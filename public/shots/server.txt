@@ -1,0 +1,88 @@
+/* eslint-disable no-console */
+/* eslint-disable func-names */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable camelcase */
+const puppeteer = require('puppeteer')
+const fsone = require('fs')
+const fs = require('fs').promises
+const async = require('async')
+
+const minimal_args = [
+  '--autoplay-policy=user-gesture-required',
+  '--disable-background-networking',
+  '--disable-background-timer-throttling',
+  '--disable-backgrounding-occluded-windows',
+  '--disable-breakpad',
+  '--disable-client-side-phishing-detection',
+  '--disable-component-update',
+  '--disable-default-apps',
+  '--disable-dev-shm-usage',
+  '--disable-domain-reliability',
+  '--disable-extensions',
+  '--disable-features=AudioServiceOutOfProcess',
+  '--disable-hang-monitor',
+  '--disable-ipc-flooding-protection',
+  '--disable-notifications',
+  '--disable-offer-store-unmasked-wallet-cards',
+  '--disable-popup-blocking',
+  '--disable-print-preview',
+  '--disable-prompt-on-repost',
+  '--disable-renderer-backgrounding',
+  '--disable-setuid-sandbox',
+  '--disable-speech-api',
+  '--disable-sync',
+  '--hide-scrollbars',
+  '--ignore-gpu-blacklist',
+  '--metrics-recording-only',
+  '--mute-audio',
+  '--no-default-browser-check',
+  '--no-first-run',
+  '--no-pings',
+  '--no-sandbox',
+  '--no-zygote',
+  '--password-store=basic',
+  '--use-gl=swiftshader',
+  '--use-mock-keychain',
+  '--window-size=479,246',
+]
+
+;(async () => {
+  const someObject = await fs.readFile('../src/data/all.json.real', 'utf8')
+  const browser = await puppeteer.launch({
+    args: minimal_args,
+    defaultViewport: {
+      width: 479,
+      height: 246,
+    },
+  })
+
+  async.mapLimit(
+    JSON.parse(someObject),
+    150,
+    async function (item) {
+      if (fsone.existsSync(`../public/out/${item.doc._id}.png`)) {
+        console.log(`${item.id} 🟢`)
+        return {}
+      }
+      const page = await browser.newPage()
+      await page.goto(
+        `file://${__dirname}/index.html?param=${item.doc.joke.replaceAll(
+          '\n',
+          'xxx',
+        )}`,
+      )
+
+      console.log(`📸 ${item.id}`)
+      await page.screenshot({ path: `../public/out/${item.doc._id}.png` })
+      await page.close()
+      return {}
+    },
+    (err, results) => {
+      if (err) throw err
+      // results is now an array of the response bodies
+      console.log(results)
+    },
+  )
+
+  // await browser.close()
+})()

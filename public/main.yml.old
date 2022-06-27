@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+name: GitHub Pages deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+      - name: list files
+        run: pwd && ls -la && ls -la /Users/runner/work/kloun/kloun/src/data/ && rm -rf /Users/runner/work/kloun/kloun/src/data/all.json
+      - name: Use real DB
+        run: mv /Users/runner/work/kloun/kloun/src/data/all.json.real /Users/runner/work/kloun/kloun/src/data/all.json
+
+      - name: Installing my packages
+        run: npm ci
+
+      - name: Build my App
+        run: npm run tbuild
+
+      - name: Export my App
+        run: npm run export # touch ./out/.nojekyll
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          FOLDER: out # The folder the action should deploy.
+          single-commit: true # Whether to deploy a single commit.

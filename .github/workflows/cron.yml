@@ -1,0 +1,11 @@
+name: Trigger FB Post
+on:
+  schedule:
+    - cron: '1 * * * *'
+    #- cron: '1 9-17 * * *'
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post 🔧
+        run: date

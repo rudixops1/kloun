@@ -1,0 +1,32 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main
+permissions: write-all
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install and Build 🔧
+        run: |
+          alias npm='node --max_old_space_size=8000 /usr/bin/npm'
+          npm ci
+          npm run build
+          npm run export
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.4
+        with:
+          folder: public/error # The folder the action should deploy.
+          clean: false # Whether to clean the folder before deploying.
+          single-commit: true # Whether to deploy a single commit.
+
+      - name: Deploy2 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.4
+        with:
+          folder: out # The folder the action should deploy. 1
+

@@ -1,0 +1,45 @@
+/* eslint-disable no-underscore-dangle */
+
+import catsdata from '@/data/cats'
+import type { Doc } from '@/data/structure'
+import data from '@/data/structure'
+
+import CatPage from './[pagenum]'
+
+const CatPageIndex = ({
+  section,
+  pages,
+  cat,
+}: {
+  section: Doc[]
+  pages: number
+  pagenum: number
+  cat: string
+}): JSX.Element => {
+  return <CatPage pagenum={1} cat={cat} section={section} pages={pages} />
+}
+
+export default CatPageIndex
+
+export async function getStaticProps(context: { params: any }) {
+  const {
+    params: { cat },
+  } = context
+  const obj = await data()
+  const pages = obj[cat]!.size
+  const section = obj[cat]!.pages[0]
+  return {
+    props: { section, pages, cat },
+  }
+}
+
+export const getStaticPaths = async () => {
+  const paths = catsdata.map((item) => ({
+    params: { cat: item.cat },
+  }))
+
+  return {
+    paths,
+    fallback: false,
+  }
+}

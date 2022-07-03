@@ -8,5 +8,10 @@ jobs:
     name: Debug
     runs-on: ubuntu-latest
     steps:
-      - name: List files
-        run: date
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Run
+        run: |
+          npm install node-fetch
+          node public/cron/server.js

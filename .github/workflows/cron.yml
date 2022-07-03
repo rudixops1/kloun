@@ -1,11 +1,15 @@
 name: Trigger FB Post
 on:
   schedule:
-    - cron: '*/5 * * * *'
-    #- cron: '1 9-17 * * *'ddd
+    - cron: '*/1 * * * *'
+
 jobs:
-  build-and-deploy:
+  job1:
+    name: Debug
     runs-on: ubuntu-latest
     steps:
-      - name: Post 🔧
+      - name: Git checkout
+        uses: actions/checkout@v2
+        with: { ref: debug }
+      - name: List files
         run: date

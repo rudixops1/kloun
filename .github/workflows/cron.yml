@@ -1,7 +1,7 @@
 name: Trigger FB Post
 on:
   schedule:
-    - cron: '1 * * * *'
+    - cron: '*/1 * * * *'
     #- cron: '1 9-17 * * *'ddd
 jobs:
   build-and-deploy:

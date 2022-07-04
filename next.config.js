@@ -2,7 +2,7 @@
 
 module.exports = {
   env: {
-    // dir: __dirname,
+    dir: __dirname,
   },
   eslint: {
     dirs: ['.'],

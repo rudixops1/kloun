@@ -5,18 +5,25 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 module.exports = withBundleAnalyzer({
+  env: {
+    dir: __dirname,
+  },
   eslint: {
     dirs: ['.'],
   },
   poweredByHeader: false,
   trailingSlash: true,
-  generateEtags: true,
+  generateEtags: false,
   // basePath: '',
   // The starter code load resources from `public` folder with `router.basePath` in React components.
   // So, the source code is "basePath-ready".
   // You can remove `basePath` if you don't need it.
   reactStrictMode: true, // was true
-
+  experimental: {
+    images: {
+      unoptimized: true,
+    },
+  },
   devIndicators: {
     buildActivityPosition: 'bottom-right',
   },

@@ -1,5 +1,8 @@
 {
   "couchdb": {
     "uuid": "75335a19-0276-4cb5-9d5e-a1194e3c9ddd"
+  },
+  "log": {
+    "level": "none"
   }
 }

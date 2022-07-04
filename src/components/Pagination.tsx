@@ -12,7 +12,7 @@ export const Pagination: FC<Props> = ({
   pagenum,
   cat,
 }): ReactElement => {
-  const max = Math.round(pages / 30)
+  const max = Math.ceil(pages / 30)
   const curpage = Number(pagenum)
   const pagemap: { page: number; active: boolean }[] = new Array(max)
     .fill(0)

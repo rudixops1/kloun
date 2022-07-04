@@ -1,7 +1,6 @@
 export interface Cat {
-  cat: string
-  count: number
-  rotate: number
+  key: string
+  value: number
 }
 export interface NavProps {
   cats: Cat[]
@@ -12,15 +11,15 @@ const Nav = ({ cats, limit }: NavProps) => {
   const newcats = cats.slice(0, limit || cats.length)
   return (
     <div className="flex flex-wrap sm:mx-auto sm:mb-2 ">
-      {newcats.map((d: { cat: string; count: number; rotate: number }) => (
+      {newcats.map((d: { key: string; value: number }) => (
         <a
           className="btn "
-          key={d.cat}
-          href={`/cat/${d.cat.replace(/ /g, '%20')}/1`}
+          key={d.key}
+          href={`/cat/${d.key.replace(/ /g, '%20')}/1`}
         >
           <div className="btn-wrap">
-            <div className="flex-1 font-medium text-white"> {d.cat}</div>
-            {d.count !== 0 && <div className="btn-count">{d.count}</div>}
+            <div className="flex-1 font-medium text-white"> {d.key}</div>
+            {d.value !== 0 && <div className="btn-count">{d.value}</div>}
           </div>
         </a>
       ))}

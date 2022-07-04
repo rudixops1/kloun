@@ -1,13 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 
+import type { GetServerSideProps } from 'next'
 import React from 'react'
 
 import { JokeThumbnail } from '@/components/JokeThumbnail'
 import { Main } from '@/components/Layouts/Main'
 import { Meta } from '@/components/Layouts/Meta'
 import { Pagination } from '@/components/Pagination'
+import { jokes } from '@/data/nextdb'
 import type { Doc } from '@/data/structure'
-import data from '@/data/structure'
+
+import catsdata from '../../../data/cats'
 
 const CatPage = ({
   section,
@@ -51,22 +54,23 @@ const CatPage = ({
 
 export default CatPage
 
-export async function getStaticProps(context: { params: any }) {
-  const {
-    params: { pagenum, cat },
-  } = context
-  const obj = await data()
-  const pages = obj[cat]!.size
-  const section = obj[cat]!.pages[Number(pagenum) - 1]
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { pagenum, cat } = context.query
+  const pages = catsdata.find((item) => item.key === cat)!.value
+  const skip = Number(pagenum) * 30 - 30
+
+  const section = await jokes
+    .query('api/cat', {
+      limit: 30,
+      key: cat,
+      skip,
+    })
+    .then((res: { rows: any[] }): Doc[] => {
+      return res.rows.map((row): Doc => {
+        return { _id: row.id, ...row.value }
+      })
+    })
   return {
     props: { section, pages, pagenum, cat },
-  }
-}
-export const getStaticPaths = async () => {
-  const { pathspagination } = await data()
-  return {
-    paths: pathspagination,
-
-    fallback: false,
   }
 }

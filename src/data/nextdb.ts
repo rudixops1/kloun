@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 const PouchDB = require('pouchdb')
 
 const Db = PouchDB.defaults({
@@ -6,3 +7,11 @@ const Db = PouchDB.defaults({
 })
 
 export const jokes = new Db('jokes')
+jokes
+  .compact()
+  .then((info: any) => {
+    console.log(info)
+  })
+  .catch((err: any) => {
+    console.log(err)
+  })

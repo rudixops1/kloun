@@ -1,0 +1,5 @@
+myNextApplication:
+  component: '@sls-next/serverless-component'
+  inputs:
+    domain: 'kloun.lol' # sub-domain defaults to www
+    domainMinimumProtocolVersion: 'TLSv1.2_2018' # can be omitted, defaults to "TLSv1.2_2018"

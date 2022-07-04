@@ -9,11 +9,13 @@ const Db = PouchDB.defaults({
 })
 
 export const jokes = new Db('jokes')
-jokes
-  .compact()
-  .then((info: any) => {
-    console.log(info)
-  })
-  .catch((err: any) => {
-    console.log(err)
-  })
+if (process.env.PORT) {
+  jokes
+    .compact()
+    .then((info: any) => {
+      console.log(info)
+    })
+    .catch((err: any) => {
+      console.log(err)
+    })
+}

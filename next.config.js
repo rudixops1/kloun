@@ -6,6 +6,7 @@ module.exports = {
   },
   eslint: {
     dirs: ['.'],
+    ignoreDuringBuilds: true,
   },
   poweredByHeader: false,
   trailingSlash: true,
@@ -20,6 +21,7 @@ module.exports = {
       unoptimized: true,
     },
   },
+
   devIndicators: {
     buildActivityPosition: 'bottom-right',
   },

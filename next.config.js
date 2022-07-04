@@ -20,6 +20,7 @@ module.exports = {
     images: {
       unoptimized: true,
     },
+    nftTracing: true,
   },
 
   devIndicators: {

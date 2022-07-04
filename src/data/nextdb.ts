@@ -2,9 +2,7 @@
 const PouchDB = require('pouchdb')
 
 const Db = PouchDB.defaults({
-  prefix: process.env.PORT
-    ? '/app/src/data/db/'
-    : `${process.env.dir}/src/data/db/`,
+  prefix: `${process.env.dir}/src/data/db/`,
   skip_setup: true,
 })
 

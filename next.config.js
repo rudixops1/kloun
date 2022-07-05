@@ -3,9 +3,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 module.exports = withBundleAnalyzer({
-  env: {
-    customKey: 'my-value',
-  },
   eslint: {
     dirs: ['.'],
   },
@@ -21,7 +18,7 @@ module.exports = withBundleAnalyzer({
     images: {
       unoptimized: true,
     },
-    nftTracing: true,
+    nftTracing: false,
   },
   devIndicators: {
     buildActivityPosition: 'bottom-right',

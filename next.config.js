@@ -16,12 +16,6 @@ module.exports = {
   // So, the source code is "basePath-ready".
   // You can remove `basePath` if you don't need it.
   reactStrictMode: true, // was true
-  experimental: {
-    images: {
-      unoptimized: true,
-    },
-    nftTracing: true,
-  },
 
   devIndicators: {
     buildActivityPosition: 'bottom-right',

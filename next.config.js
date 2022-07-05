@@ -1,15 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
-
-module.exports = withBundleAnalyzer({
+module.exports = {
   env: {
-    customKey: 'my-value',
+    dir: __dirname,
   },
   eslint: {
     dirs: ['.'],
+    ignoreDuringBuilds: true,
   },
   poweredByHeader: false,
   trailingSlash: true,
@@ -23,8 +20,10 @@ module.exports = withBundleAnalyzer({
     images: {
       unoptimized: true,
     },
+    nftTracing: true,
   },
+
   devIndicators: {
     buildActivityPosition: 'bottom-right',
   },
-})
+}

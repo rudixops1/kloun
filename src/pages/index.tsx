@@ -1,5 +1,3 @@
-// import { useRouter } from 'next/router';
-
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -8,7 +6,6 @@ import Nav from '@/components/JokeCats'
 import { Main } from '@/components/Layouts/Main'
 import { Meta } from '@/components/Layouts/Meta'
 import { Program } from '@/components/Program'
-import data from '@/data/structure'
 
 import catsdata from '../data/cats'
 
@@ -64,12 +61,7 @@ const Index = (props: NavProps) => {
 }
 
 export async function getStaticProps() {
-  const obj = await data()
-  const remapcats = catsdata
-    .map(({ cat }) => {
-      return { cat, count: obj[cat].size }
-    })
-    .sort((a, b) => b.count - a.count)
+  const remapcats = catsdata.sort((a, b) => b.value - a.value)
   return {
     props: { cats: remapcats },
   }

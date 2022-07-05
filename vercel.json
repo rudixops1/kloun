@@ -1,5 +1,16 @@
 {
   "version": 2,
+  "functions": {
+    "pages/api/*.ts": {
+      "includeFiles": "src/data/**"
+    },
+    "pages/api/index.ts": {
+      "includeFiles": "src/data/**"
+    },
+    "pages/api/index.js": {
+      "includeFiles": "src/data/**"
+    }
+  },
   "builds": [
     {
       "src": "src/data/nextdb.ts",

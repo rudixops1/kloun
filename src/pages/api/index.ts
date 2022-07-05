@@ -13,6 +13,7 @@ export default async function handler(
   exec(cmd, (_: any, output: any) => {
     res.status(200).json({
       ver: '1.0.0',
+      joke: 'I am a joke',
       cmd,
       data: output.split('\n'),
       cwd: process.cwd(),

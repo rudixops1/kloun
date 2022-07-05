@@ -6,15 +6,11 @@ export default async function handler(
   _req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const dirRelativeToPublicFolder = 'img'
-
-  const dir = path.resolve('./src/data', dirRelativeToPublicFolder)
+  const dir = path.resolve('./src/data')
 
   const filenames = fs.readdirSync(dir)
 
-  const images = filenames.map((name) =>
-    path.join('/', dirRelativeToPublicFolder, name)
-  )
+  const images = filenames.map((name) => path.join('/', name))
 
   res.statusCode = 200
   res.json(images)

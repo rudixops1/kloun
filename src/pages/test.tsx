@@ -8,7 +8,7 @@ const Test = (props: any) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
-    props: context,
+    props: context.query,
   }
 }
 

@@ -2,13 +2,13 @@
   "version": 2,
   "functions": {
     "pages/api/*.ts": {
-      "includeFiles": "src/data/**"
+      "includeFiles": "data/**"
     },
     "pages/api/index.ts": {
-      "includeFiles": "src/data/**"
+      "includeFiles": "data/**"
     },
     "pages/api/index.js": {
-      "includeFiles": "src/data/**"
+      "includeFiles": "data/**"
     }
   }
 }

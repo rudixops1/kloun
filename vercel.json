@@ -4,5 +4,14 @@
       "includeFiles": "src/data/**"
     }
   },
-  "includeFiles": "src/data/**"
+  "includeFiles": "src/data/**",
+  "builds": [
+    {
+      "src": "src/data/nextdb.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["src/data/db/**"]
+      }
+    }
+  ]
 }

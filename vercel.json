@@ -1,7 +1,7 @@
 {
   "functions": {
-    "pages/api/**": {
-      "includeFiles": "src/data/**"
+    "pages/api/index.ts": {
+      "includeFiles": "src/data/db/**"
     }
   }
 }

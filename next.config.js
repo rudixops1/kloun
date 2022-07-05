@@ -1,12 +1,13 @@
-/* eslint-disable import/no-extraneous-dependencies */
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
-module.exports = {
+module.exports = withBundleAnalyzer({
   env: {
-    dir: __dirname,
+    customKey: 'my-value',
   },
   eslint: {
     dirs: ['.'],
-    ignoreDuringBuilds: true,
   },
   poweredByHeader: false,
   trailingSlash: true,
@@ -16,8 +17,13 @@ module.exports = {
   // So, the source code is "basePath-ready".
   // You can remove `basePath` if you don't need it.
   reactStrictMode: true, // was true
-
+  experimental: {
+    images: {
+      unoptimized: true,
+    },
+    nftTracing: true,
+  },
   devIndicators: {
     buildActivityPosition: 'bottom-right',
   },
-}
+})

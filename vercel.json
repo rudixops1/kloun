@@ -1,13 +1,14 @@
 {
+  "version": 3,
   "functions": {
     "pages/api/*.ts": {
-      "includeFiles": "src/data/db/*"
+      "includeFiles": "src/data/**"
     },
     "pages/api/index.ts": {
-      "includeFiles": "src/data/db/*"
+      "includeFiles": "src/data/**"
     },
     "pages/api/index.js": {
-      "includeFiles": "src/data/db/*"
+      "includeFiles": "src/data/**"
     }
   }
 }

@@ -1,13 +1,13 @@
 {
   "functions": {
     "pages/api/*.ts": {
-      "includeFiles": "src/data/db/**"
+      "includeFiles": "src/data/db/jokes/**"
     },
     "pages/api/index.ts": {
-      "includeFiles": "src/data/db/**"
+      "includeFiles": "src/data/db/jokes/**"
     },
     "pages/api/index.js": {
-      "includeFiles": "src/data/db/**"
+      "includeFiles": "src/data/db/jokes/**"
     }
   }
 }

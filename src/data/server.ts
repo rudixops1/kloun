@@ -8,4 +8,4 @@ const Db = PouchDB.defaults({ prefix: `${__dirname}/db/` })
 
 app.use('/', require('express-pouchdb')(Db))
 
-app.listen(3001)
+app.listen(process.env.PORT || 3001)

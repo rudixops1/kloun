@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const { spawn } = require('child_process')
+const { exec } = require('node:child_process')
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,8 +8,8 @@ export default async function handler(
 ) {
   const { query } = req
   const { cmd } = query
-  const ls = spawn(cmd)
-  ls.stdout.on('data', (data: any) => {
-    res.status(200).json({ joke: 'Hello World', cmd, data: data.toString() })
+
+  exec(cmd, (_: any, output: any) => {
+    res.status(200).json({ joke: 'Hello World', cmd, data: output.split('\n') })
   })
 }

@@ -12,3 +12,4 @@ const Db = PouchDB.defaults({
 })
 
 export const jokes = new Db('jokes')
+// test

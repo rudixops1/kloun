@@ -1,7 +1,7 @@
 name: Trigger FB Post
 on:
   schedule:
-    - cron: '*/5 * * * *' #*/5 7-22 hours of the day, every 5 minutes
+    - cron: '*/15 * * * *' #*/5 7-22 hours of the day, every 5 minutes
 permissions: read-all
 jobs:
   job1:

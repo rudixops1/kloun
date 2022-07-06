@@ -8,7 +8,7 @@ const PouchDB = require('pouchdb')
 
 const Db = PouchDB.defaults({
   prefix: `${path.resolve(
-    process.env.VERCEL ? tmp : process.cwd(),
+    process.env.ONLYVERCEL ? tmp : process.cwd(),
     'src',
     'data',
     'db'
@@ -17,5 +17,5 @@ const Db = PouchDB.defaults({
 })
 
 export const jokes = new Db(
-  process.env.VERCEL ? 'http://klounlol.herokuapp.com/jokes' : 'jokes'
+  process.env.ONLYVERCEL ? 'http://klounlol.herokuapp.com/jokes' : 'jokes'
 )

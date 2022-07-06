@@ -53,8 +53,8 @@ const Meta = (props: IMetaProps) => {
           },
           images: [
             {
-              width: 479,
-              height: 246,
+              width: 1207,
+              height: 620,
               type: 'image/png',
               alt: 'Виц',
               url: props.image

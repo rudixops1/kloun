@@ -1,8 +1,9 @@
 const PouchDB = require('pouchdb')
-
+const cors = require('cors')
 const express = require('express')
 
 const app = express()
+app.use(cors())
 
 const Db = PouchDB.defaults({ prefix: `${__dirname}/db/` })
 

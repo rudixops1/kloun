@@ -5,11 +5,12 @@ fetch('https://pouchdb.herokuapp.com/jokes/_all_docs')
   .then((res) => res.json())
   .then((json) => {
     const { total_rows } = json
-    const settings = { limit: 1, skip: Math.floor(Math.random() * total_rows) }
-    fetch('https://klounlol.herokuapp.com/jokes/_all_docs', settings)
+    const skip = Math.floor(Math.random() * total_rows)
+    fetch('https://klounlol.herokuapp.com/jokes/_all_docs?limit=1&skip=' + skip)
       .then((res) => res.json())
       .then((json1) => {
         const { id } = json1.rows[0]
+        console.log(id)
         console.log(
           `https://graph.facebook.com/v14.0/me/feed?access_token=${token}`
         )

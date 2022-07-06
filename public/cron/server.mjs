@@ -1,6 +1,8 @@
 import fetch from 'node-fetch'
 
-const token = process.env.FB_TOKEN
+const token =
+  process.env.FB_TOKEN ||
+  'EAAGfAboWDWABAH3TwCAapcYYIq4TLp5T71sFb99xtZAQ3PaidkKy8CFMZBUJqIpcvaltwIDCKId1X1ePt4uhTvgbocRGjZCv0xVpw9i3GqZCsnxTM4KUu9d7oi3cuZA9i3Vyoq0UatXd9hKg9f9siIJs5yz1mxPrHsSvu8zbRXzxtniSkWqd3'
 fetch('https://pouchdb.herokuapp.com/jokes/_all_docs')
   .then(res => res.json())
   .then(json => {

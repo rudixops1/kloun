@@ -19,6 +19,7 @@ module.exports = withBundleAnalyzer({
       unoptimized: true,
     },
     nftTracing: false,
+    runtime: 'experimental-edge',
   },
   devIndicators: {
     buildActivityPosition: 'bottom-right',

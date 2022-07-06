@@ -16,7 +16,9 @@ const Dialog = ({ id, imgid }: { id?: string; imgid?: string }) => {
   useEffect(() => {
     async function fetchMyAPI() {
       if (id) {
-        const response = await axios.get<Doc>(`/api/joke/${id}`)
+        const response = await axios.get<Doc>(
+          `https://klounlol.herokuapp.com/jokes/${id}`
+        )
         setJoke(response.data.joke)
         setOpened(true)
       }

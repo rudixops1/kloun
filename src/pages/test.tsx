@@ -1,7 +1,12 @@
 import type { GetServerSideProps } from 'next'
 
 const Test = (props: any) => {
-  return <pre>{JSON.stringify(props, null, 2)}</pre>
+  return (
+    <div>
+      <pre>{JSON.stringify(props, null, 2)}</pre>
+      <pre>{JSON.stringify(process.env, null, 2)}</pre>
+    </div>
+  )
 }
 const fs = require('fs')
 

@@ -6,7 +6,7 @@ fetch('https://pouchdb.herokuapp.com/jokes/_all_docs')
   .then(json => {
     const { total_rows } = json
     const settings = { limit: 1, skip: Math.floor(Math.random() * total_rows) }
-    fetch('https://pouchdb.herokuapp.com/jokes/_all_docs', settings)
+    fetch('https://klounlol.herokuapp.com/jokes/_all_docs', settings)
       .then(res => res.json())
       .then(json1 => {
         const { id } = json1.rows[0]

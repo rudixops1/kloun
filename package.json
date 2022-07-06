@@ -38,6 +38,7 @@
     "express-pouchdb": "^4.2.0",
     "fs": "^0.0.1-security",
     "lodash": "^4.17.21",
+    "nano": "^10.0.0",
     "next": "^12.2.0",
     "next-seo": "^5.4.0",
     "next-share": "^0.12.1",

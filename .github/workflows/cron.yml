@@ -1,19 +1,21 @@
 name: Trigger FB Post
 on:
   schedule:
-    - cron: '*/10 * * * *' #*/5 7-22 hours of the day, every 5 minutes
+    - cron: '*/5 * * * *' #*/5 7-22 hours of the day, every 5 minutes
 permissions: read-all
 jobs:
   job1:
     name: Debug
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
-      - name: ENV
       - uses: oNaiPs/secrets-to-env-action@v1
         with:
           secrets: ${{ toJSON(secrets) }}
+      - run: ls
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Run
         run: |
           npm install node-fetch
           node public/cron/server.mjs

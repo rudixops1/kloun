@@ -2,13 +2,14 @@ import fetch from 'node-fetch'
 
 const token = process.env.FB_TOKEN
 fetch('https://pouchdb.herokuapp.com/jokes/_all_docs')
-  .then((res) => res.json())
-  .then((json) => {
+  .then(res => res.json())
+  .then(json => {
     const { total_rows } = json
     const skip = Math.floor(Math.random() * total_rows)
-    fetch('https://klounlol.herokuapp.com/jokes/_all_docs?limit=1&skip=' + skip)
-      .then((res) => res.json())
-      .then((json1) => {
+    fetch(`https://klounlol.herokuapp.com/jokes/_all_docs?limit=1&skip=${skip}`)
+      .then(res => res.json())
+      .then(json1 => {
+        console.log(json1.rows)
         const { id } = json1.rows[0]
         console.log(id)
         console.log(
@@ -27,8 +28,8 @@ fetch('https://pouchdb.herokuapp.com/jokes/_all_docs')
             }),
           }
         )
-          .then((res) => res.json())
-          .then((json) => {
+          .then(res => res.json())
+          .then(json => {
             console.log(json)
           })
       })

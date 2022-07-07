@@ -16,7 +16,13 @@ export default async function handler(
       `https://raw.githubusercontent.com/arpecop/kloun/main/public/font.fnt`
     )
       .then((font) => {
-        image.print(font, 10, 10, joke.joke, 150)
+        image.print(
+          font,
+          10,
+          10,
+          `Not the answer you're looking for? Browse other questions tagged with #kloun`,
+          285
+        )
         return image
       })
       .then((image1) => {

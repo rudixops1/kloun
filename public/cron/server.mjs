@@ -28,6 +28,12 @@ fetch('https://pouchdb.herokuapp.com/jokes/_all_docs')
               og_action_type_id: '383635058339457',
               og_object_id: '140035382814582',
               og_icon_id: '202857099862987',
+              actions: [
+                {
+                  link: `https://kloun.lol/joke/${id}/`,
+                  name: 'Прочети',
+                },
+              ],
             }),
           }
         )

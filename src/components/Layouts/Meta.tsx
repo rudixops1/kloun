@@ -49,7 +49,6 @@ const Meta = (props: IMetaProps) => {
             modifiedTime: '2022-06-30T00:00:00+00:00',
             section: props.cat ? props.cat : 'Разни',
             tags: ['Виц', props.cat ? props.cat : 'Разни'],
-            authors: ['rudix'],
           },
           images: [
             {

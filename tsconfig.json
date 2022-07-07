@@ -10,7 +10,7 @@
     "alwaysStrict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
-    "types": ["@cloudflare/workers-types"],
+    "types": ["@cloudflare/workers-types", "facebook-js-sdk"],
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,

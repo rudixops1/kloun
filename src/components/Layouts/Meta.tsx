@@ -58,7 +58,7 @@ const Meta = (props: IMetaProps) => {
               type: 'image/png',
               alt: 'Виц',
               url: props.image
-                ? `https://kloun.lol/${props.image}`
+                ? `https://kloun.lol${props.image}`
                 : `${AppConfig.prefix}/images/default.png`,
             },
           ],

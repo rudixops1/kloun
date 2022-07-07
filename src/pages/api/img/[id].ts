@@ -1,4 +1,4 @@
-import Jimp from 'jimp'
+import Jimp from 'jimp/es'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(

@@ -53,12 +53,12 @@ const Meta = (props: IMetaProps) => {
           },
           images: [
             {
-              width: 1207,
-              height: 620,
+              width: 2136,
+              height: 1097,
               type: 'image/png',
               alt: 'Виц',
               url: props.image
-                ? `https://cdn.kloun.lol${props.image}`
+                ? `https://kloun.lol/${props.image}`
                 : `${AppConfig.prefix}/images/default.png`,
             },
           ],

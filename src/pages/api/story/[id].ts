@@ -10,9 +10,11 @@ export default async function handler(
   const { id } = req.query
   const joke = await jokes.get(id)
   if (joke) {
-    const image = new Jimp(300, 530, 'black')
+    const image = new Jimp(300, 530, 'white')
 
-    Jimp.loadFont(`./font.fnt`)
+    Jimp.loadFont(
+      `https://raw.githubusercontent.com/arpecop/kloun/main/public/font.fnt`
+    )
       .then((font) => {
         image.print(font, 10, 10, joke.joke, 150)
         return image

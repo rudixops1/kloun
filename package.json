@@ -5,11 +5,11 @@
     "node": "18.x"
   },
   "scripts": {
+    "heroku-prebuild": "mv Proc Procfile",
     "dev": "next",
     "build": "next build",
     "rename": "rm -rf ./src/data/all.json && mv ./src/data/all.json.real ./src/data/all.json",
     "start": "next start -p $PORT",
-    "tbuild": "turbo run build",
     "build-stats": "cross-env ANALYZE=true npm run build",
     "export": "next export",
     "build-prod": "run-s clean build export",

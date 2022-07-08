@@ -36,3 +36,6 @@ local
 .vercel
 
 .turbo
+
+
+src/data/db/_replicator/*

@@ -38,4 +38,4 @@ local
 .turbo
 
 
- 
+src/data/db/_replicator/*

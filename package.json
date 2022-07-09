@@ -1,8 +1,8 @@
 {
   "name": "rudixops_jokes",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "engines": {
-    "node": "18.x"
+    "node": "16.x"
   },
   "scripts": {
     "heroku-prebuild": "mv Proc Procfile",

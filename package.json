@@ -1,9 +1,6 @@
 {
   "name": "rudixops_jokes",
   "version": "1.2.1",
-  "engines": {
-    "node": "16.x"
-  },
   "scripts": {
     "heroku-prebuild": "mv Proc Procfile",
     "dev": "next",
@@ -24,9 +21,6 @@
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
-  "workspaces": [
-    "/*"
-  ],
   "dependencies": {
     "@headlessui/react": "^1.6.6",
     "@next/bundle-analyzer": "^12.2.1",

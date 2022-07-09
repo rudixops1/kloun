@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { FacebookShareButton } from 'next-share'
+
 import React from 'react'
 
 const FacebookShare = ({
@@ -11,12 +11,11 @@ const FacebookShare = ({
   noText?: boolean
   noWrapper?: boolean
 }) => {
+  // url={`https://kloun.lol/joke/${id}`}
+  // quote={'next-share is a social share buttons for your next React apps.'}
+  // hashtag={'#виц'}
   return (
-    <FacebookShareButton
-      url={`https://kloun.lol/joke/${id}`}
-      quote={'next-share is a social share buttons for your next React apps.'}
-      hashtag={'#виц'}
-    >
+    <div id={id}>
       <div
         className={
           !noWrapper
@@ -35,7 +34,7 @@ const FacebookShare = ({
 
         <span>{noText ? '' : 'Сподели във Facebook'}</span>
       </div>
-    </FacebookShareButton>
+    </div>
   )
 }
 

@@ -18,8 +18,7 @@ module.exports = withBundleAnalyzer({
     images: {
       unoptimized: true,
     },
-    nftTracing: false,
-    runtime: 'experimental-edge',
+    // runtime: 'experimental-edge',
   },
   devIndicators: {
     buildActivityPosition: 'bottom-right',

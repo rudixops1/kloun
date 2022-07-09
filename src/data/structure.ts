@@ -1,6 +1,17 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-plusplus */
 
+export interface Article {
+  joke: string
+  title: string
+  image: string
+  slug: string
+  _id: string
+  _rev?: string
+  doc?: object
+  item?: object
+}
+
 export interface Doc {
   joke: string
   cat: string

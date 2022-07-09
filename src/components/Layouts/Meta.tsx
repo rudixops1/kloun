@@ -12,6 +12,7 @@ type IMetaProps = {
   image?: string
   url?: string
   cat?: string
+  imgtype?: string
 }
 
 const Meta = (props: IMetaProps) => {
@@ -40,7 +41,7 @@ const Meta = (props: IMetaProps) => {
         openGraph={{
           title: props.title,
           description: props.description,
-          url: props.url ? `${AppConfig.prefix}${props.url}` : AppConfig.prefix,
+          url: props.url ? props.url : AppConfig.prefix,
           locale: AppConfig.locale,
           site_name: AppConfig.site_name,
           type: 'article',
@@ -54,10 +55,10 @@ const Meta = (props: IMetaProps) => {
             {
               width: 2136,
               height: 1097,
-              type: 'image/png',
+              type: props.imgtype ? props.imgtype : 'image/png',
               alt: 'Виц',
               url: props.image
-                ? `https://kloun.lol${props.image}`
+                ? props.image
                 : `${AppConfig.prefix}/images/default.png`,
             },
           ],

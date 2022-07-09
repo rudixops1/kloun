@@ -33,8 +33,8 @@ const Joke = (props: {
           title={`${jokemeta.substring(0, 30)} ...`}
           description={`${jokemeta.substring(0, 150)} ...`}
           cat={props.joke.cat}
-          image={`/api/img/${props.joke._id}/`}
-          url={`/joke/${props.joke._id}/`}
+          image={`https://kloun.lol/api/img/${props.joke._id}/`}
+          url={`https://kloun.lol/joke/${props.joke._id}/`}
         />
       }
     >

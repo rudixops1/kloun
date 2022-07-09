@@ -16,6 +16,10 @@ const Db = PouchDB.defaults({
   // skip_setup: true,
 })
 
+export const news = new Db(
+  process.env.ONLYVERCEL ? 'http://klounlol.herokuapp.com/news' : 'news'
+)
+
 export const jokes = new Db(
   process.env.ONLYVERCEL ? 'http://klounlol.herokuapp.com/jokes' : 'jokes'
 )

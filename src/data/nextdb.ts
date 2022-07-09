@@ -4,7 +4,7 @@ import path from 'path'
 const tmp = os.tmpdir()
 
 /* eslint-disable func-names */
-const PouchDB = require('pouchdb')
+const PouchDB = require('pouchdb-node')
 
 const Db = PouchDB.defaults({
   prefix: `${path.resolve(
@@ -23,3 +23,5 @@ export const news = new Db(
 export const jokes = new Db(
   process.env.ONLYVERCEL ? 'http://klounlol.herokuapp.com/jokes' : 'jokes'
 )
+
+console.log(jokes.adapter)

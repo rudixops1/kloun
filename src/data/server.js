@@ -1,4 +1,4 @@
-const PouchDB = require('pouchdb')
+const PouchDB = require('pouchdb-node')
 const cors = require('cors')
 const compression = require('compression')
 const express = require('express')

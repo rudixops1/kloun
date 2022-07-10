@@ -22,6 +22,7 @@
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@headlessui/react": "^1.6.6",
     "@next/bundle-analyzer": "^12.2.1",
     "axios": "^0.27.2",
@@ -29,6 +30,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "express-pouchdb": "^4.2.0",
+    "graphql": "^16.5.0",
     "jimp": "^0.16.1",
     "lodash": "^4.17.21",
     "nano": "^10.0.0",

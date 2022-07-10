@@ -21,7 +21,6 @@ const Main = (props: IMainProps) => {
       {props.meta}
       <div className="flex min-h-screen flex-col">
         <Logo title={props.title} />
-
         <div className="container mx-auto flex grow flex-col justify-center px-2 pb-20 sm:px-4 md:px-8">
           {props.children}
         </div>

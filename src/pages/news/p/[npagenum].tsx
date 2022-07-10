@@ -46,8 +46,8 @@ const PagingNews = ({
 }
 export default PagingNews
 const DATA_QUERY = gql`
-  query MyQuery($offset: Int!) {
-    news(limit: 30, order_by: { date: desc_nulls_last }, offset: $offset) {
+  query MyQuery($start: Int!, $end: Int!) {
+    news(where: { id: { _gte: $start, _lte: $end } }) {
       title
       image
       _id
@@ -62,11 +62,12 @@ const DATA_QUERY = gql`
 `
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { npagenum } = context.query
-  const offset = (Number(npagenum) - 1) * 30
+  const start = (Number(npagenum) - 1) * 30
+  const end = start + 30
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { npagenum, offset },
+    variables: { npagenum, start, end },
   })
 
   return { props: { ...data, npagenum } }

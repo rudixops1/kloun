@@ -47,7 +47,7 @@ const PagingNews = ({
 export default PagingNews
 const DATA_QUERY = gql`
   query MyQuery($start: Int!, $end: Int!) {
-    news(where: { id: { _gte: $start, _lte: $end } }) {
+    news(where: { id: { _gte: $start, _lte: $end } }, offset: 1) {
       title
       image
       _id

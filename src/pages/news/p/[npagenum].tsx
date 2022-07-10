@@ -50,7 +50,7 @@ const DATA_QUERY = gql`
     news(limit: 30, order_by: { date: desc_nulls_last }, offset: $offset) {
       title
       image
-      date
+      _id
       slug
     }
     news_aggregate {

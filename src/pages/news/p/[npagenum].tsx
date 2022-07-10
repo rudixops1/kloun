@@ -45,13 +45,24 @@ const PagingNews = ({
   )
 }
 export default PagingNews
+const DATA_AGREGATE = gql`
+  query MyQuery {
+    news_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`
+
 const DATA_QUERY = gql`
   query MyQuery($start: Int!, $end: Int!) {
-    news(where: { id: { _gte: $start, _lte: $end } }, offset: 1) {
+    news(where: { id: { _gte: $end, _lte: $start } }, offset: 1) {
       title
       image
       _id
       slug
+      id
     }
     news_aggregate {
       aggregate {
@@ -62,13 +73,21 @@ const DATA_QUERY = gql`
 `
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { npagenum } = context.query
-  const start = (Number(npagenum) - 1) * 30
-  const end = start + 30
+  const agregate = await client.query({ query: DATA_AGREGATE })
+  const start =
+    agregate.data.news_aggregate.aggregate.count - (Number(npagenum) - 1) * 30
+  const end = start - 30
 
   const { data } = await client.query({
     query: DATA_QUERY,
     variables: { npagenum, start, end },
   })
 
-  return { props: { ...data, npagenum } }
+  return {
+    props: {
+      news: data.news.slice().reverse(),
+      news_aggregate: agregate.data.news_aggregate,
+      npagenum,
+    },
+  }
 }

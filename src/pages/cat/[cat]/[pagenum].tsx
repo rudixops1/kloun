@@ -34,7 +34,7 @@ const CatPage = ({
         />
       }
     >
-      <Pagination pages={pages} pagenum={pagenum} cat={cat} />
+      <Pagination pages={pages} pagenum={pagenum} cat={`/cat/${cat}`} />
       <div className="flex flex-wrap">
         {section.map((item) => (
           <JokeThumbnail
@@ -46,7 +46,12 @@ const CatPage = ({
         ))}
       </div>
       <div className="fixed bottom-0 left-0 z-10 flex w-full justify-center bg-black/30 backdrop-blur-sm">
-        <Pagination pages={pages} pagenum={pagenum} cat={cat} hideStats />
+        <Pagination
+          pages={pages}
+          pagenum={pagenum}
+          cat={`/cat/${cat}`}
+          hideStats
+        />
       </div>
     </Main>
   )

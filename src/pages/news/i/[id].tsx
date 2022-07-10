@@ -12,6 +12,7 @@ export interface RootNewsProps {
   news: News[]
   news_aggregate: NewsAggregate
   news_by_pk: NewsByPk
+  npagenum?: number
 }
 
 export interface News {
@@ -56,7 +57,7 @@ const NewsItem = ({
           cat="Новини"
           imgtype="image/jpeg"
           image={image}
-          url={`https://kloun.lol/news/${_id}`}
+          url={`https://kloun.lol/news/i/${_id}`}
         />
       }
     >
@@ -74,7 +75,7 @@ const NewsItem = ({
         <div className="flex flex-wrap">
           {news.map((item) => (
             <div className="joke" key={item._id}>
-              <a href={`/news/${item._id}`}>
+              <a href={`/news/i/${item._id}`}>
                 <div className="flex flex-row">
                   <img
                     alt={item.title}
@@ -120,9 +121,7 @@ const DATA_QUERY = gql`
 `
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query
-
   const { data } = await client.query({ query: DATA_QUERY, variables: { id } })
-
   return { props: data }
 }
 

@@ -42,7 +42,7 @@ export const Pagination: FC<Props> = ({
       {pagemap[0]!.page !== 1 && (
         <>
           <a
-            href={`/cat/${cat}/1`}
+            href={`${cat}/1`}
             className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex "
           >
             1
@@ -58,7 +58,7 @@ export const Pagination: FC<Props> = ({
         return (
           <a
             key={page}
-            href={`/cat/${cat}/${page}`}
+            href={`${cat}/${page}`}
             className={`relative hidden items-center border border-gray-800 px-4 py-2 font-medium hover:bg-gray-800  sm:inline-flex ${
               active
                 ? 'text-striped bg-gray-800 text-white'
@@ -71,13 +71,13 @@ export const Pagination: FC<Props> = ({
       })}
       <a
         className="inline-flex items-center border border-gray-800 bg-gray-900 px-4 py-2 font-medium text-gray-500 hover:bg-gray-800 sm:hidden"
-        href={`/cat/${cat}/${prev}`}
+        href={`${cat}/${prev}`}
       >
         Назад
       </a>
       <a
         className="inline-flex items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:hidden"
-        href={`/cat/${cat}/${next}`}
+        href={`${cat}/${next}`}
       >
         Напред
       </a>
@@ -88,7 +88,7 @@ export const Pagination: FC<Props> = ({
           </span>
 
           <a
-            href={`/cat/${cat}/${max}`}
+            href={`${cat}/${max}`}
             className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex"
           >
             {max}

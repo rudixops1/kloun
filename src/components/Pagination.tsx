@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { FC, ReactElement } from 'react'
 
 interface Props {
@@ -41,12 +42,11 @@ export const Pagination: FC<Props> = ({
     >
       {pagemap[0]!.page !== 1 && (
         <>
-          <a
-            href={`${cat}/1`}
-            className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex "
-          >
-            1
-          </a>
+          <Link href={`${cat}/1`}>
+            <a className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex ">
+              1
+            </a>
+          </Link>
 
           <span className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex ">
             ...
@@ -56,43 +56,40 @@ export const Pagination: FC<Props> = ({
 
       {pagemap.map(({ page, active }) => {
         return (
-          <a
-            key={page}
-            href={`${cat}/${page}`}
-            className={`relative hidden items-center border border-gray-800 px-4 py-2 font-medium hover:bg-gray-800  sm:inline-flex ${
-              active
-                ? 'text-striped bg-gray-800 text-white'
-                : 'bg-gray-900 text-gray-500'
-            }`}
-          >
-            {page}
-          </a>
+          <Link key={page} href={`${cat}/${page}`}>
+            <a
+              className={`relative hidden items-center border border-gray-800 px-4 py-2 font-medium hover:bg-gray-800  sm:inline-flex ${
+                active
+                  ? 'text-striped bg-gray-800 text-white'
+                  : 'bg-gray-900 text-gray-500'
+              }`}
+            >
+              {page}
+            </a>
+          </Link>
         )
       })}
-      <a
-        className="inline-flex items-center border border-gray-800 bg-gray-900 px-4 py-2 font-medium text-gray-500 hover:bg-gray-800 sm:hidden"
-        href={`${cat}/${prev}`}
-      >
-        Назад
-      </a>
-      <a
-        className="inline-flex items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:hidden"
-        href={`${cat}/${next}`}
-      >
-        Напред
-      </a>
+      <Link href={`${cat}/${prev}`}>
+        <a className="inline-flex items-center border border-gray-800 bg-gray-900 px-4 py-2 font-medium text-gray-500 hover:bg-gray-800 sm:hidden">
+          Назад
+        </a>
+      </Link>
+      <Link href={`${cat}/${next}`}>
+        <a className="inline-flex items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:hidden">
+          Напред
+        </a>
+      </Link>
       {max - pagemap[0]!.page > 10 && (
         <>
           <span className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex">
             ...
           </span>
 
-          <a
-            href={`${cat}/${max}`}
-            className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex"
-          >
-            {max}
-          </a>
+          <Link href={`${cat}/${max}`}>
+            <a className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex">
+              {max}
+            </a>
+          </Link>
         </>
       )}
     </nav>

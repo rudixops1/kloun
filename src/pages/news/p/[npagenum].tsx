@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 // import { useRouter } from 'next/router';
 
-import { gql } from '@apollo/client'
 import type { GetServerSideProps } from 'next'
 
 import { Main } from '@/components/Layouts/Main'
@@ -10,6 +9,7 @@ import NewsThumbnail from '@/components/NewsThumbnail'
 import { Pagination } from '@/components/Pagination'
 import client from '@/data/client'
 import type { RootNewsProps } from '@/pages/news/'
+import { DATA_AGREGATE, DATA_QUERY } from '@/pages/news/'
 
 const PagingNews = ({
   news,
@@ -45,32 +45,7 @@ const PagingNews = ({
   )
 }
 export default PagingNews
-const DATA_AGREGATE = gql`
-  query MyQuery {
-    news_aggregate {
-      aggregate {
-        count
-      }
-    }
-  }
-`
 
-const DATA_QUERY = gql`
-  query MyQuery($start: Int!, $end: Int!) {
-    news(where: { id: { _gte: $end, _lte: $start } }, offset: 1) {
-      title
-      image
-      _id
-      slug
-      id
-    }
-    news_aggregate {
-      aggregate {
-        count
-      }
-    }
-  }
-`
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { npagenum } = context.query
   const agregate = await client.query({ query: DATA_AGREGATE })

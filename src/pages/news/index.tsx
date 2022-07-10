@@ -73,15 +73,24 @@ const Index = ({ news, news_aggregate }: RootNewsProps): JSX.Element => {
     </Main>
   )
 }
-
-const DATA_QUERY = gql`
+export const DATA_AGREGATE = gql`
   query MyQuery {
-    news(limit: 30, order_by: { date: desc_nulls_last }) {
+    news_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`
+
+export const DATA_QUERY = gql`
+  query MyQuery($start: Int!, $end: Int!) {
+    news(where: { id: { _gte: $end, _lte: $start } }, offset: 1) {
       title
       image
-      date
-      slug
       _id
+      slug
+      id
     }
     news_aggregate {
       aggregate {
@@ -91,8 +100,23 @@ const DATA_QUERY = gql`
   }
 `
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data } = await client.query({ query: DATA_QUERY })
-  return { props: data }
-}
+  const npagenum = 1
+  const agregate = await client.query({ query: DATA_AGREGATE })
+  const start =
+    agregate.data.news_aggregate.aggregate.count - (Number(npagenum) - 1) * 30
+  const end = start - 30
 
+  const { data } = await client.query({
+    query: DATA_QUERY,
+    variables: { npagenum, start, end },
+  })
+
+  return {
+    props: {
+      news: data.news.slice().reverse(),
+      news_aggregate: agregate.data.news_aggregate,
+      npagenum,
+    },
+  }
+}
 export default Index

@@ -42,7 +42,7 @@ module.exports = {
     },
   },
   // eslint-disable-next-line global-require
-  plugins: [require('tailwind-scrollbar')],
+  plugins: [require('tailwind-scrollbar'), require('daisyui')],
   variants: {
     scrollbar: ['rounded'],
   },

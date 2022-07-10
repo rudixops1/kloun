@@ -44,7 +44,7 @@ const PagingNews = ({
     </Main>
   )
 }
-
+export default PagingNews
 const DATA_QUERY = gql`
   query MyQuery($offset: Int!) {
     news(limit: 30, order_by: { date: desc_nulls_last }, offset: $offset) {
@@ -71,5 +71,3 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return { props: { ...data, npagenum } }
 }
-
-export default PagingNews

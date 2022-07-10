@@ -1,24 +1,22 @@
 /* eslint-disable no-underscore-dangle */
 
+import { gql } from '@apollo/client'
 import type { GetServerSideProps } from 'next'
-import React from 'react'
 
 import { JokeThumbnail } from '@/components/JokeThumbnail'
 import { Main } from '@/components/Layouts/Main'
 import { Meta } from '@/components/Layouts/Meta'
 import { Pagination } from '@/components/Pagination'
-import { jokes } from '@/data/nextdb'
+import client from '@/data/client'
 import type { Doc } from '@/data/structure'
 
-import catsdata from '../../../data/cats'
-
 const CatPage = ({
-  section,
+  jokes,
   pages,
   pagenum,
   cat,
 }: {
-  section: Doc[]
+  jokes: Doc[]
   pages: number
   pagenum: number
   cat: string
@@ -28,7 +26,7 @@ const CatPage = ({
       meta={
         <Meta
           title={`Вицове от ${cat} на страница ${pagenum}`}
-          description={`Вицове от ${cat}${section[0]!.joke
+          description={`Вицове от ${cat}${jokes[0]!.joke
             .replace(/\n/gi, ' ')
             .substring(0, 100)}`}
         />
@@ -36,7 +34,7 @@ const CatPage = ({
     >
       <Pagination pages={pages} pagenum={pagenum} cat={`/cat/${cat}`} />
       <div className="flex flex-wrap">
-        {section.map((item) => (
+        {jokes.map((item) => (
           <JokeThumbnail
             item={item}
             key={item._id}
@@ -59,23 +57,35 @@ const CatPage = ({
 
 export default CatPage
 
+const DATA_QUERY = gql`
+  query MyQuery($cat: String!, $offset: Int!) {
+    jokes_aggregate(where: { cat: { _eq: $cat } }) {
+      aggregate {
+        count
+      }
+    }
+    jokes(where: { cat: { _eq: $cat } }, limit: 30, offset: $offset) {
+      _id
+      joke
+    }
+  }
+`
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { pagenum, cat } = context.query
-  const pages = catsdata.find((item) => item.key === cat)!.value
-  const skip = Number(pagenum) * 30 - 30
 
-  const section = await jokes
-    .query('api/cat', {
-      limit: 30,
-      key: cat,
-      skip,
-    })
-    .then((res: { rows: any[] }): Doc[] => {
-      return res.rows.map((row): Doc => {
-        return { _id: row.id, ...row.value }
-      })
-    })
+  const offset = (Number(pagenum) - 1) * 30
+  const { data } = await client.query({
+    query: DATA_QUERY,
+    variables: { pagenum, offset, cat },
+  })
+
   return {
-    props: { section, pages, pagenum, cat },
+    props: {
+      jokes: data.jokes,
+      pagenum,
+      cat,
+      pages: data.jokes_aggregate.aggregate.count,
+    },
   }
 }

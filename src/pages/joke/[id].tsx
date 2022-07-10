@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 // import { useRouter } from 'next/router';
 
+import { gql } from '@apollo/client'
 import { chunk } from 'lodash'
 import type { GetServerSideProps } from 'next'
 import dynamic from 'next/dynamic'
@@ -11,7 +12,7 @@ import { FormatJoke } from '@/components/JokeText'
 import { JokeThumbnail } from '@/components/JokeThumbnail'
 import { Main } from '@/components/Layouts/Main'
 import { Meta } from '@/components/Layouts/Meta'
-import { jokes } from '@/data/nextdb'
+import client from '@/data/client'
 import type { Doc } from '@/data/structure'
 
 const FacebookShare = dynamic(() => import('@/components/FacebookShare'), {
@@ -91,22 +92,29 @@ const Joke = (props: {
   )
 }
 
+const DATA_QUERY = gql`
+  query MyQuery($id: String!) {
+    jokes(limit: 30, where: { _id: { _gt: $id } }) {
+      _id
+      joke
+      cat
+    }
+    jokes_by_pk(_id: $id) {
+      _id
+      cat
+      joke
+    }
+  }
+`
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query
 
-  const joke = await jokes.get(id)
-  const items = await jokes
-    .query('api/random', {
-      limit: 30,
-      start_key: Math.random(),
-    })
-    .then((res: { rows: any[] }): Doc[] => {
-      return res.rows.map((row): Doc => {
-        return { _id: row.id, ...row.value }
-      })
-    })
+  const { data } = await client.query({
+    query: DATA_QUERY,
+    variables: { id },
+  })
 
-  const cats = items.reduce((acc: any, item: any) => {
+  const cats = data.jokes.reduce((acc: any, item: any) => {
     if (!acc[item.cat]) {
       acc[item!.cat] = { key: item.cat }
     }
@@ -115,8 +123,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      joke,
-      items: items && chunk(items, Math.round(items.length / 3)),
+      joke: data.jokes_by_pk,
+      items: chunk(data.jokes, Math.round(data.jokes.length / 3)),
       cats:
         cats &&
         chunk(Object.values(cats), Math.round(Object.values(cats).length / 2)),

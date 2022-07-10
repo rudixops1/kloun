@@ -13,13 +13,13 @@ const Nav = ({ cats, limit }: NavProps) => {
     <div className="flex flex-wrap sm:mx-auto sm:mb-2 ">
       {newcats.map((d: { key: string; value: number }) => (
         <a
-          className="btn "
+          className="btn1"
           key={d.key}
           href={`/cat/${d.key.replace(/ /g, '%20')}/1`}
         >
-          <div className="btn-wrap">
+          <div className="btn1-wrap">
             <div className="flex-1 font-medium text-white"> {d.key}</div>
-            {d.value !== 0 && <div className="btn-count">{d.value}</div>}
+            {d.value !== 0 && <div className="btn1-count">{d.value}</div>}
           </div>
         </a>
       ))}

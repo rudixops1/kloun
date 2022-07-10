@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import type { NavProps } from '@/components/JokeCats'
 import Nav from '@/components/JokeCats'
 import { Main } from '@/components/Layouts/Main'
 import { Meta } from '@/components/Layouts/Meta'
@@ -25,12 +24,12 @@ const MoreButton = ({
   </div>
 )
 
-const Index = (props: NavProps) => {
+const Index = () => {
   const router = useRouter()
   const {
     query: { type },
   } = router
-
+  const cats = catsdata.sort((a, b) => b.value - a.value)
   return (
     <Main
       hideFooter
@@ -41,13 +40,13 @@ const Index = (props: NavProps) => {
         />
       }
     >
-      {type === 'Jokes' && <Nav cats={props.cats} />}
+      {type === 'Jokes' && <Nav cats={cats} />}
       {type === 'Program' && (
         <Program className="container flex flex-wrap items-center justify-center sm:mx-auto" />
       )}
       {!type && (
         <>
-          <Nav cats={props.cats} limit={9} />
+          <Nav cats={cats} limit={9} />
           <MoreButton text="Oще категории" type="Jokes" />
           <Program
             limit={12}
@@ -58,13 +57,6 @@ const Index = (props: NavProps) => {
       )}
     </Main>
   )
-}
-
-export async function getStaticProps() {
-  const remapcats = catsdata.sort((a, b) => b.value - a.value)
-  return {
-    props: { cats: remapcats },
-  }
 }
 
 export default Index

@@ -19,13 +19,13 @@
   body {
     @apply m-0 bg-gray-900 p-0 text-gray-400 text-base;
   }
-  .btn {
+  .btn1 {
     @apply w-full grow p-2 sm:w-1/3 md:h-1/4;
   }
-  .btn-count {
+  .btn1-count {
     @apply flex-none  rounded bg-purple-900 px-2 text-2xl font-extralight;
   }
-  .btn-wrap {
+  .btn1-wrap {
     @apply flex h-full items-center rounded bg-gray-800 p-4;
   }
   .joke {

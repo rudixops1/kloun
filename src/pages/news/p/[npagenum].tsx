@@ -6,9 +6,10 @@ import type { GetServerSideProps } from 'next'
 
 import { Main } from '@/components/Layouts/Main'
 import { Meta } from '@/components/Layouts/Meta'
+import NewsThumbnail from '@/components/NewsThumbnail'
 import { Pagination } from '@/components/Pagination'
 import client from '@/data/client'
-import type { RootNewsProps } from '@/pages/news/i/[id]'
+import type { RootNewsProps } from '@/pages/news/'
 
 const PagingNews = ({
   news,
@@ -29,32 +30,16 @@ const PagingNews = ({
     >
       <div className="my-10 flex w-full flex-col">
         <div className="flex flex-wrap">
-          {typeof npagenum}
           {news.map((item) => (
-            <div className="joke" key={item._id}>
-              <a href={`/news/i/${item._id}`}>
-                <div className="flex flex-row">
-                  <img
-                    alt={item.title}
-                    className="h-14 w-14 rounded object-cover"
-                    src={item.image}
-                  />
-                  <div className="ml-4 items-center justify-center ">
-                    <h3 className="text-xs font-medium text-slate-50">
-                      {item.title}
-                    </h3>
-                  </div>
-                </div>
-              </a>
-            </div>
+            <NewsThumbnail key={item.slug} {...item} />
           ))}
-          <Pagination
-            pages={news_aggregate.aggregate.count}
-            pagenum={Number(npagenum)}
-            cat={`/news/p/`}
-            hideStats
-          />
         </div>
+        <Pagination
+          pages={news_aggregate.aggregate.count}
+          pagenum={Number(npagenum)}
+          cat={`/news/p/`}
+          hideStats
+        />
       </div>
     </Main>
   )
@@ -67,7 +52,6 @@ const DATA_QUERY = gql`
       image
       date
       slug
-      _id
     }
     news_aggregate {
       aggregate {

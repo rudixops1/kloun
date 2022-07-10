@@ -6,9 +6,43 @@ import type { GetServerSideProps } from 'next'
 
 import { Main } from '@/components/Layouts/Main'
 import { Meta } from '@/components/Layouts/Meta'
+import NewsThumbnail from '@/components/NewsThumbnail'
 import { Pagination } from '@/components/Pagination'
 import client from '@/data/client'
-import type { RootNewsProps } from '@/pages/news/i/[id]'
+
+export interface RootNewsProps {
+  news: News[]
+  news_aggregate: NewsAggregate
+  news_by_pk: NewsByPk
+  npagenum?: number
+}
+
+export interface News {
+  __typename: string
+  _id: string
+  title: string
+  image: string
+  slug: string
+}
+
+export interface NewsAggregate {
+  __typename: string
+  aggregate: Aggregate
+}
+
+export interface Aggregate {
+  __typename: string
+  count: number
+}
+
+export interface NewsByPk {
+  __typename: string
+  date: string
+  title: string
+  image: string
+  slug: string
+  _id: string
+}
 
 const Index = ({ news, news_aggregate }: RootNewsProps): JSX.Element => {
   return (
@@ -26,22 +60,7 @@ const Index = ({ news, news_aggregate }: RootNewsProps): JSX.Element => {
       <div className="my-10 flex w-full flex-col">
         <div className="flex flex-wrap">
           {news.map((item) => (
-            <div className="joke" key={item._id}>
-              <a href={`/news/i/${item._id}`}>
-                <div className="flex flex-row">
-                  <img
-                    alt={item.title}
-                    className="h-14 w-14 rounded object-cover"
-                    src={item.image}
-                  />
-                  <div className="ml-4 items-center justify-center ">
-                    <h3 className="text-xs font-medium text-slate-50">
-                      {item.title}
-                    </h3>
-                  </div>
-                </div>
-              </a>
-            </div>
+            <NewsThumbnail key={item.slug} {...item} />
           ))}
           <Pagination
             pages={news_aggregate.aggregate.count}

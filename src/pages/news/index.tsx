@@ -42,6 +42,11 @@ export interface NewsByPk {
   image: string
   slug: string
   _id: string
+  content: {
+    html?: string[]
+    description?: string
+    image?: string
+  }
 }
 
 const Index = ({ news, news_aggregate }: RootNewsProps): JSX.Element => {

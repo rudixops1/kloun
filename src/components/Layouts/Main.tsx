@@ -27,7 +27,7 @@ const Main = (props: IMainProps) => {
         <div className="flex-none">
           <ul className="menu menu-horizontal p-0 text-sm">
             <li>
-              <a>Начало</a>
+              <Link href="/">Начало</Link>
             </li>
             <li>
               <a>
@@ -45,9 +45,12 @@ const Main = (props: IMainProps) => {
               <ul className="bg-base-100 p-2">
                 {catsdata.slice(0, 10).map((item) => (
                   <li key={item.key}>
-                    <Link href={`/cat/${item.key}/1`}>{item.key}</Link>
+                    <Link href={`/cat/${item.key}/`}>{item.key}</Link>
                   </li>
                 ))}
+                <li>
+                  <Link href={`/?type=Jokes`}>Всички </Link>
+                </li>
               </ul>
             </li>
             <li>

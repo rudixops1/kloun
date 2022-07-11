@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
+import { gql } from '@apollo/client'
 import type { GetServerSideProps } from 'next'
 
 import { JokeThumbnail } from '@/components/JokeThumbnail'
@@ -8,8 +9,6 @@ import { Meta } from '@/components/Layouts/Meta'
 import { Pagination } from '@/components/Pagination'
 import client from '@/data/client'
 import type { Doc } from '@/data/structure'
-
-import { DATA_QUERY_CAT } from './index'
 
 const CatPage = ({
   jokes,
@@ -33,16 +32,13 @@ const CatPage = ({
         />
       }
     >
-      <div className="breadcrumbs absolute top-3 text-sm">
+      <div className="breadcrumbs top-3 text-sm">
         <ul>
           <li>
             <a>Начало</a>
           </li>
           <li>
             <a>{cat}</a>
-          </li>
-          <li>
-            <a>{pagenum}</a>
           </li>
         </ul>
       </div>
@@ -71,19 +67,32 @@ const CatPage = ({
 
 export default CatPage
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { pagenum, cat } = context.query
+export const DATA_QUERY_CAT = gql`
+  query MyQuery($cat: String!, $offset: Int!) {
+    jokes_aggregate(where: { cat: { _eq: $cat } }) {
+      aggregate {
+        count
+      }
+    }
+    jokes(where: { cat: { _eq: $cat } }, limit: 30, offset: $offset) {
+      _id
+      joke
+    }
+  }
+`
 
-  const offset = (Number(pagenum) - 1) * 30
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cat } = context.query
+
   const { data } = await client.query({
     query: DATA_QUERY_CAT,
-    variables: { pagenum, offset, cat },
+    variables: { pagenum: 1, offset: 0, cat },
   })
 
   return {
     props: {
       jokes: data.jokes,
-      pagenum,
+      pagenum: 1,
       cat,
       pages: data.jokes_aggregate.aggregate.count,
     },

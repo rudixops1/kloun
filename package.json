@@ -38,6 +38,7 @@
     "nano": "^10.0.0",
     "next": "^12.2.1",
     "next-seo": "^5.4.0",
+    "nextjs-progressbar": "^0.0.14",
     "pexels": "^1.3.0",
     "pouchdb-node": "^7.3.0",
     "react": "^18.2.0",

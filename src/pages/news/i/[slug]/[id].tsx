@@ -12,7 +12,7 @@ import type { RootNewsProps } from '@/pages/news/'
 
 const NewsItem = ({
   news,
-  news_by_pk: { title, image, _id, content, slug },
+  news_by_pk: { title, image, _id, content, slug, date },
 }: RootNewsProps): JSX.Element => (
   <Main
     hideFooter
@@ -37,6 +37,7 @@ const NewsItem = ({
           />
           <h1 className="ml-4  text-2xl font-bold">{title}</h1>
         </div>
+        {date && <div className="ml-4 text-sm text-gray-600">{date}</div>}
         {content.html && (
           <div>
             {content.html.map((p: string, i: number) => (

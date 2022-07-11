@@ -16,7 +16,7 @@ const MoreButton = ({
   type: string
 }): JSX.Element => (
   <div className="my-2 flex flex-row-reverse">
-    <Link href={{ pathname: 'https://kloun.lol', query: { type } }}>
+    <Link href={{ pathname: '/', query: { type } }}>
       <div className="mr-2 flex cursor-pointer items-center rounded   bg-gradient-to-r from-purple-900 to-pink-600 ">
         <div className="m-1 flex bg-gray-800 p-2 text-sm">{text}</div>
       </div>

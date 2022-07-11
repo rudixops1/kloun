@@ -34,7 +34,7 @@ export const JokeThumbnail: FC<Props> = ({
   return (
     <div className="joke">
       {showcats && item.cat !== 'Разни' && (
-        <a className="joketop" href={`/cat/${cat.replace(/ /g, '%20')}/1`}>
+        <a className="joketop" href={`/cat/${cat.replace(/ /g, '%20')}/`}>
           {cat}
         </a>
       )}

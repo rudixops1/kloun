@@ -65,7 +65,7 @@ const Index = ({ news, news_aggregate }: RootNewsProps): JSX.Element => {
           <Pagination
             pages={news_aggregate.aggregate.count}
             pagenum={1}
-            cat={`/news/p/`}
+            cat={`/news/`}
             hideStats
           />
         </div>

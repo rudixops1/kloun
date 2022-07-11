@@ -24,7 +24,7 @@ const PagingNews = ({
           title="Новини"
           description="Новини"
           cat="Новини"
-          url={`https://kloun.lol/news/p/${npagenum}`}
+          url={`https://kloun.lol/news/${npagenum}`}
         />
       }
     >
@@ -37,7 +37,7 @@ const PagingNews = ({
         <Pagination
           pages={news_aggregate.aggregate.count}
           pagenum={Number(npagenum)}
-          cat={`/news/p/`}
+          cat={`/news/`}
           hideStats
         />
       </div>

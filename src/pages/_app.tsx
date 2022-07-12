@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5476404733919333"
       />
-      <NextNProgress />
+      <NextNProgress color="rgb(147 51 234)" />
       <RecoilRoot>
         <Component {...pageProps} />
       </RecoilRoot>

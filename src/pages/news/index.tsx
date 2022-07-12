@@ -89,8 +89,8 @@ export const DATA_AGREGATE = gql`
 `
 
 export const DATA_QUERY = gql`
-  query MyQuery($end: Int!) {
-    news(limit: 30, where: { id: { _lte: $end } }, order_by: { id: desc }) {
+  query MyQuery($start: Int!) {
+    news(limit: 30, where: { id: { _lte: $start } }, order_by: { id: desc }) {
       title
       image
       _id

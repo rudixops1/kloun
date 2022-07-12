@@ -70,7 +70,7 @@ const Index = ({ news, news_aggregate }: RootNewsProps): JSX.Element => {
           <Pagination
             pages={news_aggregate.aggregate.count}
             pagenum={1}
-            cat={`/news/`}
+            cat={`/news`}
             hideStats
           />
         </div>
@@ -89,13 +89,12 @@ export const DATA_AGREGATE = gql`
 `
 
 export const DATA_QUERY = gql`
-  query MyQuery($start: Int!, $end: Int!) {
-    news(where: { id: { _gte: $end, _lte: $start } }, offset: 1) {
+  query MyQuery($end: Int!) {
+    news(limit: 30, where: { id: { _lte: $end } }, order_by: { id: desc }) {
       title
       image
       _id
       slug
-      id
     }
     news_aggregate {
       aggregate {
@@ -118,7 +117,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      news: data.news.slice().reverse(),
+      news: data.news,
       news_aggregate: agregate.data.news_aggregate,
       npagenum,
     },

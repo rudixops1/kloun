@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const start =
     agregate.data.news_aggregate.aggregate.count - (Number(npagenum) - 1) * 30
   const end = start - 30
-
+  console.log(start, end)
   const { data } = await client.query({
     query: DATA_QUERY,
     variables: { npagenum, start, end },

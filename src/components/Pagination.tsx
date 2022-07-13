@@ -36,62 +36,44 @@ export const Pagination: FC<Props> = ({
   const next = curpage + 1 < max ? curpage + 1 : max
 
   return (
-    <nav
-      className="relative z-0 inline-flex justify-center -space-x-px rounded-md  p-2 shadow-sm"
-      aria-label="Pagination"
-    >
-      {pagemap[0]!.page !== 1 && (
-        <>
-          <Link href={`${cat}/`} passHref>
-            <a className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex ">
-              1
-            </a>
-          </Link>
+    <>
+      <nav className="btn-group block sm:hidden" aria-label="Pagination">
+        <Link href={`${cat}/${prev === 1 ? '' : prev}`} passHref>
+          <a className="btn">Назад</a>
+        </Link>
+        <Link href={`${cat}/${next === 1 ? '' : next}`} passHref>
+          <a className="btn">Напред</a>
+        </Link>
+      </nav>
+      <nav className="btn-group hidden sm:block" aria-label="Pagination">
+        {pagemap[0]!.page !== 1 && (
+          <>
+            <Link href={`${cat}/`} passHref>
+              <a className="btn">1</a>
+            </Link>
 
-          <span className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex ">
-            ...
-          </span>
-        </>
-      )}
+            <div className="btn-disabled btn">...</div>
+          </>
+        )}
 
-      {pagemap.map(({ page, active }) => {
-        return (
-          <Link key={page} href={`${cat}/${page === 1 ? '' : page}`} passHref>
-            <a
-              className={`relative hidden items-center border border-gray-800 px-4 py-2 font-medium hover:bg-gray-800  sm:inline-flex ${
-                active
-                  ? 'text-striped bg-gray-800 text-white'
-                  : 'bg-gray-900 text-gray-500'
-              }`}
-            >
-              {page}
-            </a>
-          </Link>
-        )
-      })}
-      <Link href={`${cat}/${prev === 1 ? '' : prev}`} passHref>
-        <a className="inline-flex items-center border border-gray-800 bg-gray-900 px-4 py-2 font-medium text-gray-500 hover:bg-gray-800 sm:hidden">
-          Назад
-        </a>
-      </Link>
-      <Link href={`${cat}/${next === 1 ? '' : next}`} passHref>
-        <a className="inline-flex items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:hidden">
-          Напред
-        </a>
-      </Link>
-      {max - pagemap[0]!.page > 10 && (
-        <>
-          <span className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex">
-            ...
-          </span>
+        {pagemap.map(({ page, active }) => {
+          return (
+            <Link key={page} href={`${cat}/${page === 1 ? '' : page}`} passHref>
+              <a className={`btn ${active ? 'btn-active' : ''}`}>{page}</a>
+            </Link>
+          )
+        })}
 
-          <Link href={`${cat}/${max}`} passHref>
-            <a className="relative hidden items-center border border-gray-800 bg-gray-900 px-4 py-2  font-medium text-gray-500 hover:bg-gray-800 sm:inline-flex">
-              {max}
-            </a>
-          </Link>
-        </>
-      )}
-    </nav>
+        {max - pagemap[0]!.page > 10 && (
+          <>
+            <div className="btn-disabled btn">...</div>
+
+            <Link href={`${cat}/${max}`} passHref>
+              <a className="btn">{max}</a>
+            </Link>
+          </>
+        )}
+      </nav>
+    </>
   )
 }

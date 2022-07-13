@@ -18,7 +18,7 @@ const defaultOptions = {
 const client = new ApolloClient({
   ssrMode: true,
   link: new HttpLink({
-    uri: 'http://ip-192-168-40-183.eu-west-1.compute.internal:8080/v1/graphql',
+    uri: 'http://ec2-3-250-146-84.eu-west-1.compute.amazonaws.com:8080/v1/graphql',
     fetch,
   }),
   cache: new InMemoryCache(),

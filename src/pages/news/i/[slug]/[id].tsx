@@ -3,7 +3,6 @@
 
 import { gql } from '@apollo/client'
 import { shuffle } from 'lodash'
-import { useEffect } from 'react'
 
 import { Main } from '@/components/Layouts/Main'
 import { Meta } from '@/components/Layouts/Meta'
@@ -16,12 +15,6 @@ const NewsItem = ({
   news_by_pk: { title, image, _id, content, slug, date },
   shuffled,
 }: RootNewsProps): JSX.Element => {
-  useEffect(() => {
-    const contentEl = document.getElementById('content') as HTMLInputElement
-    const arr = content.html || []
-    contentEl.innerHTML = arr.map((p) => `<p>${p}</p>`).join('\n')
-  }, [])
-
   return (
     <Main
       hideFooter

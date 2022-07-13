@@ -3,6 +3,7 @@
 
 import { gql } from '@apollo/client'
 import { shuffle } from 'lodash'
+import dynamic from 'next/dynamic'
 
 import { Main } from '@/components/Layouts/Main'
 import { Meta } from '@/components/Layouts/Meta'
@@ -10,6 +11,9 @@ import NewsThumbnail from '@/components/NewsThumbnail'
 import client from '@/data/client'
 import type { RootNewsProps } from '@/pages/news/'
 
+const NoSEO = dynamic(() => import('@/components/NoSEO'), {
+  ssr: false,
+})
 const NewsItem = ({
   news,
   news_by_pk: { title, image, _id, content, slug, date },
@@ -42,11 +46,14 @@ const NewsItem = ({
           {date && <div className="ml-4 text-sm text-gray-600">{date}</div>}
 
           {shuffled && (
-            <div id="content">
-              {shuffled.map((p: string, i: number) => (
-                <p key={i}>{p}</p>
-              ))}
-            </div>
+            <>
+              <div>{content.html && <NoSEO content={content.html} />}</div>
+              <div className="hidden">
+                {shuffled.map((p: string, i: number) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+            </>
           )}
         </div>
         <div className="flex flex-wrap">

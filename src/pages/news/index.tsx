@@ -20,7 +20,7 @@ export interface RootNewsProps {
 
 export interface News {
   __typename: string
-  _id: string
+  id: number
   title: string
   image: string
   slug: string
@@ -96,7 +96,7 @@ export const DATA_QUERY = gql`
     news(limit: 30, where: { id: { _lte: $end } }, order_by: { id: desc }) {
       title
       image
-      _id
+      id
       slug
     }
   }

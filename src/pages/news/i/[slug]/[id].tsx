@@ -67,20 +67,20 @@ const NewsItem = ({
 }
 
 const DATA_QUERY = gql`
-  query MyQuery($id: String!, $slug: String!) {
+  query MyQuery($id: Int!, $slug: String!) {
     news(limit: 15, where: { slug: { _regex: $slug } }) {
       title
       image
       slug
-      _id
+      id
     }
 
-    news_by_pk(_id: $id) {
+    news_by_pk(id: $id) {
       date
       title
       image
+      id
       slug
-      _id
       content
     }
   }

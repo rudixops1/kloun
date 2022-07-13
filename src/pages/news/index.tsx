@@ -15,6 +15,7 @@ export interface RootNewsProps {
   news_aggregate: NewsAggregate
   news_by_pk: NewsByPk
   npagenum?: number
+  shuffled?: string[]
 }
 
 export interface News {

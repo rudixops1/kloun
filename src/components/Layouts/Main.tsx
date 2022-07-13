@@ -46,7 +46,7 @@ const Main = (props: IMainProps) => {
                 {catsdata.slice(0, 10).map((item) => (
                   <li key={item.key}>
                     <Link href={`/cat/${item.key}/`} passHref>
-                      {item.key}
+                      <a>{item.key}</a>
                     </Link>
                   </li>
                 ))}
@@ -57,7 +57,7 @@ const Main = (props: IMainProps) => {
             </li>
             <li>
               <Link href="/news" passHref>
-                Новини
+                <a>Новини</a>
               </Link>
             </li>
           </ul>

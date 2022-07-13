@@ -12,7 +12,7 @@ const NewsThumbnail = ({
   _id: string
 }) => (
   <div className="joke">
-    <Link href={`/news/i/${slug}/${_id}`}>
+    <Link href={`/news/i/${slug}/${_id}`} passHref>
       <div className="flex cursor-pointer flex-row">
         <img
           alt={image}

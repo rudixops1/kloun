@@ -14,7 +14,7 @@ const Nav = ({ cats, limit }: NavProps) => {
   return (
     <div className="flex flex-wrap sm:mx-auto sm:mb-2 ">
       {newcats.map((d: { key: string; value: number }) => (
-        <Link key={d.key} href={`/cat/${d.key.replace(/ /g, '%20')}/`}>
+        <Link key={d.key} href={`/cat/${d.key.replace(/ /g, '%20')}/`} passHref>
           <a className="btn1">
             <div className="btn1-wrap">
               <div className="flex-1 font-medium text-white"> {d.key}</div>

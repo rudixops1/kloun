@@ -45,7 +45,9 @@ const Main = (props: IMainProps) => {
               <ul className="bg-base-100 p-2">
                 {catsdata.slice(0, 10).map((item) => (
                   <li key={item.key}>
-                    <Link href={`/cat/${item.key}/`}>{item.key}</Link>
+                    <Link href={`/cat/${item.key}/`} passHref>
+                      {item.key}
+                    </Link>
                   </li>
                 ))}
                 <li>
@@ -54,7 +56,9 @@ const Main = (props: IMainProps) => {
               </ul>
             </li>
             <li>
-              <Link href="/news">Новини</Link>
+              <Link href="/news" passHref>
+                Новини
+              </Link>
             </li>
           </ul>
         </div>

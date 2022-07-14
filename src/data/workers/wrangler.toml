@@ -1,4 +1,0 @@
-name = "workers"
-main = "src/index.js"
-compatibility_date = "2022-07-06"
-node_compat = true 

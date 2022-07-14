@@ -19,13 +19,14 @@ const NewsItem = ({
   news_by_pk: { title, image, uid, content, slug, date },
   shuffled,
 }: RootNewsProps): JSX.Element => {
+  const description = content.description ? content.description : title
   return (
     <Main
       hideFooter
       meta={
         <Meta
           title={title}
-          description={content.description ? content.description : title}
+          description={description}
           cat="Новини"
           imgtype="image/jpeg"
           image={content.image ? content.image : image}
@@ -36,12 +37,14 @@ const NewsItem = ({
       <div className="my-10 flex w-full flex-col">
         <div className="mx-auto leading-relaxed lg:w-2/3">
           <div className="flex flex-row">
-            <img
-              alt={title}
-              className="h-48 w-48 rounded-lg object-cover"
-              src={image}
-            />
-            <h1 className="ml-4  text-2xl font-bold">{title}</h1>
+            {image && (
+              <img
+                alt={description}
+                className="mr-4 h-48 w-48 rounded-lg object-cover"
+                src={image}
+              />
+            )}
+            <h1 className="text-2xl font-bold">{title}</h1>
           </div>
           {date && <div className="ml-4 text-sm text-gray-600">{date}</div>}
 

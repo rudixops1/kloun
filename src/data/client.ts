@@ -18,7 +18,7 @@ const defaultOptions = {
 const client = new ApolloClient({
   ssrMode: true,
   link: new HttpLink({
-    uri: 'https://db.up.railway.app/v1/graphql',
+    uri: 'https://workers.kloun.workers.dev/graphql',
     fetch,
   }),
   cache: new InMemoryCache(),

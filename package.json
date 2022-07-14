@@ -34,6 +34,7 @@
     "express": "^4.18.1",
     "express-pouchdb": "^4.2.0",
     "graphql": "^16.5.0",
+    "hamburger-react": "^2.5.0",
     "jimp": "^0.16.1",
     "lodash": "^4.17.21",
     "nano": "^10.0.0",

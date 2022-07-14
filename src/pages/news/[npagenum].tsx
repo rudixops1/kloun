@@ -35,7 +35,7 @@ const PagingNews = ({
           ))}
         </div>
         <Pagination
-          pages={news_aggregate.aggregate.max.id}
+          pages={news_aggregate.aggregate.max.nid}
           pagenum={Number(npagenum)}
           cat={`/news/`}
           hideStats
@@ -50,7 +50,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { npagenum } = context.query
   const agregate = await client.query({ query: DATA_AGREGATE })
   const start =
-    agregate.data.news_aggregate.aggregate.max.id - (Number(npagenum) - 1) * 30
+    agregate.data.news_aggregate.aggregate.max.nid - (Number(npagenum) - 1) * 30
   const end = start
 
   const { data } = await client.query({
@@ -60,7 +60,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      news: data.news.slice().reverse(),
+      news: data.news,
       news_aggregate: agregate.data.news_aggregate,
       npagenum,
     },

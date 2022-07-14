@@ -33,7 +33,7 @@ export interface NewsAggregate {
 
 export interface Aggregate {
   __typename: string
-  max: { id: number }
+  max: { nid: number }
 }
 
 export interface NewsByPk {
@@ -69,7 +69,7 @@ const Index = ({ news, news_aggregate }: RootNewsProps): JSX.Element => {
             <NewsThumbnail key={item.slug} {...item} />
           ))}
           <Pagination
-            pages={news_aggregate.aggregate.max.id}
+            pages={news_aggregate.aggregate.max.nid}
             pagenum={1}
             cat={`/news`}
             hideStats
@@ -84,7 +84,7 @@ export const DATA_AGREGATE = gql`
     news_aggregate {
       aggregate {
         max {
-          id
+          nid
         }
       }
     }
@@ -93,7 +93,7 @@ export const DATA_AGREGATE = gql`
 
 export const DATA_QUERY = gql`
   query MyQuery($end: Int!) {
-    news(limit: 30, where: { id: { _lte: $end } }, order_by: { id: desc }) {
+    news(limit: 30, where: { nid: { _lte: $end } }, order_by: { nid: desc }) {
       title
       image
       id
@@ -105,7 +105,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const npagenum = 1
   const agregate = await client.query({ query: DATA_AGREGATE })
   const start =
-    agregate.data.news_aggregate.aggregate.max.id - (Number(npagenum) - 1) * 30
+    agregate.data.news_aggregate.aggregate.max.nid - (Number(npagenum) - 1) * 30
   const end = start
 
   const { data } = await client.query({

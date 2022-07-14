@@ -1,9 +1,18 @@
-const NoSEO = ({ content }: { content: string[] }) => {
+import Link from 'next/link'
+
+const NoSEO = ({ content, href }: { content: string[]; href: string }) => {
+  const short = content.slice(0, 2)
   return (
     <>
-      {content.map((item, i) => (
+      {short.map((item, i) => (
         <p key={i}>{item}</p>
-      ))}
+      ))}{' '}
+      ...
+      <Link href={href}>
+        <a className="btn" rel="noopener noreferrer nofollow">
+          Прочети нататък
+        </a>
+      </Link>
     </>
   )
 }

@@ -16,7 +16,7 @@ const NoSEO = dynamic(() => import('@/components/NoSEO'), {
 })
 const NewsItem = ({
   news,
-  news_by_pk: { title, image, uid, content, slug, date },
+  news_by_pk: { title, image, uid, content, slug, date, href },
   shuffled,
 }: RootNewsProps): JSX.Element => {
   const description = content.description ? content.description : title
@@ -50,7 +50,9 @@ const NewsItem = ({
 
           {shuffled && (
             <>
-              <div>{content.html && <NoSEO content={content.html} />}</div>
+              <div>
+                <NoSEO content={[description] || content.html} href={href} />
+              </div>
               <div className="hidden">
                 {shuffled.map((p: string, i: number) => (
                   <p key={i}>{p}</p>
@@ -84,6 +86,7 @@ const DATA_QUERY = gql`
       image
       slug
       content
+      href
     }
   }
 `

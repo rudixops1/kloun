@@ -4,15 +4,15 @@ const NewsThumbnail = ({
   title,
   image,
   slug,
-  id,
+  uid,
 }: {
   title: string
   image: string
   slug: string
-  id: number
+  uid: string
 }) => (
   <div className="joke">
-    <Link href={`/news/i/${slug}/${id}`} passHref>
+    <Link href={`/news/i/${slug}/${uid}`} passHref>
       <a>
         <div className="flex cursor-pointer flex-row">
           <img

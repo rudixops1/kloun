@@ -20,7 +20,7 @@ export interface RootNewsProps {
 
 export interface News {
   __typename: string
-  id: number
+  uid: string
   title: string
   image: string
   slug: string
@@ -42,7 +42,7 @@ export interface NewsByPk {
   title: string
   image: string
   slug: string
-  _id: string
+  uid: string
   content: {
     html?: string[]
     description?: string
@@ -66,7 +66,7 @@ const Index = ({ news, news_aggregate }: RootNewsProps): JSX.Element => {
       <div className="my-10 flex w-full flex-col">
         <div className="flex flex-wrap">
           {news.map((item) => (
-            <NewsThumbnail key={item.slug} {...item} />
+            <NewsThumbnail key={item.uid} {...item} />
           ))}
           <Pagination
             pages={news_aggregate.aggregate.max.nid}
@@ -96,7 +96,7 @@ export const DATA_QUERY = gql`
     news(limit: 30, where: { nid: { _lte: $end } }, order_by: { nid: desc }) {
       title
       image
-      id
+      uid
       slug
     }
   }

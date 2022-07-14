@@ -16,7 +16,7 @@ const NoSEO = dynamic(() => import('@/components/NoSEO'), {
 })
 const NewsItem = ({
   news,
-  news_by_pk: { title, image, _id, content, slug, date },
+  news_by_pk: { title, image, uid, content, slug, date },
   shuffled,
 }: RootNewsProps): JSX.Element => {
   return (
@@ -29,7 +29,7 @@ const NewsItem = ({
           cat="Новини"
           imgtype="image/jpeg"
           image={content.image ? content.image : image}
-          url={`https://kloun.lol/news/i/${slug}/${_id}`}
+          url={`https://kloun.lol/news/i/${slug}/${uid}`}
         />
       }
     >
@@ -58,7 +58,7 @@ const NewsItem = ({
         </div>
         <div className="flex flex-wrap">
           {news.map((item) => (
-            <NewsThumbnail key={item.slug} {...item} />
+            <NewsThumbnail key={item.uid} {...item} />
           ))}
         </div>
       </div>
@@ -67,19 +67,18 @@ const NewsItem = ({
 }
 
 const DATA_QUERY = gql`
-  query MyQuery($id: Int!, $slug: String!) {
+  query MyQuery($id: uuid!, $slug: String!) {
     news(limit: 15, where: { slug: { _regex: $slug } }) {
       title
       image
       slug
-      id
+      uid
     }
 
-    news_by_pk(id: $id) {
+    news_by_pk(uid: $id) {
       date
       title
       image
-      id
       slug
       content
     }

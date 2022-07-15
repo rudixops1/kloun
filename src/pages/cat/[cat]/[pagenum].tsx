@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 
 import type { GetServerSideProps } from 'next'
+import Link from 'next/link'
 
 import { JokeThumbnail } from '@/components/JokeThumbnail'
 import { Main } from '@/components/Layouts/Main'
@@ -33,13 +34,13 @@ const CatPage = ({
         />
       }
     >
-      <div className="breadcrumbs absolute top-3 text-sm">
+      <div className="breadcrumbs text-sm">
         <ul>
           <li>
-            <a>Начало</a>
+            <Link href="/?type=Jokes">Вицове</Link>
           </li>
           <li>
-            <a>{cat}</a>
+            <Link href={`/cat/${cat}`}>{cat}</Link>
           </li>
           <li>
             <a>{pagenum}</a>

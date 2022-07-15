@@ -19,7 +19,7 @@ function Footer({ hide }: { hide?: boolean }) {
     >
       <div className="">
         {!hide && <Nav cats={shuffle(catsdata).slice(0, 3)} />}
-        <div className="text-center">
+        <div className="text-center text-xs">
           © {new Date().getFullYear()}, Built by RudixOps with ❤️
         </div>
       </div>

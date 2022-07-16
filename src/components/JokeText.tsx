@@ -20,10 +20,13 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
       </>
     )
   }
+
   return (
     <div>
       {joke.split('\n').map((line: string, i: number) =>
-        line.startsWith('-') ? (
+        line.startsWith('-') ||
+        line.startsWith(' -') ||
+        line.startsWith('–') ? (
           <div className="flex flex-wrap odd:flex-row-reverse" key={i}>
             <div
               className={`${

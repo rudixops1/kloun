@@ -1,6 +1,7 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import fetch from 'cross-fetch'
 
+export const GRAPH_URL = 'http://34.244.15.176:8080'
 const defaultOptions = {
   watchQuery: {
     fetchPolicy: 'no-cache',
@@ -18,7 +19,7 @@ const defaultOptions = {
 const client = new ApolloClient({
   ssrMode: true,
   link: new HttpLink({
-    uri: 'http://34.244.15.176:8080/v1/graphql',
+    uri: `${GRAPH_URL}/v1/graphql`,
     fetch,
   }),
   cache: new InMemoryCache(),

@@ -1,3 +1,5 @@
+/* eslint-disable no-cond-assign */
+/* eslint-disable no-nested-ternary */
 import type { FC, ReactElement } from 'react'
 import React from 'react'
 
@@ -20,29 +22,55 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
       </>
     )
   }
+  let i1 = 0
+
+  const remapped = joke.split('\n').map((line, i) => {
+    const num =
+      line.startsWith('-') || line.startsWith(' -') || line.startsWith('–')
+        ? (i1 += 1) % 2 === 0
+          ? 'even'
+          : 'odd'
+        : false
+
+    return {
+      key: i,
+      line:
+        num === 'odd' || num === 'even'
+          ? line.replace('-', '').replace('–', '')
+          : line,
+      ...(num && { oddness: num }),
+    }
+  })
 
   return (
     <div>
-      {joke.split('\n').map((line: string, i: number) =>
-        line.startsWith('-') ||
-        line.startsWith(' -') ||
-        line.startsWith('–') ? (
-          <div className="flex flex-wrap odd:flex-row-reverse" key={i}>
-            <div
-              className={`${
-                i % 2 === 0
-                  ? 'speech-bubble-even bg-gradient-to-r text-right'
-                  : 'speech-bubble-odd bg-gradient-to-l text-left'
-              } speech-bubble my-3 rounded from-purple-900 to-pink-600 p-3 `}
-            >
-              <div>{line.replace('-', '')}</div>
+      {remapped.map(
+        ({
+          oddness,
+          line,
+          key,
+        }: {
+          oddness?: string
+          line: string
+          key: number
+        }) =>
+          oddness ? (
+            <div className="flex flex-wrap odd:flex-row-reverse" key={key}>
+              <div
+                className={`${
+                  oddness === 'even'
+                    ? 'speech-bubble-even bg-gradient-to-r text-right'
+                    : 'speech-bubble-odd bg-gradient-to-l text-left'
+                } speech-bubble my-3 rounded from-purple-900 to-pink-600 p-3 `}
+              >
+                <div>{line}</div>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div key={i} className="block">
-            {line}
-          </div>
-        )
+          ) : (
+            <div key={key} className="block">
+              {line}
+            </div>
+          )
       )}
     </div>
   )

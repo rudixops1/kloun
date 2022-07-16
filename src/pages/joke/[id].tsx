@@ -40,7 +40,7 @@ const Joke = (props: {
       }
     >
       <div className="my-10 flex w-full flex-col text-center">
-        <div className="mx-auto text-xl leading-relaxed lg:w-2/3">
+        <div className="mx-auto mb-6 text-xl leading-relaxed lg:w-2/3">
           <FormatJoke joke={props.joke.joke} />
         </div>
         <FacebookShare id={props.joke._id} />
@@ -120,7 +120,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
     return acc
   }, {} as Cat[])
-  console.log(cats)
 
   return {
     props: {

@@ -116,7 +116,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const cats = data.jokes.reduce((acc: any, item: any) => {
     if (!acc[item.cat]) {
-      acc[item!.cat] = { key: item.cat }
+      acc[item!.cat] = { cat: item.cat }
     }
     return acc
   }, {} as Cat[])

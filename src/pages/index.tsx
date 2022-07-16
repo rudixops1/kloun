@@ -29,7 +29,7 @@ const Index = () => {
   const {
     query: { type },
   } = router
-  const cats = catsdata.sort((a, b) => b.value - a.value)
+  const cats = catsdata.sort((a, b) => b.count - a.count)
   return (
     <Main
       hideFooter

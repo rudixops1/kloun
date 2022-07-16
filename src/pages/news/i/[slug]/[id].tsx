@@ -95,7 +95,10 @@ export const getServerSideProps = async (context: {
 }) => {
   const { id, slug } = context.query
 
-  const regex = shuffle(slug!.split('-')).join('|')
+  const regex = shuffle(slug.split('-'))
+    .filter((ix: string) => ix.length >= 5)
+    .slice(0, 3)
+    .join('|')
 
   const { data } = await client.query({
     query: DATA_QUERY,

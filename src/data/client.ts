@@ -1,7 +1,7 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import fetch from 'cross-fetch'
 
-export const GRAPH_URL = 'http://34.244.15.176:8080'
+export const GRAPH_URL = 'http://34.242.41.16'
 const defaultOptions = {
   watchQuery: {
     fetchPolicy: 'no-cache',

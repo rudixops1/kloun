@@ -59,7 +59,7 @@ const catsdata: Cat[] = [
   },
   {
     cat: 'Лекари',
-    count: 1097,
+    count: 1202,
   },
   {
     cat: 'Иванчо',
@@ -130,11 +130,11 @@ const catsdata: Cat[] = [
     count: 382,
   },
   {
-    cat: 'Татковци',
+    cat: 'Тъпизми',
     count: 330,
   },
   {
-    cat: 'Тъпизми',
+    cat: 'Татковци',
     count: 330,
   },
   {
@@ -164,6 +164,10 @@ const catsdata: Cat[] = [
   {
     cat: 'Авто',
     count: 247,
+  },
+  {
+    cat: 'България',
+    count: 240,
   },
   {
     cat: 'Изпити',
@@ -238,15 +242,15 @@ const catsdata: Cat[] = [
     count: 126,
   },
   {
-    cat: 'Джипове',
-    count: 120,
-  },
-  {
     cat: 'Водка',
     count: 120,
   },
   {
     cat: 'Комунистически',
+    count: 120,
+  },
+  {
+    cat: 'Джипове',
     count: 120,
   },
   {
@@ -270,23 +274,7 @@ const catsdata: Cat[] = [
     count: 106,
   },
   {
-    cat: 'Телефони',
-    count: 105,
-  },
-  {
     cat: 'Директори',
-    count: 105,
-  },
-  {
-    cat: 'Марийка',
-    count: 105,
-  },
-  {
-    cat: 'Монаси',
-    count: 105,
-  },
-  {
-    cat: 'Фейсбук',
     count: 105,
   },
   {
@@ -294,7 +282,23 @@ const catsdata: Cat[] = [
     count: 105,
   },
   {
+    cat: 'Марийка',
+    count: 105,
+  },
+  {
     cat: 'Дискотеки',
+    count: 105,
+  },
+  {
+    cat: 'Фейсбук',
+    count: 105,
+  },
+  {
+    cat: 'Монаси',
+    count: 105,
+  },
+  {
+    cat: 'Телефони',
     count: 105,
   },
   {
@@ -302,11 +306,11 @@ const catsdata: Cat[] = [
     count: 103,
   },
   {
-    cat: 'Бебета',
+    cat: 'Ловци',
     count: 97,
   },
   {
-    cat: 'Ловци',
+    cat: 'Бебета',
     count: 97,
   },
   {
@@ -326,7 +330,7 @@ const catsdata: Cat[] = [
     count: 89,
   },
   {
-    cat: 'Мутри',
+    cat: 'Годеници',
     count: 89,
   },
   {
@@ -334,7 +338,7 @@ const catsdata: Cat[] = [
     count: 89,
   },
   {
-    cat: 'Годеници',
+    cat: 'Мутри',
     count: 89,
   },
   {
@@ -358,11 +362,11 @@ const catsdata: Cat[] = [
     count: 78,
   },
   {
-    cat: 'Африка',
+    cat: 'Комар',
     count: 76,
   },
   {
-    cat: 'Комар',
+    cat: 'Африка',
     count: 76,
   },
   {
@@ -370,15 +374,7 @@ const catsdata: Cat[] = [
     count: 75,
   },
   {
-    cat: 'Хасан и Айшето',
-    count: 75,
-  },
-  {
-    cat: 'Зима',
-    count: 75,
-  },
-  {
-    cat: 'Варна',
+    cat: 'Чапай и Петка',
     count: 75,
   },
   {
@@ -394,11 +390,19 @@ const catsdata: Cat[] = [
     count: 75,
   },
   {
+    cat: 'Хасан и Айшето',
+    count: 75,
+  },
+  {
     cat: 'Дъщери',
     count: 75,
   },
   {
-    cat: 'Чапай и Петка',
+    cat: 'Зима',
+    count: 75,
+  },
+  {
+    cat: 'Варна',
     count: 75,
   },
   {
@@ -418,11 +422,11 @@ const catsdata: Cat[] = [
     count: 61,
   },
   {
-    cat: 'Бърза помощ',
+    cat: 'Нова година',
     count: 60,
   },
   {
-    cat: 'Вино',
+    cat: 'Бърза помощ',
     count: 60,
   },
   {
@@ -434,11 +438,15 @@ const catsdata: Cat[] = [
     count: 60,
   },
   {
-    cat: 'Нова година',
+    cat: 'Златната рибка',
     count: 60,
   },
   {
-    cat: 'Митничари',
+    cat: 'Вино',
+    count: 60,
+  },
+  {
+    cat: 'Зъболекари',
     count: 60,
   },
   {
@@ -450,11 +458,7 @@ const catsdata: Cat[] = [
     count: 60,
   },
   {
-    cat: 'Зъболекари',
-    count: 60,
-  },
-  {
-    cat: 'Златната рибка',
+    cat: 'Митничари',
     count: 60,
   },
   {
@@ -462,7 +466,7 @@ const catsdata: Cat[] = [
     count: 55,
   },
   {
-    cat: 'Банки',
+    cat: 'Филми',
     count: 51,
   },
   {
@@ -470,7 +474,7 @@ const catsdata: Cat[] = [
     count: 51,
   },
   {
-    cat: 'Филми',
+    cat: 'Банки',
     count: 51,
   },
   {
@@ -522,6 +526,10 @@ const catsdata: Cat[] = [
     count: 45,
   },
   {
+    cat: 'Затворници',
+    count: 45,
+  },
+  {
     cat: 'Градове',
     count: 45,
   },
@@ -532,6 +540,182 @@ const catsdata: Cat[] = [
   {
     cat: 'Лято',
     count: 45,
+  },
+  {
+    cat: 'Ракия',
+    count: 45,
+  },
+  {
+    cat: 'Щастие',
+    count: 45,
+  },
+  {
+    cat: 'Коледа и Нова година',
+    count: 42,
+  },
+  {
+    cat: 'Журналисти',
+    count: 41,
+  },
+  {
+    cat: 'Депутати',
+    count: 39,
+  },
+  {
+    cat: 'Германия',
+    count: 33,
+  },
+  {
+    cat: 'Красиви',
+    count: 32,
+  },
+  {
+    cat: 'Кино',
+    count: 30,
+  },
+  {
+    cat: 'Зоопарк',
+    count: 30,
+  },
+  {
+    cat: 'Дебели',
+    count: 30,
+  },
+  {
+    cat: 'Образованието',
+    count: 30,
+  },
+  {
+    cat: 'Крокодили',
+    count: 30,
+  },
+  {
+    cat: 'Кюфтета',
+    count: 30,
+  },
+  {
+    cat: 'Слонове',
+    count: 30,
+  },
+  {
+    cat: 'Свекър и свекърва',
+    count: 30,
+  },
+  {
+    cat: 'Щерки',
+    count: 30,
+  },
+  {
+    cat: 'Футбол',
+    count: 30,
+  },
+  {
+    cat: 'Медицински сестри',
+    count: 30,
+  },
+  {
+    cat: 'София',
+    count: 30,
+  },
+  {
+    cat: 'Колеги',
+    count: 30,
+  },
+  {
+    cat: 'Психиатрия',
+    count: 30,
+  },
+  {
+    cat: 'Гъбари',
+    count: 30,
+  },
+  {
+    cat: 'Сутрин',
+    count: 30,
+  },
+  {
+    cat: 'Избори',
+    count: 30,
+  },
+  {
+    cat: 'Кръчми',
+    count: 30,
+  },
+  {
+    cat: 'Перничани',
+    count: 30,
+  },
+  {
+    cat: 'Мравки',
+    count: 30,
+  },
+  {
+    cat: 'Истории',
+    count: 30,
+  },
+  {
+    cat: 'Бойко Борисов',
+    count: 30,
+  },
+  {
+    cat: 'Шерлок Хоумс',
+    count: 27,
+  },
+  {
+    cat: 'Овчари',
+    count: 26,
+  },
+  {
+    cat: 'Слаботелесни',
+    count: 26,
+  },
+  {
+    cat: 'Бизнесмени',
+    count: 24,
+  },
+  {
+    cat: 'Киркор и Гарабед',
+    count: 23,
+  },
+  {
+    cat: 'Пътуване',
+    count: 21,
+  },
+  {
+    cat: 'Съседи',
+    count: 18,
+  },
+  {
+    cat: 'Магарета',
+    count: 16,
+  },
+  {
+    cat: 'Огледало',
+    count: 16,
+  },
+  {
+    cat: 'Джентълмени',
+    count: 15,
+  },
+  {
+    cat: 'Оптимисти',
+    count: 15,
+  },
+  {
+    cat: 'Патки',
+    count: 15,
+  },
+  {
+    cat: 'Университети',
+    count: 15,
+  },
+  {
+    cat: 'Смърта',
+    count: 15,
+  },
+  {
+    cat: 'Плуване',
+    count: 15,
   },
 ]
 export default catsdata

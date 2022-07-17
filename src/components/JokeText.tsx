@@ -65,12 +65,21 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
               key={key}
             >
               <div
-                className={`whitespace-pre-wrap rounded-lg p-2 font-sans font-medium shadow-2xl ${
+                className={`relative whitespace-pre-wrap rounded-lg p-2 font-sans font-medium shadow-2xl ${
                   oddness === 'even'
                     ? 'bg-violet-900 text-right'
                     : 'bg-indigo-700 text-left'
                 }`}
               >
+                {oddness === 'odd' ? (
+                  <div className="absolute -left-4 top-3 inline-block w-4 overflow-hidden">
+                    <div className="h-16  origin-top-right -rotate-45 bg-indigo-700"></div>
+                  </div>
+                ) : (
+                  <div className="absolute -right-4 top-3 inline-block w-4 overflow-hidden">
+                    <div className=" h-16  origin-top-left rotate-45 bg-violet-900"></div>
+                  </div>
+                )}
                 {line}
               </div>
             </div>

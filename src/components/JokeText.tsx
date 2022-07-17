@@ -26,7 +26,10 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
 
   const remapped = joke.split('\n').map((line, i) => {
     const num =
-      line.startsWith('-') || line.startsWith(' -') || line.startsWith('–')
+      line.startsWith('-') ||
+      line.startsWith(' -') ||
+      line.startsWith('–') ||
+      line.startsWith('  -')
         ? (i1 += 1) % 2 === 0
           ? 'even'
           : 'odd'
@@ -55,19 +58,24 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
           key: number
         }) =>
           oddness ? (
-            <div className="flex flex-wrap odd:flex-row-reverse" key={key}>
+            <div
+              className={`flex flex-wrap pb-4 ${
+                oddness === 'even' ? 'flex-row-reverse' : ''
+              }`}
+              key={key}
+            >
               <div
-                className={`${
+                className={`whitespace-pre-wrap rounded-lg p-2 font-sans font-medium shadow-2xl ${
                   oddness === 'even'
-                    ? 'speech-bubble-even bg-gradient-to-r text-right'
-                    : 'speech-bubble-odd bg-gradient-to-l text-left'
-                } speech-bubble my-3 rounded from-purple-900 to-pink-600 p-3 `}
+                    ? 'bg-violet-900 text-right'
+                    : 'bg-indigo-700 text-left'
+                }`}
               >
-                <div>{line}</div>
+                {line}
               </div>
             </div>
           ) : (
-            <div key={key} className="block">
+            <div key={key} className="block pb-4 text-lg">
               {line}
             </div>
           )

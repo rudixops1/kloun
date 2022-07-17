@@ -95,7 +95,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     query: DATA_QUERY_CAT,
     variables: { pagenum: 1, offset: 0, cat },
   })
-  console.log(data.jokes_count[0].count)
 
   return {
     props: {

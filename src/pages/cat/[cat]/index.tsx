@@ -73,10 +73,8 @@ export default CatPage
 
 export const DATA_QUERY_CAT = gql`
   query MyQuery($cat: String!, $offset: Int!) {
-    jokes_aggregate(where: { cat: { _eq: $cat } }) {
-      aggregate {
-        count
-      }
+    jokes_count(where: { cat: { _eq: $cat } }) {
+      count
     }
     jokes(
       where: { cat: { _eq: $cat } }
@@ -97,13 +95,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     query: DATA_QUERY_CAT,
     variables: { pagenum: 1, offset: 0, cat },
   })
+  console.log(data.jokes_count[0].count)
 
   return {
     props: {
       jokes: data.jokes,
       pagenum: 1,
       cat,
-      pages: data.jokes_aggregate.aggregate.count,
+      pages: data.jokes_count[0].count,
     },
   }
 }

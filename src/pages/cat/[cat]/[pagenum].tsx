@@ -86,7 +86,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       jokes: data.jokes,
       pagenum,
       cat,
-      pages: data.jokes_aggregate.aggregate.count,
+      pages: data.jokes_count[0].count,
     },
   }
 }

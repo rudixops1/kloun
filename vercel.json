@@ -1,10 +1,10 @@
 {
   "functions": {
     "src/pages/api/**/*.ts": {
-      "memory": 512
+      "memory": 1024
     },
     "src/pages/**/*": {
-      "memory": 512
+      "memory": 1024
     }
   }
 }

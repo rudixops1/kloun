@@ -16,7 +16,7 @@ const NoSEO = dynamic(() => import('@/components/NoSEO'), {
 })
 const NewsItem = ({
   news,
-  news_by_pk: { title, image, uid, content, slug, date, href },
+  news_by_pk: { title, image, uid, slug, date, content, href },
   shuffled,
 }: RootNewsProps): JSX.Element => {
   const description = content.description ? content.description : title
@@ -85,7 +85,7 @@ const DATA_QUERY = gql`
       title
       image
       slug
-      content
+      source
       href
     }
   }
@@ -104,9 +104,11 @@ export const getServerSideProps = async (context: {
     query: DATA_QUERY,
     variables: { id, slug: `(${regex})` },
   })
-  const shufflprep = data.news_by_pk.content.html
+  const content = JSON.parse(data.news_by_pk.source)
+
+  const shufflprep = content.html
     ? shuffle(
-        data.news_by_pk.content.html
+        content.html
           .join(' ')
           .split('.')
           .map((p: string) => `${shuffle(p.split(' ')).join(' ')}.`)
@@ -124,7 +126,8 @@ export const getServerSideProps = async (context: {
 
   return {
     props: {
-      ...data,
+      news: data.news,
+      news_by_pk: { ...data.news_by_pk, content },
       slug,
       shuffled,
     },

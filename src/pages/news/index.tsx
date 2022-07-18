@@ -44,6 +44,7 @@ export interface NewsByPk {
   slug: string
   uid: string
   href: string
+  source: string
   content: {
     html: string[]
     description?: string

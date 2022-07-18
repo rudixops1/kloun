@@ -70,16 +70,14 @@ const CatPage = ({
 }
 
 export default CatPage
-export const COUNT_QUERY = gql`
-  query CountJokes($cat: String!) @cached(ttl: 86400) {
-    jokes_count(where: { cat: { _eq: $cat } }) {
-      count
-    }
-  }
-`
 
 export const DATA_QUERY_CAT = gql`
   query MyQuery($cat: String!, $offset: Int!) {
+    jokes_aggregate(where: { cat: { _eq: $cat } }) {
+      aggregate {
+        count
+      }
+    }
     jokes(
       where: { cat: { _eq: $cat } }
       order_by: { nid: desc }
@@ -94,10 +92,6 @@ export const DATA_QUERY_CAT = gql`
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { cat } = context.query
-  const count = await client.query({
-    query: COUNT_QUERY,
-    variables: { cat },
-  })
 
   const { data } = await client.query({
     query: DATA_QUERY_CAT,
@@ -109,7 +103,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       jokes: data.jokes,
       pagenum: 1,
       cat,
-      pages: count.data.jokes_count[0].count,
+      pages: data.jokes_aggregate.aggregate.count,
     },
   }
 }

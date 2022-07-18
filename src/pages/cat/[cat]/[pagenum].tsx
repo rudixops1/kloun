@@ -10,7 +10,7 @@ import { Pagination } from '@/components/Pagination'
 import client from '@/data/client'
 import type { Doc } from '@/data/structure'
 
-import { COUNT_QUERY, DATA_QUERY_CAT } from './index'
+import { DATA_QUERY_CAT } from './index'
 
 const CatPage = ({
   jokes,
@@ -76,10 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { pagenum, cat } = context.query
 
   const offset = (Number(pagenum) - 1) * 30
-  const count = await client.query({
-    query: COUNT_QUERY,
-    variables: { cat },
-  })
+
   const { data } = await client.query({
     query: DATA_QUERY_CAT,
     variables: { pagenum, offset, cat },
@@ -90,7 +87,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       jokes: data.jokes,
       pagenum,
       cat,
-      pages: count.data.jokes_count[0].count,
+      pages: data.jokes_aggregate.aggregate.count,
     },
   }
 }

@@ -1,5 +1,4 @@
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
-import fetch from 'cross-fetch'
+import { ApolloClient, InMemoryCache } from '@apollo/client'
 
 export const GRAPH_URL = 'http://34.242.41.16'
 const defaultOptions = {
@@ -10,20 +9,20 @@ const defaultOptions = {
     fetchPolicy: 'no-cache',
   },
 } as any
-// const client1 = new ApolloClient({
-// ssrMode: true,
-// uri: 'https://db.up.railway.app/v1/graphql',
-// cache: new InMemoryCache(),
-// defaultOptions,
-// })
 const client = new ApolloClient({
   ssrMode: true,
-  link: new HttpLink({
-    uri: `${GRAPH_URL}/v1/graphql`,
-    fetch,
-  }),
+  uri: `${GRAPH_URL}/v1/graphql`,
   cache: new InMemoryCache(),
   defaultOptions,
 })
+// const client2 = new ApolloClient({
+//   ssrMode: true,
+//   link: new HttpLink({
+//     uri: `${GRAPH_URL}/v1/graphql`,
+//     fetch,
+//   }),
+//   cache: new InMemoryCache(),
+//   defaultOptions,
+// })
 
 export default client

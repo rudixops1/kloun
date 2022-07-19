@@ -75,7 +75,7 @@ export const DATA_QUERY_CAT = gql`
   query MyQuery($cat: String!, $offset: Int!) {
     jokes_aggregate(where: { cat: { _eq: $cat } }) {
       aggregate {
-        count
+        count(columns: _id)
       }
     }
     jokes(

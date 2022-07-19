@@ -119,8 +119,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      news: data.newsbg,
-      news_aggregate: agregate.data.newsbg_aggregate,
+      newsbg: data.newsbg,
+      newsbg_aggregate: agregate.data.newsbg_aggregate,
       npagenum,
     },
   }

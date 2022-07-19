@@ -12,8 +12,8 @@ import type { RootNewsProps } from '@/pages/news/'
 import { DATA_AGREGATE, DATA_QUERY } from '@/pages/news/'
 
 const PagingNews = ({
-  news,
-  news_aggregate,
+  newsbg,
+  newsbg_aggregate,
   npagenum,
 }: RootNewsProps): JSX.Element => {
   return (
@@ -30,12 +30,12 @@ const PagingNews = ({
     >
       <div className="my-10 flex w-full flex-col">
         <div className="flex flex-wrap">
-          {news.map((item) => (
+          {newsbg.map((item) => (
             <NewsThumbnail key={item.slug} {...item} />
           ))}
         </div>
         <Pagination
-          pages={news_aggregate.aggregate.max.nid}
+          pages={newsbg_aggregate.aggregate.max.nid}
           pagenum={Number(npagenum)}
           cat={`/news/`}
           hideStats
@@ -50,7 +50,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { npagenum } = context.query
   const agregate = await client.query({ query: DATA_AGREGATE })
   const start =
-    agregate.data.news_aggregate.aggregate.max.nid - (Number(npagenum) - 1) * 30
+    agregate.data.newsbg_aggregate.aggregate.max.nid -
+    (Number(npagenum) - 1) * 30
   const end = start
 
   const { data } = await client.query({
@@ -60,8 +61,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      news: data.news,
-      news_aggregate: agregate.data.news_aggregate,
+      newsbg: data.newsbg,
+      newsbg_aggregate: agregate.data.newsbg_aggregate,
       npagenum,
     },
   }

@@ -11,9 +11,9 @@ import { Pagination } from '@/components/Pagination'
 import client from '@/data/client'
 
 export interface RootNewsProps {
-  news: News[]
-  news_aggregate: NewsAggregate
-  news_by_pk: NewsByPk
+  newsbg: News[]
+  newsbg_aggregate: NewsAggregate
+  newsbg_by_pk: NewsByPk
   npagenum?: number
   shuffled?: string[]
 }
@@ -52,7 +52,7 @@ export interface NewsByPk {
   }
 }
 
-const Index = ({ news, news_aggregate }: RootNewsProps): JSX.Element => {
+const Index = ({ newsbg, newsbg_aggregate }: RootNewsProps): JSX.Element => {
   return (
     <Main
       hideFooter
@@ -67,11 +67,11 @@ const Index = ({ news, news_aggregate }: RootNewsProps): JSX.Element => {
     >
       <div className="my-10 flex w-full flex-col">
         <div className="flex flex-wrap">
-          {news.map((item) => (
+          {newsbg.map((item) => (
             <NewsThumbnail key={item.uid} {...item} />
           ))}
           <Pagination
-            pages={news_aggregate.aggregate.max.nid}
+            pages={newsbg_aggregate.aggregate.max.nid}
             pagenum={1}
             cat={`/news`}
             hideStats
@@ -83,7 +83,7 @@ const Index = ({ news, news_aggregate }: RootNewsProps): JSX.Element => {
 }
 export const DATA_AGREGATE = gql`
   query MyQuery {
-    news_aggregate {
+    newsbg_aggregate {
       aggregate {
         max {
           nid
@@ -95,7 +95,7 @@ export const DATA_AGREGATE = gql`
 
 export const DATA_QUERY = gql`
   query MyQuery($end: Int!) {
-    news(limit: 30, where: { nid: { _lte: $end } }, order_by: { nid: desc }) {
+    newsbg(limit: 30, where: { nid: { _lte: $end } }, order_by: { nid: desc }) {
       title
       image
       uid
@@ -106,8 +106,10 @@ export const DATA_QUERY = gql`
 export const getServerSideProps: GetServerSideProps = async () => {
   const npagenum = 1
   const agregate = await client.query({ query: DATA_AGREGATE })
+
   const start =
-    agregate.data.news_aggregate.aggregate.max.nid - (Number(npagenum) - 1) * 30
+    agregate.data.newsbg_aggregate.aggregate.max.nid -
+    (Number(npagenum) - 1) * 30
   const end = start
 
   const { data } = await client.query({
@@ -117,8 +119,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      news: data.news,
-      news_aggregate: agregate.data.news_aggregate,
+      news: data.newsbg,
+      news_aggregate: agregate.data.newsbg_aggregate,
       npagenum,
     },
   }

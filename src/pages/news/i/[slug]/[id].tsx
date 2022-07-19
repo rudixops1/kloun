@@ -15,8 +15,8 @@ const NoSEO = dynamic(() => import('@/components/NoSEO'), {
   ssr: false,
 })
 const NewsItem = ({
-  news,
-  news_by_pk: { title, image, uid, slug, date, content, href },
+  newsbg,
+  newsbg_by_pk: { title, image, uid, slug, date, content, href },
   shuffled,
 }: RootNewsProps): JSX.Element => {
   const description = content.description ? content.description : title
@@ -62,7 +62,7 @@ const NewsItem = ({
           )}
         </div>
         <div className="flex flex-wrap">
-          {news.map((item) => (
+          {newsbg.map((item) => (
             <NewsThumbnail key={item.uid} {...item} />
           ))}
         </div>
@@ -73,19 +73,20 @@ const NewsItem = ({
 
 const DATA_QUERY = gql`
   query MyQuery($id: uuid!, $slug: String!) {
-    news(limit: 15, where: { slug: { _regex: $slug } }) {
+    newsbg(limit: 15, where: { slug: { _regex: $slug } }) {
       title
       image
       slug
       uid
+      href
     }
-
-    news_by_pk(uid: $id) {
+    newsbg_by_pk(uid: $id) {
       date
       title
       image
+      uid
       slug
-      source
+      content
       href
     }
   }
@@ -95,20 +96,16 @@ export const getServerSideProps = async (context: {
 }) => {
   const { id, slug } = context.query
 
-  const regex = shuffle(slug.split('-'))
-    .filter((ix: string) => ix.length >= 5)
-    .slice(0, 3)
-    .join('|')
+  const regex = shuffle(slug!.split('-')).join('|')
 
   const { data } = await client.query({
     query: DATA_QUERY,
     variables: { id, slug: `(${regex})` },
   })
-  const content = JSON.parse(data.news_by_pk.source)
 
-  const shufflprep = content.html
+  const shufflprep = data.newsbg_by_pk.content.html
     ? shuffle(
-        content.html
+        data.newsbg_by_pk.content.html
           .join(' ')
           .split('.')
           .map((p: string) => `${shuffle(p.split(' ')).join(' ')}.`)
@@ -126,8 +123,7 @@ export const getServerSideProps = async (context: {
 
   return {
     props: {
-      news: data.news,
-      news_by_pk: { ...data.news_by_pk, content },
+      ...data,
       slug,
       shuffled,
     },

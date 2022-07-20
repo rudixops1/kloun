@@ -4,6 +4,7 @@
 import { gql } from '@apollo/client';
 import { shuffle } from 'lodash';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 
 import client from '@/data/client';
 
@@ -22,6 +23,7 @@ const NewsItem = ({
   shuffled,
 }: RootNewsProps): JSX.Element => {
   const description = content.description ? content.description : title;
+  const html = content.html;
   return (
     <Main
       hideFooter
@@ -40,10 +42,12 @@ const NewsItem = ({
         <div className='mx-auto leading-relaxed lg:w-2/3'>
           <div className='flex flex-row'>
             {image && (
-              <img
+              <Image
                 alt={description}
                 className='mr-4 h-48 w-48 rounded-lg object-cover'
                 src={image}
+                width={480}
+                height={320}
               />
             )}
             <h1 className='text-2xl font-bold'>{title}</h1>
@@ -53,7 +57,7 @@ const NewsItem = ({
           {shuffled && (
             <>
               <div>
-                <NoSEO content={[description] || content.html} href={href} />
+                <NoSEO content={[description] || html} href={href} />
               </div>
               <div className='hidden'>
                 {shuffled.map((p: string, i: number) => (
@@ -74,8 +78,27 @@ const NewsItem = ({
 };
 
 const DATA_QUERY = gql`
-  query MyQuery($id: uuid!, $slug: String!) {
-    newsbg(limit: 15, where: { slug: { _regex: $slug } }) {
+  query MyQuery(
+    $id: uuid!
+    $_ilike1: String!
+    $_ilike2: String!
+    $_ilike3: String!
+  ) {
+    termone: newsbg(where: { slug: { _like: $_ilike1 } }, limit: 4) {
+      title
+      image
+      slug
+      uid
+      href
+    }
+    termtwo: newsbg(where: { slug: { _like: $_ilike2 } }, limit: 4) {
+      title
+      image
+      slug
+      uid
+      href
+    }
+    termthree: newsbg(where: { slug: { _like: $_ilike3 } }, limit: 4) {
       title
       image
       slug
@@ -94,16 +117,25 @@ const DATA_QUERY = gql`
   }
 `;
 export const getServerSideProps = async (context: {
-  query: { id: any; slug: any };
+  query: { id: string; slug: string };
 }) => {
   const { id, slug } = context.query;
 
-  const regex = shuffle(slug!.split('-')).join('|');
+  const regex = shuffle(slug.split('-'))
+    .filter((strx) => strx.length >= 5)
+    .slice(0, 3);
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { id, slug: `(${regex})` },
+    variables: {
+      id,
+      _ilike1: '%' + regex[0] + '%',
+      _ilike2: '%' + regex[1] + '%',
+      _ilike3: '%' + regex[2] + '%',
+    },
   });
+
+  const newsbg = shuffle([...data.termone, ...data.termtwo, ...data.termthree]);
 
   const shufflprep = data.newsbg_by_pk.content.html
     ? shuffle(
@@ -126,6 +158,7 @@ export const getServerSideProps = async (context: {
   return {
     props: {
       ...data,
+      newsbg,
       slug,
       shuffled,
     },

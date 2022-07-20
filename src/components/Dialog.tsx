@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import axios from 'axios';
+import Image from 'next/image';
 import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
@@ -92,7 +93,9 @@ const Dialog = ({ id, imgid }: { id?: string; imgid?: string }) => {
                 Your browser does not support the video tag.
               </video>
             ) : (
-              <img src={imgid} alt='' className='w-auto rounded-lg' />
+              <div className='absolute h-screen w-3/4 rounded-lg'>
+                <Image src={imgid} alt='' layout='fill' objectFit='contain' />
+              </div>
             )}
           </>
         )}

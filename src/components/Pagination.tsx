@@ -46,7 +46,7 @@ export const Pagination: FC<Props> = ({
         </Link>
       </nav>
       <nav className='btn-group hidden sm:block' aria-label='Pagination'>
-        {pagemap[0]!.page !== 1 && (
+        {pagemap[0].page !== 1 && (
           <>
             <Link href={`${cat}/`} passHref>
               <a className='btn'>1</a>
@@ -64,7 +64,7 @@ export const Pagination: FC<Props> = ({
           );
         })}
 
-        {max - pagemap[0]!.page > 10 && (
+        {max - pagemap[0].page > 10 && (
           <>
             <div className='btn btn-disabled'>...</div>
 

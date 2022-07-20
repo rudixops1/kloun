@@ -29,7 +29,7 @@ export interface Item {
 export interface RootObject {
   atEnd: boolean;
   atStart: boolean;
-  error?: any;
+
   items: Item[];
   ts: number;
   cache: string;
@@ -56,10 +56,10 @@ const Program = ({
     );
     if (older) {
       setItems((itemz) => itemz.concat(response.data.items));
-      setItem(response.data.items[response.data.items.length - 1]!.promoted);
+      setItem(response.data.items[response.data.items.length - 1].promoted);
     } else {
       setItems(response.data.items);
-      setItem(response.data.items[response.data.items.length - 1]!.promoted);
+      setItem(response.data.items[response.data.items.length - 1].promoted);
     }
   }
 

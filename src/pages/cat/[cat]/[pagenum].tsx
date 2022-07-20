@@ -29,8 +29,9 @@ const CatPage = ({
       meta={
         <Meta
           title={`Вицове от ${cat} на страница ${pagenum}`}
-          description={`Вицове от ${cat}${jokes[0]!.joke
-            .replace(/\n/gi, ' ')
+          description={`Вицове от ${cat}${jokes[0].joke
+            .split('\n')
+            .join(' ')
             .substring(0, 100)}`}
         />
       }

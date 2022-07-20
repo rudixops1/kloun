@@ -2,7 +2,7 @@
 // import { useRouter } from 'next/router';
 
 import { gql } from '@apollo/client';
-import { chunk } from 'lodash';
+import { chunk, uniqBy } from 'lodash';
 import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 
@@ -115,12 +115,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     variables: { id },
   });
 
-  const cats = data.jokes.reduce((acc: any, item: any) => {
-    if (!acc[item.cat]) {
-      acc[item!.cat] = { cat: item.cat };
-    }
-    return acc;
-  }, {} as Cat[]);
+  const cats = uniqBy(
+    data.jokes.map((joke: Doc) => {
+      return { cat: joke.cat };
+    }),
+    'cat'
+  );
 
   return {
     props: {

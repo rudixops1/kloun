@@ -27,8 +27,9 @@ const CatPage = ({
       meta={
         <Meta
           title={`Вицове  на страница ${pagenum}`}
-          description={`Вицове от  ${jokes[0]!.joke
-            .replace(/\n/gi, ' ')
+          description={`Вицове от  ${jokes[0].joke
+            .split('\n')
+            .join(' ')
             .substring(0, 100)}`}
         />
       }
@@ -82,7 +83,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       jokes: data.jokes,
       pagenum: 1,
-
       pages: data.jokes_aggregate.aggregate.count,
     },
   };

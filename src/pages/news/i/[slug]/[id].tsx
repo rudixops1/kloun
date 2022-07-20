@@ -161,7 +161,7 @@ export const getServerSideProps = async (context: {
 
   return {
     props: {
-      ...data,
+      newsbg_by_pk: data.newsbg_by_pk,
       newsbg,
       slug,
       shuffled,

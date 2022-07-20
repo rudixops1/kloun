@@ -1,6 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-export const GRAPH_URL = 'http://34.242.41.16';
+export const GRAPH_URL =
+  'https://container-service-1.ijgils88742po.eu-west-1.cs.amazonlightsail.com';
 
 const client = new ApolloClient({
   ssrMode: true,

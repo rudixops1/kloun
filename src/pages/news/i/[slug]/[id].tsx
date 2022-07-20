@@ -2,7 +2,7 @@
 // import { useRouter } from 'next/router';
 
 import { gql } from '@apollo/client';
-import { shuffle } from 'lodash';
+import { shuffle, uniqBy } from 'lodash';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
@@ -84,21 +84,21 @@ const DATA_QUERY = gql`
     $_ilike2: String!
     $_ilike3: String!
   ) {
-    termone: newsbg(where: { slug: { _like: $_ilike1 } }, limit: 4) {
+    termone: newsbg(where: { slug: { _like: $_ilike1 } }, limit: 5) {
       title
       image
       slug
       uid
       href
     }
-    termtwo: newsbg(where: { slug: { _like: $_ilike2 } }, limit: 4) {
+    termtwo: newsbg(where: { slug: { _like: $_ilike2 } }, limit: 5) {
       title
       image
       slug
       uid
       href
     }
-    termthree: newsbg(where: { slug: { _like: $_ilike3 } }, limit: 4) {
+    termthree: newsbg(where: { slug: { _like: $_ilike3 } }, limit: 5) {
       title
       image
       slug
@@ -135,8 +135,12 @@ export const getServerSideProps = async (context: {
     },
   });
 
-  const newsbg = shuffle([...data.termone, ...data.termtwo, ...data.termthree]);
-
+  const newsbg = uniqBy(
+    [...data.termone, ...data.termtwo, ...data.termthree],
+    'uid'
+  ).sort((a, b) => {
+    return a.uid - b.uid;
+  });
   const shufflprep = data.newsbg_by_pk.content.html
     ? shuffle(
         data.newsbg_by_pk.content.html

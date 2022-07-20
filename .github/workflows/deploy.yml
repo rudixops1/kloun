@@ -1,4 +1,4 @@
-ame: Deploy master branch
+name: Deploy to the cloud
 
 on:
   push:

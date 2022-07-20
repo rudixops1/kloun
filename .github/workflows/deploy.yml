@@ -1,10 +1,8 @@
 name: Deploy to the cloud
-
 on:
   push:
     branches:
       - main
-
 jobs:
   deploy:
     name: deploy
@@ -18,7 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      - run: npm install
       - name: serverless deploy
         uses: serverless/github-action@v3.1
         with:

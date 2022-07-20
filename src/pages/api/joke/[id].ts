@@ -21,7 +21,7 @@ export default async function handler(
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { id }
+    variables: { id },
   });
 
   res.status(200).json(data.jokes_by_pk);

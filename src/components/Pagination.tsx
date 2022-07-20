@@ -11,7 +11,7 @@ interface Props {
 export const Pagination: FC<Props> = ({
   pages,
   pagenum,
-  cat
+  cat,
 }): ReactElement => {
   const max = Math.ceil(pages / 30);
   const curpage = Number(pagenum);
@@ -37,22 +37,22 @@ export const Pagination: FC<Props> = ({
 
   return (
     <>
-      <nav className="btn-group block sm:hidden" aria-label="Pagination">
+      <nav className='btn-group block sm:hidden' aria-label='Pagination'>
         <Link href={`${cat}/${prev === 1 ? '' : prev}`} passHref>
-          <a className="btn">Назад</a>
+          <a className='btn'>Назад</a>
         </Link>
         <Link href={`${cat}/${next === 1 ? '' : next}`} passHref>
-          <a className="btn">Напред</a>
+          <a className='btn'>Напред</a>
         </Link>
       </nav>
-      <nav className="btn-group hidden sm:block" aria-label="Pagination">
+      <nav className='btn-group hidden sm:block' aria-label='Pagination'>
         {pagemap[0]!.page !== 1 && (
           <>
             <Link href={`${cat}/`} passHref>
-              <a className="btn">1</a>
+              <a className='btn'>1</a>
             </Link>
 
-            <div className="btn-disabled btn">...</div>
+            <div className='btn btn-disabled'>...</div>
           </>
         )}
 
@@ -66,10 +66,10 @@ export const Pagination: FC<Props> = ({
 
         {max - pagemap[0]!.page > 10 && (
           <>
-            <div className="btn-disabled btn">...</div>
+            <div className='btn btn-disabled'>...</div>
 
             <Link href={`${cat}/${max}`} passHref>
-              <a className="btn">{max}</a>
+              <a className='btn'>{max}</a>
             </Link>
           </>
         )}

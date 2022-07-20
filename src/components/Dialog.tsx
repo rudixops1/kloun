@@ -3,8 +3,9 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
-import { dialogAtom } from '@/atoms/dialog';
 import type { Doc } from '@/data/structure';
+
+import { dialogAtom } from '@/atoms/dialog';
 
 import FacebookShare from './FacebookShare';
 import { FormatJoke } from './JokeText';
@@ -42,36 +43,36 @@ const Dialog = ({ id, imgid }: { id?: string; imgid?: string }) => {
       }`}
       onClick={close}
     >
-      <div className="flex flex-col items-center">
+      <div className='flex flex-col items-center'>
         <svg
-          className="h-12 w-12 cursor-pointer self-end"
-          xmlns="http://www.w3.org/2000/svg"
-          version="1.1"
-          viewBox="0 0 744.09 1052.4"
+          className='h-12 w-12 cursor-pointer self-end'
+          xmlns='http://www.w3.org/2000/svg'
+          version='1.1'
+          viewBox='0 0 744.09 1052.4'
           onClick={close}
         >
           <g>
             <path
-              stroke="#000"
-              strokeWidth="5.524"
-              d="M720.418 507.697a347.228 347.228 0 11-694.445 0 347.228 347.228 0 11694.445 0z"
+              stroke='#000'
+              strokeWidth='5.524'
+              d='M720.418 507.697a347.228 347.228 0 11-694.445 0 347.228 347.228 0 11694.445 0z'
             ></path>
             <g
-              fill="none"
-              stroke="#fff"
-              strokeLinecap="round"
-              strokeWidth="133.87"
-              transform="translate(47.587 10.944) scale(.91837)"
+              fill='none'
+              stroke='#fff'
+              strokeLinecap='round'
+              strokeWidth='133.87'
+              transform='translate(47.587 10.944) scale(.91837)'
             >
-              <path d="M176.51 362.87L532.64 719"></path>
-              <path d="M532.64 362.87L176.51 719"></path>
+              <path d='M176.51 362.87L532.64 719'></path>
+              <path d='M532.64 362.87L176.51 719'></path>
             </g>
           </g>
         </svg>
 
         {id && (
           <>
-            <div className="container max-w-screen-md">
+            <div className='container max-w-screen-md'>
               <FormatJoke joke={joke} />
             </div>
             <FacebookShare id={id} />
@@ -81,17 +82,17 @@ const Dialog = ({ id, imgid }: { id?: string; imgid?: string }) => {
           <>
             {imgid.includes('.mp4') ? (
               <video
-                width="320"
-                height="240"
+                width='320'
+                height='240'
                 controls={false}
                 autoPlay
-                className="w-auto rounded-lg"
+                className='w-auto rounded-lg'
               >
-                <source src={imgid} type="video/mp4" />
+                <source src={imgid} type='video/mp4' />
                 Your browser does not support the video tag.
               </video>
             ) : (
-              <img src={imgid} alt="" className="w-auto rounded-lg" />
+              <img src={imgid} alt='' className='w-auto rounded-lg' />
             )}
           </>
         )}

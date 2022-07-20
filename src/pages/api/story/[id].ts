@@ -22,7 +22,7 @@ export default async function handler(
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { id }
+    variables: { id },
   });
 
   if (data.jokes_by_pk.joke) {

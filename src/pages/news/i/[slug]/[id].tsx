@@ -5,19 +5,21 @@ import { gql } from '@apollo/client';
 import { shuffle } from 'lodash';
 import dynamic from 'next/dynamic';
 
+import client from '@/data/client';
+
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
 import NewsThumbnail from '@/components/NewsThumbnail';
-import client from '@/data/client';
+
 import type { RootNewsProps } from '@/pages/news/';
 
 const NoSEO = dynamic(() => import('@/components/NoSEO'), {
-  ssr: false
+  ssr: false,
 });
 const NewsItem = ({
   newsbg,
   newsbg_by_pk: { title, image, uid, slug, date, content, href },
-  shuffled
+  shuffled,
 }: RootNewsProps): JSX.Element => {
   const description = content.description ? content.description : title;
   return (
@@ -27,33 +29,33 @@ const NewsItem = ({
         <Meta
           title={title}
           description={description}
-          cat="Новини"
-          imgtype="image/jpeg"
+          cat='Новини'
+          imgtype='image/jpeg'
           image={content.image ? content.image : image}
           url={`https://kloun.lol/news/i/${slug}/${uid}`}
         />
       }
     >
-      <div className="my-10 flex w-full flex-col">
-        <div className="mx-auto leading-relaxed lg:w-2/3">
-          <div className="flex flex-row">
+      <div className='my-10 flex w-full flex-col'>
+        <div className='mx-auto leading-relaxed lg:w-2/3'>
+          <div className='flex flex-row'>
             {image && (
               <img
                 alt={description}
-                className="mr-4 h-48 w-48 rounded-lg object-cover"
+                className='mr-4 h-48 w-48 rounded-lg object-cover'
                 src={image}
               />
             )}
-            <h1 className="text-2xl font-bold">{title}</h1>
+            <h1 className='text-2xl font-bold'>{title}</h1>
           </div>
-          {date && <div className="ml-4 text-sm text-gray-600">{date}</div>}
+          {date && <div className='ml-4 text-sm text-gray-600'>{date}</div>}
 
           {shuffled && (
             <>
               <div>
                 <NoSEO content={[description] || content.html} href={href} />
               </div>
-              <div className="hidden">
+              <div className='hidden'>
                 {shuffled.map((p: string, i: number) => (
                   <p key={i}>{p}</p>
                 ))}
@@ -61,7 +63,7 @@ const NewsItem = ({
             </>
           )}
         </div>
-        <div className="flex flex-wrap">
+        <div className='flex flex-wrap'>
           {newsbg.map((item) => (
             <NewsThumbnail key={item.uid} {...item} />
           ))}
@@ -100,7 +102,7 @@ export const getServerSideProps = async (context: {
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { id, slug: `(${regex})` }
+    variables: { id, slug: `(${regex})` },
   });
 
   const shufflprep = data.newsbg_by_pk.content.html
@@ -125,8 +127,8 @@ export const getServerSideProps = async (context: {
     props: {
       ...data,
       slug,
-      shuffled
-    }
+      shuffled,
+    },
   };
 };
 

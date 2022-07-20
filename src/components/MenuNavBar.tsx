@@ -6,14 +6,14 @@ const MenuNavBar = ({ className }: { className: string }) => {
   return (
     <ul tabIndex={0} className={className}>
       <li>
-        <Link href="/">
+        <Link href='/'>
           <a>Начало</a>
         </Link>
       </li>
 
       <li>
         <a>Вицове</a>
-        <ul className="rounded bg-base-100 p-2">
+        <ul className='rounded bg-base-100 p-2'>
           {catsdata.slice(0, 10).map((item) => (
             <li key={item.cat}>
               <Link href={`/cat/${item.cat}/`} passHref>
@@ -22,12 +22,12 @@ const MenuNavBar = ({ className }: { className: string }) => {
             </li>
           ))}
           <li>
-            <Link href={`/?type=Jokes`}>Всички </Link>
+            <Link href='/?type=Jokes'>Всички </Link>
           </li>
         </ul>
       </li>
       <li>
-        <Link href={`/news/`} passHref>
+        <Link href='/news/' passHref>
           <a>Новини</a>
         </Link>
       </li>

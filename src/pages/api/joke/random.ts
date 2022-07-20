@@ -28,7 +28,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const total = await client.query({
-    query: TOTAL
+    query: TOTAL,
   });
 
   const { data } = await client.query({
@@ -36,8 +36,8 @@ export default async function handler(
     variables: {
       offset: Math.floor(
         Math.random() * total.data.jokes_aggregate.aggregate.count
-      )
-    }
+      ),
+    },
   });
 
   res.status(200).json(data.jokes);

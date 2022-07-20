@@ -5,7 +5,7 @@ export const GRAPH_URL = 'http://34.242.41.16';
 const client = new ApolloClient({
   ssrMode: true,
   uri: `${GRAPH_URL}/v1/graphql`,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 // const client2 = new ApolloClient({
 //   ssrMode: true,

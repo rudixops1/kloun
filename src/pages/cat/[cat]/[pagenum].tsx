@@ -3,12 +3,13 @@
 import type { GetServerSideProps } from 'next';
 import Link from 'next/link';
 
+import client from '@/data/client';
+import type { Doc } from '@/data/structure';
+
 import { JokeThumbnail } from '@/components/JokeThumbnail';
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
 import { Pagination } from '@/components/Pagination';
-import client from '@/data/client';
-import type { Doc } from '@/data/structure';
 
 import { DATA_QUERY_CAT } from './index';
 
@@ -16,7 +17,7 @@ const CatPage = ({
   jokes,
   pages,
   pagenum,
-  cat
+  cat,
 }: {
   jokes: Doc[];
   pages: number;
@@ -34,10 +35,10 @@ const CatPage = ({
         />
       }
     >
-      <div className="breadcrumbs text-sm">
+      <div className='breadcrumbs text-sm'>
         <ul>
           <li>
-            <Link href="/?type=Jokes">Вицове</Link>
+            <Link href='/?type=Jokes'>Вицове</Link>
           </li>
           <li>
             <Link href={`/cat/${cat}`}>{cat}</Link>
@@ -48,7 +49,7 @@ const CatPage = ({
         </ul>
       </div>
       <Pagination pages={pages} pagenum={pagenum} cat={`/cat/${cat}`} />
-      <div className="flex flex-wrap">
+      <div className='flex flex-wrap'>
         {jokes.map((item) => (
           <JokeThumbnail
             item={item}
@@ -58,7 +59,7 @@ const CatPage = ({
           />
         ))}
       </div>
-      <div className="fixed bottom-0 left-0 z-10 flex w-full justify-center bg-black/30 backdrop-blur-sm">
+      <div className='fixed bottom-0 left-0 z-10 flex w-full justify-center bg-black/30 backdrop-blur-sm'>
         <Pagination
           pages={pages}
           pagenum={pagenum}
@@ -79,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const { data } = await client.query({
     query: DATA_QUERY_CAT,
-    variables: { pagenum, offset, cat }
+    variables: { pagenum, offset, cat },
   });
 
   return {
@@ -87,7 +88,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       jokes: data.jokes,
       pagenum,
       cat,
-      pages: data.jokes_aggregate.aggregate.count
-    }
+      pages: data.jokes_aggregate.aggregate.count,
+    },
   };
 };

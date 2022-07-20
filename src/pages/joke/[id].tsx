@@ -6,17 +6,18 @@ import { chunk } from 'lodash';
 import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 
+import client from '@/data/client';
+import type { Doc } from '@/data/structure';
+
 import type { Cat } from '@/components/JokeCats';
 import Nav from '@/components/JokeCats';
 import { FormatJoke } from '@/components/JokeText';
 import { JokeThumbnail } from '@/components/JokeThumbnail';
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
-import client from '@/data/client';
-import type { Doc } from '@/data/structure';
 
 const FacebookShare = dynamic(() => import('@/components/FacebookShare'), {
-  ssr: false
+  ssr: false,
 });
 
 const Joke = (props: {
@@ -39,8 +40,8 @@ const Joke = (props: {
         />
       }
     >
-      <div className="my-10 flex w-full flex-col text-center">
-        <div className="xs:px-2 mx-auto mb-6 px-10 text-xl leading-relaxed sm:px-4 lg:w-2/3">
+      <div className='my-10 flex w-full flex-col text-center'>
+        <div className='xs:px-2 mx-auto mb-6 px-10 text-xl leading-relaxed sm:px-4 lg:w-2/3'>
           <FormatJoke joke={props.joke.joke} />
         </div>
         <FacebookShare id={props.joke._id} />
@@ -48,7 +49,7 @@ const Joke = (props: {
 
       {props.items && props.cats && (
         <>
-          <div className="-m-2 flex flex-wrap">
+          <div className='-m-2 flex flex-wrap'>
             {props.items[0].map((item): JSX.Element => {
               return (
                 <JokeThumbnail
@@ -61,7 +62,7 @@ const Joke = (props: {
             })}
           </div>
           <Nav cats={props.cats[1]} />
-          <div className="-m-2 flex flex-wrap">
+          <div className='-m-2 flex flex-wrap'>
             {props.items[1].map((item): JSX.Element => {
               return (
                 <JokeThumbnail
@@ -74,7 +75,7 @@ const Joke = (props: {
             })}
           </div>
           <Nav cats={props.cats[0]} />
-          <div className="-m-2 flex flex-wrap">
+          <div className='-m-2 flex flex-wrap'>
             {props.items[2].map((item): JSX.Element => {
               return (
                 <JokeThumbnail
@@ -111,7 +112,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { id }
+    variables: { id },
   });
 
   const cats = data.jokes.reduce((acc: any, item: any) => {
@@ -127,8 +128,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       items: chunk(data.jokes, Math.round(data.jokes.length / 3)),
       cats:
         cats &&
-        chunk(Object.values(cats), Math.round(Object.values(cats).length / 2))
-    }
+        chunk(Object.values(cats), Math.round(Object.values(cats).length / 2)),
+    },
   };
 };
 

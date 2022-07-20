@@ -4,5 +4,5 @@ export const AppConfig = {
   description: '🤡 Най-яките вицове и меметалики за клоуни',
   locale: 'bg_BG',
   localehtml: 'bg',
-  prefix: 'https://kloun.lol'
+  prefix: 'https://kloun.lol',
 };

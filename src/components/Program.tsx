@@ -39,7 +39,7 @@ export interface RootObject {
 
 const Program = ({
   limit,
-  className
+  className,
 }: {
   limit?: number;
   className: string;
@@ -87,7 +87,7 @@ const Program = ({
             fullsize,
             image,
             id,
-            promoted
+            promoted,
           }: {
             thumb: string;
             fullsize?: string;
@@ -97,26 +97,26 @@ const Program = ({
           }) => (
             <div
               key={id}
-              className="m-2 flex cursor-pointer items-center justify-center hover:animate-pulse"
+              className='m-2 flex cursor-pointer items-center justify-center hover:animate-pulse'
             >
-              <div className="flex snap-start rounded-lg bg-gradient-to-r from-purple-900 to-pink-600 p-1">
+              <div className='flex snap-start rounded-lg bg-gradient-to-r from-purple-900 to-pink-600 p-1'>
                 <Image
                   onLoadingComplete={() => setLoaded(promoted)}
-                  className="rounded-lg"
+                  className='rounded-lg'
                   onClick={(): void => {
                     document.body.style.overflow = 'hidden';
                     setDialog(() => {
                       return {
-                        imgid: `https://img.pr0gramm.com/${fullsize || image}`
+                        imgid: `https://img.pr0gramm.com/${fullsize || image}`,
                       };
                     });
                   }}
-                  alt="pr0gramm"
-                  placeholder="empty"
+                  alt='pr0gramm'
+                  placeholder='empty'
                   width={128}
                   height={128}
                   src={`https://thumb.pr0gramm.com/${thumb}`}
-                  layout="fixed"
+                  layout='fixed'
                 />
               </div>
             </div>

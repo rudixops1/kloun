@@ -3,18 +3,19 @@
 import { gql } from '@apollo/client';
 import type { GetServerSideProps } from 'next';
 
+import client from '@/data/client';
+import type { Doc } from '@/data/structure';
+
 import { JokeThumbnail } from '@/components/JokeThumbnail';
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
 import { Pagination } from '@/components/Pagination';
-import client from '@/data/client';
-import type { Doc } from '@/data/structure';
 
 const CatPage = ({
   jokes,
   pages,
   pagenum,
-  cat
+  cat,
 }: {
   jokes: Doc[];
   pages: number;
@@ -32,8 +33,8 @@ const CatPage = ({
         />
       }
     >
-      <Pagination pages={pages} pagenum={pagenum} cat={`/cat/all`} />
-      <div className="flex flex-wrap">
+      <Pagination pages={pages} pagenum={pagenum} cat='/cat/all' />
+      <div className='flex flex-wrap'>
         {jokes.map((item) => (
           <JokeThumbnail
             item={item}
@@ -43,7 +44,7 @@ const CatPage = ({
           />
         ))}
       </div>
-      <div className="fixed bottom-0 left-0 z-10 flex w-full justify-center bg-black/30 backdrop-blur-sm">
+      <div className='fixed bottom-0 left-0 z-10 flex w-full justify-center bg-black/30 backdrop-blur-sm'>
         <Pagination
           pages={pages}
           pagenum={pagenum}
@@ -74,7 +75,7 @@ const DATA_ALL = gql`
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await client.query({
     query: DATA_ALL,
-    variables: { pagenum: 1, offset: 0 }
+    variables: { pagenum: 1, offset: 0 },
   });
 
   return {
@@ -82,7 +83,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       jokes: data.jokes,
       pagenum: 1,
 
-      pages: data.jokes_aggregate.aggregate.count
-    }
+      pages: data.jokes_aggregate.aggregate.count,
+    },
   };
 };

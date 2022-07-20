@@ -19,16 +19,16 @@ const Meta = (props: IMetaProps) => {
   return (
     <>
       <Head>
-        <meta charSet="UTF-8" key="charset" />
+        <meta charSet='UTF-8' key='charset' />
         <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1"
-          key="viewport"
+          name='viewport'
+          content='width=device-width,initial-scale=1'
+          key='viewport'
         />
         <link
-          rel="icon"
+          rel='icon'
           href={`${AppConfig.prefix}/favicon.ico`}
-          key="favicon"
+          key='favicon'
         />
       </Head>
       <NextSeo
@@ -36,7 +36,7 @@ const Meta = (props: IMetaProps) => {
         description={props.description}
         canonical={props.canonical}
         facebook={{
-          appId: '281985576166744'
+          appId: '281985576166744',
         }}
         openGraph={{
           title: props.title,
@@ -49,7 +49,7 @@ const Meta = (props: IMetaProps) => {
             publishedTime: '2022-06-30T00:00:00+00:00',
             modifiedTime: '2022-06-30T00:00:00+00:00',
             section: props.cat ? props.cat : 'Разни',
-            tags: ['Виц', props.cat ? props.cat : 'Разни']
+            tags: ['Виц', props.cat ? props.cat : 'Разни'],
           },
           images: [
             {
@@ -59,9 +59,9 @@ const Meta = (props: IMetaProps) => {
               alt: 'Виц',
               url: props.image
                 ? props.image
-                : `${AppConfig.prefix}/images/default.png`
-            }
-          ]
+                : `${AppConfig.prefix}/images/default.png`,
+            },
+          ],
         }}
       />
     </>

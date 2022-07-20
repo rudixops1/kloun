@@ -18,7 +18,7 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
         {lines.map((line: string, i: number) => (
           <p key={i}>{i === 2 && !jlen ? <>{`${line}...`}</> : line}</p>
         ))}
-        {substr.length >= 149 && lines.length <= 2 && <>{'...'}</>}
+        {substr.length >= 149 && lines.length <= 2 && <>...</>}
       </>
     );
   }
@@ -41,7 +41,7 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
         num === 'odd' || num === 'even'
           ? line.replace('-', '').replace('–', '')
           : line,
-      ...(num && { oddness: num })
+      ...(num && { oddness: num }),
     };
   });
 
@@ -51,7 +51,7 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
         ({
           oddness,
           line,
-          key
+          key,
         }: {
           oddness?: string;
           line: string;
@@ -72,19 +72,19 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
                 }`}
               >
                 {oddness === 'odd' ? (
-                  <div className="absolute -left-4 top-3 inline-block w-4 overflow-hidden">
-                    <div className="h-16  origin-top-right -rotate-45 bg-indigo-700"></div>
+                  <div className='absolute -left-4 top-3 inline-block w-4 overflow-hidden'>
+                    <div className='h-16  origin-top-right -rotate-45 bg-indigo-700'></div>
                   </div>
                 ) : (
-                  <div className="absolute -right-4 top-3 inline-block w-4 overflow-hidden">
-                    <div className=" h-16  origin-top-left rotate-45 bg-violet-900"></div>
+                  <div className='absolute -right-4 top-3 inline-block w-4 overflow-hidden'>
+                    <div className=' h-16  origin-top-left rotate-45 bg-violet-900'></div>
                   </div>
                 )}
                 {line}
               </div>
             </div>
           ) : (
-            <div key={key} className="block pb-4 text-lg">
+            <div key={key} className='block pb-4 text-lg'>
               {line}
             </div>
           )

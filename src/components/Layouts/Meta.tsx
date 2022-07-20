@@ -1,19 +1,19 @@
 /* eslint-disable @next/next/no-script-component-in-head */
 /* eslint-disable @next/next/no-before-interactive-script-outside-document */
-import Head from 'next/head'
-import { NextSeo } from 'next-seo'
+import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 
-import { AppConfig } from '@/utils/AppConfig'
+import { AppConfig } from '@/utils/AppConfig';
 
 type IMetaProps = {
-  title: string
-  description: string
-  canonical?: string
-  image?: string
-  url?: string
-  cat?: string
-  imgtype?: string
-}
+  title: string;
+  description: string;
+  canonical?: string;
+  image?: string;
+  url?: string;
+  cat?: string;
+  imgtype?: string;
+};
 
 const Meta = (props: IMetaProps) => {
   return (
@@ -36,7 +36,7 @@ const Meta = (props: IMetaProps) => {
         description={props.description}
         canonical={props.canonical}
         facebook={{
-          appId: '281985576166744',
+          appId: '281985576166744'
         }}
         openGraph={{
           title: props.title,
@@ -49,7 +49,7 @@ const Meta = (props: IMetaProps) => {
             publishedTime: '2022-06-30T00:00:00+00:00',
             modifiedTime: '2022-06-30T00:00:00+00:00',
             section: props.cat ? props.cat : 'Разни',
-            tags: ['Виц', props.cat ? props.cat : 'Разни'],
+            tags: ['Виц', props.cat ? props.cat : 'Разни']
           },
           images: [
             {
@@ -59,13 +59,13 @@ const Meta = (props: IMetaProps) => {
               alt: 'Виц',
               url: props.image
                 ? props.image
-                : `${AppConfig.prefix}/images/default.png`,
-            },
-          ],
+                : `${AppConfig.prefix}/images/default.png`
+            }
+          ]
         }}
       />
     </>
-  )
-}
+  );
+};
 
-export { Meta }
+export { Meta };

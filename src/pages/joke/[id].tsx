@@ -1,30 +1,30 @@
 /* eslint-disable no-underscore-dangle */
 // import { useRouter } from 'next/router';
 
-import { gql } from '@apollo/client'
-import { chunk } from 'lodash'
-import type { GetServerSideProps } from 'next'
-import dynamic from 'next/dynamic'
+import { gql } from '@apollo/client';
+import { chunk } from 'lodash';
+import type { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
 
-import type { Cat } from '@/components/JokeCats'
-import Nav from '@/components/JokeCats'
-import { FormatJoke } from '@/components/JokeText'
-import { JokeThumbnail } from '@/components/JokeThumbnail'
-import { Main } from '@/components/Layouts/Main'
-import { Meta } from '@/components/Layouts/Meta'
-import client from '@/data/client'
-import type { Doc } from '@/data/structure'
+import type { Cat } from '@/components/JokeCats';
+import Nav from '@/components/JokeCats';
+import { FormatJoke } from '@/components/JokeText';
+import { JokeThumbnail } from '@/components/JokeThumbnail';
+import { Main } from '@/components/Layouts/Main';
+import { Meta } from '@/components/Layouts/Meta';
+import client from '@/data/client';
+import type { Doc } from '@/data/structure';
 
 const FacebookShare = dynamic(() => import('@/components/FacebookShare'), {
-  ssr: false,
-})
+  ssr: false
+});
 
 const Joke = (props: {
-  joke: Doc
-  items?: [Doc[], Doc[], Doc[]]
-  cats?: [Cat[], Cat[]]
+  joke: Doc;
+  items?: [Doc[], Doc[], Doc[]];
+  cats?: [Cat[], Cat[]];
 }): JSX.Element => {
-  const jokemeta: string = props.joke.joke.replace(/\n/gi, ' ')
+  const jokemeta: string = props.joke.joke.replace(/\n/gi, ' ');
   return (
     <Main
       hideFooter
@@ -37,8 +37,7 @@ const Joke = (props: {
           image={`https://kloun.lol/api/img/${props.joke._id}/`}
           url={`https://kloun.lol/joke/${props.joke._id}/`}
         />
-      }
-    >
+      }>
       <div className="my-10 flex w-full flex-col text-center">
         <div className="xs:px-2 mx-auto mb-6 px-10 text-xl leading-relaxed sm:px-4 lg:w-2/3">
           <FormatJoke joke={props.joke.joke} />
@@ -57,7 +56,7 @@ const Joke = (props: {
                   showcats={true}
                   short={true}
                 />
-              )
+              );
             })}
           </div>
           <Nav cats={props.cats[1]} />
@@ -70,7 +69,7 @@ const Joke = (props: {
                   showcats={true}
                   short={true}
                 />
-              )
+              );
             })}
           </div>
           <Nav cats={props.cats[0]} />
@@ -83,14 +82,14 @@ const Joke = (props: {
                   showcats={true}
                   short={true}
                 />
-              )
+              );
             })}
           </div>
         </>
       )}
     </Main>
-  )
-}
+  );
+};
 
 const DATA_QUERY = gql`
   query MyQuery($id: String!) {
@@ -105,21 +104,21 @@ const DATA_QUERY = gql`
       joke
     }
   }
-`
+`;
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.query
+  const { id } = context.query;
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { id },
-  })
+    variables: { id }
+  });
 
   const cats = data.jokes.reduce((acc: any, item: any) => {
     if (!acc[item.cat]) {
-      acc[item!.cat] = { cat: item.cat }
+      acc[item!.cat] = { cat: item.cat };
     }
-    return acc
-  }, {} as Cat[])
+    return acc;
+  }, {} as Cat[]);
 
   return {
     props: {
@@ -127,9 +126,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       items: chunk(data.jokes, Math.round(data.jokes.length / 3)),
       cats:
         cats &&
-        chunk(Object.values(cats), Math.round(Object.values(cats).length / 2)),
-    },
-  }
-}
+        chunk(Object.values(cats), Math.round(Object.values(cats).length / 2))
+    }
+  };
+};
 
-export default Joke
+export default Joke;

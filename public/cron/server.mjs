@@ -1,29 +1,29 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable camelcase */
-import fetch from 'node-fetch'
+import fetch from 'node-fetch';
 
-const token = process.env.FB_TOKEN
+const token = process.env.FB_TOKEN;
 
 fetch(`https://kloun.lol/api/joke/random/`)
-  .then(res => res.json())
-  .then(json1 => {
-    const { id } = json1[0]._id
-    const child_attachments = json1.map(row => {
+  .then((res) => res.json())
+  .then((json1) => {
+    const { id } = json1[0]._id;
+    const child_attachments = json1.map((row) => {
       return {
         link: `https://kloun.lol/joke/${row._id}/`,
         name: row.cat,
-        picture: `https://kloun.lol/api/story/${row._id}/`,
-      }
-    })
+        picture: `https://kloun.lol/api/story/${row._id}/`
+      };
+    });
 
     console.log(
       `https://graph.facebook.com/v14.0/me/feed?access_token=${token}`
-    )
+    );
     fetch(`https://graph.facebook.com/v14.0/me/feed?access_token=${token}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         link: `https://kloun.lol/joke/${id}/`,
@@ -34,13 +34,13 @@ fetch(`https://kloun.lol/api/joke/random/`)
         actions: [
           {
             link: `https://kloun.lol/joke/${id}/`,
-            name: 'Прочети',
-          },
-        ],
-      }),
-    })
-      .then(res => res.json())
-      .then(json => {
-        console.log(json)
+            name: 'Прочети'
+          }
+        ]
       })
-  })
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+      });
+  });

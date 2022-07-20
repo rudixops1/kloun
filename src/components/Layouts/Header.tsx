@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/image';
 
 function Logo({ title }: { title?: string }) {
   return (
@@ -19,7 +19,7 @@ function Logo({ title }: { title?: string }) {
         </div>
       </div>
     </header>
-  )
+  );
 }
 
-export default Logo
+export default Logo;

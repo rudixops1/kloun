@@ -1,18 +1,18 @@
 /* eslint-disable no-cond-assign */
 /* eslint-disable no-nested-ternary */
-import type { FC, ReactElement } from 'react'
-import React from 'react'
+import type { FC, ReactElement } from 'react';
+import React from 'react';
 
 interface Props {
-  joke: string
-  short?: boolean
+  joke: string;
+  short?: boolean;
 }
 
 export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
   if (short) {
-    const substr = joke.substring(0, 150)
-    const jlen = joke.length <= 150
-    const lines = substr.split('\n').slice(0, 3)
+    const substr = joke.substring(0, 150);
+    const jlen = joke.length <= 150;
+    const lines = substr.split('\n').slice(0, 3);
     return (
       <>
         {lines.map((line: string, i: number) => (
@@ -20,9 +20,9 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
         ))}
         {substr.length >= 149 && lines.length <= 2 && <>{'...'}</>}
       </>
-    )
+    );
   }
-  let i1 = 0
+  let i1 = 0;
 
   const remapped = joke.split('\n').map((line, i) => {
     const num =
@@ -33,7 +33,7 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
         ? (i1 += 1) % 2 === 0
           ? 'even'
           : 'odd'
-        : false
+        : false;
 
     return {
       key: i,
@@ -41,9 +41,9 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
         num === 'odd' || num === 'even'
           ? line.replace('-', '').replace('–', '')
           : line,
-      ...(num && { oddness: num }),
-    }
-  })
+      ...(num && { oddness: num })
+    };
+  });
 
   return (
     <div>
@@ -51,26 +51,24 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
         ({
           oddness,
           line,
-          key,
+          key
         }: {
-          oddness?: string
-          line: string
-          key: number
+          oddness?: string;
+          line: string;
+          key: number;
         }) =>
           oddness ? (
             <div
               className={`flex flex-wrap pb-4 ${
                 oddness === 'even' ? 'flex-row-reverse' : ''
               }`}
-              key={key}
-            >
+              key={key}>
               <div
                 className={`relative whitespace-pre-wrap rounded-lg p-2 font-sans font-medium shadow-2xl ${
                   oddness === 'even'
                     ? 'bg-violet-900 text-right'
                     : 'bg-indigo-700 text-left'
-                }`}
-              >
+                }`}>
                 {oddness === 'odd' ? (
                   <div className="absolute -left-4 top-3 inline-block w-4 overflow-hidden">
                     <div className="h-16  origin-top-right -rotate-45 bg-indigo-700"></div>
@@ -90,5 +88,5 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
           )
       )}
     </div>
-  )
-}
+  );
+};

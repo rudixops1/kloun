@@ -1,39 +1,39 @@
-import Link from 'next/link'
-import type { FC, ReactElement } from 'react'
+import Link from 'next/link';
+import type { FC, ReactElement } from 'react';
 
 interface Props {
-  pagenum: number
-  pages: number
-  cat: string
-  hideStats?: boolean
+  pagenum: number;
+  pages: number;
+  cat: string;
+  hideStats?: boolean;
 }
 
 export const Pagination: FC<Props> = ({
   pages,
   pagenum,
-  cat,
+  cat
 }): ReactElement => {
-  const max = Math.ceil(pages / 30)
-  const curpage = Number(pagenum)
+  const max = Math.ceil(pages / 30);
+  const curpage = Number(pagenum);
   const pagemap: { page: number; active: boolean }[] = new Array(max)
     .fill(0)
     .map((_, i) => {
-      const p = i + 1
-      return { page: p, active: p === curpage }
+      const p = i + 1;
+      return { page: p, active: p === curpage };
     })
     .map((x) => {
-      return x
+      return x;
     })
     .filter(({ page }) => {
-      let start = curpage - 4
-      let end = curpage + 4
-      if (start < 1) start = 1
-      end = start + 8
-      return page >= start && page <= end
-    })
+      let start = curpage - 4;
+      let end = curpage + 4;
+      if (start < 1) start = 1;
+      end = start + 8;
+      return page >= start && page <= end;
+    });
 
-  const prev = curpage - 1 > 0 ? curpage - 1 : 1
-  const next = curpage + 1 < max ? curpage + 1 : max
+  const prev = curpage - 1 > 0 ? curpage - 1 : 1;
+  const next = curpage + 1 < max ? curpage + 1 : max;
 
   return (
     <>
@@ -61,7 +61,7 @@ export const Pagination: FC<Props> = ({
             <Link key={page} href={`${cat}/${page === 1 ? '' : page}`} passHref>
               <a className={`btn ${active ? 'btn-active' : ''}`}>{page}</a>
             </Link>
-          )
+          );
         })}
 
         {max - pagemap[0]!.page > 10 && (
@@ -75,5 +75,5 @@ export const Pagination: FC<Props> = ({
         )}
       </nav>
     </>
-  )
-}
+  );
+};

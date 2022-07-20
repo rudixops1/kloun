@@ -1,7 +1,7 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 const NoSEO = ({ content, href }: { content: string[]; href: string }) => {
-  const short = content.slice(0, 2)
+  const short = content.slice(0, 2);
   return (
     <>
       {short.map((item, i) => (
@@ -14,6 +14,6 @@ const NoSEO = ({ content, href }: { content: string[]; href: string }) => {
         </a>
       </Link>
     </>
-  )
-}
-export default NoSEO
+  );
+};
+export default NoSEO;

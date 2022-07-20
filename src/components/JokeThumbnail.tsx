@@ -1,36 +1,36 @@
 /* eslint-disable no-underscore-dangle */
-import dynamic from 'next/dynamic'
-import type { FC, MouseEvent, ReactElement } from 'react'
-import React from 'react'
-import { useSetRecoilState } from 'recoil'
+import dynamic from 'next/dynamic';
+import type { FC, MouseEvent, ReactElement } from 'react';
+import React from 'react';
+import { useSetRecoilState } from 'recoil';
 
-import { dialogAtom } from '@/atoms/dialog'
-import { FormatJoke } from '@/components/JokeText'
+import { dialogAtom } from '@/atoms/dialog';
+import { FormatJoke } from '@/components/JokeText';
 
-import type { Doc } from '../data/structure'
+import type { Doc } from '../data/structure';
 
 const FacebookShare = dynamic(() => import('@/components/FacebookShare'), {
-  ssr: false,
-})
+  ssr: false
+});
 
 interface Props {
-  item: Doc
-  id?: string
-  showcats?: boolean
-  short: boolean
-  hideReadMore?: boolean
-  onClick?: (event: MouseEvent) => void
+  item: Doc;
+  id?: string;
+  showcats?: boolean;
+  short: boolean;
+  hideReadMore?: boolean;
+  onClick?: (event: MouseEvent) => void;
 }
 
 export const JokeThumbnail: FC<Props> = ({
   item,
   showcats,
   short,
-  hideReadMore,
+  hideReadMore
 }): ReactElement => {
-  const { joke, cat } = item
-  const jlen = joke.length <= 150
-  const setDialog = useSetRecoilState(dialogAtom)
+  const { joke, cat } = item;
+  const jlen = joke.length <= 150;
+  const setDialog = useSetRecoilState(dialogAtom);
   return (
     <div className="joke">
       {showcats && item.cat !== 'Разни' && (
@@ -47,15 +47,14 @@ export const JokeThumbnail: FC<Props> = ({
         (!jlen ? (
           <a
             onClick={(e: MouseEvent): void => {
-              e.preventDefault()
-              document.body.style.overflow = 'hidden'
+              e.preventDefault();
+              document.body.style.overflow = 'hidden';
               setDialog(() => {
-                return { id: item._id }
-              })
+                return { id: item._id };
+              });
             }}
             className="jokebottom"
-            href={`/joke/${item._id}`}
-          >
+            href={`/joke/${item._id}`}>
             Прочети
             <img src="/images/arrow.svg" className="ml-2 h-4 w-4" alt="" />
           </a>
@@ -65,5 +64,5 @@ export const JokeThumbnail: FC<Props> = ({
           </div>
         ))}
     </div>
-  )
-}
+  );
+};

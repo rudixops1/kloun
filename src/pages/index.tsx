@@ -1,19 +1,19 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-import Nav from '@/components/JokeCats'
-import { Main } from '@/components/Layouts/Main'
-import { Meta } from '@/components/Layouts/Meta'
-import { Program } from '@/components/Program'
+import Nav from '@/components/JokeCats';
+import { Main } from '@/components/Layouts/Main';
+import { Meta } from '@/components/Layouts/Meta';
+import { Program } from '@/components/Program';
 
-import catsdata from '../data/cats'
+import catsdata from '../data/cats';
 
 const MoreButton = ({
   text,
-  type,
+  type
 }: {
-  text: string
-  type: string
+  text: string;
+  type: string;
 }): JSX.Element => (
   <div className="my-2 flex flex-row-reverse">
     <Link href={{ pathname: '/', query: { type } }}>
@@ -22,14 +22,14 @@ const MoreButton = ({
       </div>
     </Link>
   </div>
-)
+);
 
 const Index = () => {
-  const router = useRouter()
+  const router = useRouter();
   const {
-    query: { type },
-  } = router
-  const cats = catsdata.sort((a, b) => b.count - a.count)
+    query: { type }
+  } = router;
+  const cats = catsdata.sort((a, b) => b.count - a.count);
   return (
     <Main
       hideFooter
@@ -38,8 +38,7 @@ const Index = () => {
           title="Вицове и забавни котки и мемета"
           description="Вицове и забавни котки и мемета"
         />
-      }
-    >
+      }>
       {type === 'Jokes' && <Nav cats={cats} />}
       {type === 'Program' && (
         <Program className="container flex flex-wrap items-center justify-center sm:mx-auto" />
@@ -56,7 +55,7 @@ const Index = () => {
         </>
       )}
     </Main>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;

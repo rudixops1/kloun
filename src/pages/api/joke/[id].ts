@@ -1,7 +1,7 @@
-import { gql } from '@apollo/client'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { gql } from '@apollo/client';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-import client from '@/data/client'
+import client from '@/data/client';
 
 const DATA_QUERY = gql`
   query MyQuery($id: String!) {
@@ -11,18 +11,18 @@ const DATA_QUERY = gql`
       joke
     }
   }
-`
+`;
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id } = req.query
+  const { id } = req.query;
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { id },
-  })
+    variables: { id }
+  });
 
-  res.status(200).json(data.jokes_by_pk)
+  res.status(200).json(data.jokes_by_pk);
 }

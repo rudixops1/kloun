@@ -1,26 +1,26 @@
 /* eslint-disable no-underscore-dangle */
 
-import { gql } from '@apollo/client'
-import type { GetServerSideProps } from 'next'
-import Link from 'next/link'
+import { gql } from '@apollo/client';
+import type { GetServerSideProps } from 'next';
+import Link from 'next/link';
 
-import { JokeThumbnail } from '@/components/JokeThumbnail'
-import { Main } from '@/components/Layouts/Main'
-import { Meta } from '@/components/Layouts/Meta'
-import { Pagination } from '@/components/Pagination'
-import client from '@/data/client'
-import type { Doc } from '@/data/structure'
+import { JokeThumbnail } from '@/components/JokeThumbnail';
+import { Main } from '@/components/Layouts/Main';
+import { Meta } from '@/components/Layouts/Meta';
+import { Pagination } from '@/components/Pagination';
+import client from '@/data/client';
+import type { Doc } from '@/data/structure';
 
 const CatPage = ({
   jokes,
   pages,
   pagenum,
-  cat,
+  cat
 }: {
-  jokes: Doc[]
-  pages: number
-  pagenum: number
-  cat: string
+  jokes: Doc[];
+  pages: number;
+  pagenum: number;
+  cat: string;
 }): JSX.Element => {
   return (
     <Main
@@ -31,8 +31,7 @@ const CatPage = ({
             .replace(/\n/gi, ' ')
             .substring(0, 100)}`}
         />
-      }
-    >
+      }>
       <div className="breadcrumbs text-sm">
         <ul>
           <li>
@@ -66,10 +65,10 @@ const CatPage = ({
         />
       </div>
     </Main>
-  )
-}
+  );
+};
 
-export default CatPage
+export default CatPage;
 
 export const DATA_QUERY_CAT = gql`
   query MyQuery($cat: String!, $offset: Int!) {
@@ -88,22 +87,22 @@ export const DATA_QUERY_CAT = gql`
       joke
     }
   }
-`
+`;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { cat } = context.query
+  const { cat } = context.query;
 
   const { data } = await client.query({
     query: DATA_QUERY_CAT,
-    variables: { pagenum: 1, offset: 0, cat },
-  })
+    variables: { pagenum: 1, offset: 0, cat }
+  });
 
   return {
     props: {
       jokes: data.jokes,
       pagenum: 1,
       cat,
-      pages: data.jokes_aggregate.aggregate.count,
-    },
-  }
-}
+      pages: data.jokes_aggregate.aggregate.count
+    }
+  };
+};

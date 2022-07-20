@@ -1,16 +1,16 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export interface Cat {
-  cat: string
-  count: number
+  cat: string;
+  count: number;
 }
 export interface NavProps {
-  cats: Cat[]
-  limit?: number
+  cats: Cat[];
+  limit?: number;
 }
 
 const Nav = ({ cats, limit }: NavProps) => {
-  const newcats = cats.slice(0, limit || cats.length)
+  const newcats = cats.slice(0, limit || cats.length);
   return (
     <div className="flex flex-wrap sm:mx-auto sm:mb-2 ">
       {newcats.map((d: { cat: string; count: number }) => (
@@ -24,7 +24,7 @@ const Nav = ({ cats, limit }: NavProps) => {
         </Link>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

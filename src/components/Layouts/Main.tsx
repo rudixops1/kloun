@@ -1,21 +1,21 @@
-import dynamic from 'next/dynamic'
-import type { ReactNode } from 'react'
+import dynamic from 'next/dynamic';
+import type { ReactNode } from 'react';
 
-import MenuNavBar from '@/components/MenuNavBar'
+import MenuNavBar from '@/components/MenuNavBar';
 
 const Logo = dynamic(() => import('@/components/Layouts/Header'), {
-  ssr: false,
-})
+  ssr: false
+});
 const Footer = dynamic(() => import('@/components/Layouts/Footer'), {
-  ssr: false,
-})
+  ssr: false
+});
 
 type IMainProps = {
-  meta: ReactNode
-  children: ReactNode
-  hideFooter?: boolean
-  title?: string
-}
+  meta: ReactNode;
+  children: ReactNode;
+  hideFooter?: boolean;
+  title?: string;
+};
 
 const Main = (props: IMainProps) => {
   return (
@@ -30,8 +30,7 @@ const Main = (props: IMainProps) => {
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+                stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -56,7 +55,7 @@ const Main = (props: IMainProps) => {
         <Footer hide={props.hideFooter} />
       </div>
     </>
-  )
-}
+  );
+};
 
-export { Main }
+export { Main };

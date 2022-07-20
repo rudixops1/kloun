@@ -1,22 +1,21 @@
-import { shuffle } from 'lodash'
-import Script from 'next/script'
-import React from 'react'
-import { useRecoilValue } from 'recoil'
+import { shuffle } from 'lodash';
+import Script from 'next/script';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
 
-import { dialogAtom } from '@/atoms/dialog'
-import Dialog from '@/components/Dialog'
-import Nav from '@/components/JokeCats'
-import catsdata from '@/data/cats'
+import { dialogAtom } from '@/atoms/dialog';
+import Dialog from '@/components/Dialog';
+import Nav from '@/components/JokeCats';
+import catsdata from '@/data/cats';
 
 function Footer({ hide }: { hide?: boolean }) {
-  const dialogdata = useRecoilValue(dialogAtom)
+  const dialogdata = useRecoilValue(dialogAtom);
   return (
     <footer
       className="h-36 bg-cover bg-bottom"
       style={{
-        backgroundImage: `url('/images/botwave.svg')`,
-      }}
-    >
+        backgroundImage: `url('/images/botwave.svg')`
+      }}>
       <div className="">
         {!hide && <Nav cats={shuffle(catsdata).slice(0, 3)} />}
         <div className="text-center text-xs">
@@ -37,7 +36,7 @@ function Footer({ hide }: { hide?: boolean }) {
         `}
       </Script>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

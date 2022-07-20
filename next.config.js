@@ -1,10 +1,10 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
+  enabled: process.env.ANALYZE === 'true'
+});
 
 module.exports = withBundleAnalyzer({
   eslint: {
-    dirs: ['.'],
+    dirs: ['.']
   },
   poweredByHeader: false,
   trailingSlash: true,
@@ -16,11 +16,12 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: true, // was true
   experimental: {
     images: {
-      unoptimized: true,
-    },
+      unoptimized: true
+    }
     // runtime: 'experimental-edge',
   },
   devIndicators: {
-    buildActivityPosition: 'bottom-right',
-  },
-})
+    // eslint-disable-next-line prettier/prettier
+    buildActivityPosition: 'bottom-right'
+  }
+});

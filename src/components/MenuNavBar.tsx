@@ -1,6 +1,6 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
-import catsdata from '@/data/cats'
+import catsdata from '@/data/cats';
 
 const MenuNavBar = ({ className }: { className: string }) => {
   return (
@@ -32,7 +32,7 @@ const MenuNavBar = ({ className }: { className: string }) => {
         </Link>
       </li>
     </ul>
-  )
-}
+  );
+};
 
-export default MenuNavBar
+export default MenuNavBar;

@@ -1,25 +1,25 @@
 /* eslint-disable no-underscore-dangle */
 
-import { gql } from '@apollo/client'
-import type { GetServerSideProps } from 'next'
+import { gql } from '@apollo/client';
+import type { GetServerSideProps } from 'next';
 
-import { JokeThumbnail } from '@/components/JokeThumbnail'
-import { Main } from '@/components/Layouts/Main'
-import { Meta } from '@/components/Layouts/Meta'
-import { Pagination } from '@/components/Pagination'
-import client from '@/data/client'
-import type { Doc } from '@/data/structure'
+import { JokeThumbnail } from '@/components/JokeThumbnail';
+import { Main } from '@/components/Layouts/Main';
+import { Meta } from '@/components/Layouts/Meta';
+import { Pagination } from '@/components/Pagination';
+import client from '@/data/client';
+import type { Doc } from '@/data/structure';
 
 const CatPage = ({
   jokes,
   pages,
   pagenum,
-  cat,
+  cat
 }: {
-  jokes: Doc[]
-  pages: number
-  pagenum: number
-  cat: string
+  jokes: Doc[];
+  pages: number;
+  pagenum: number;
+  cat: string;
 }): JSX.Element => {
   return (
     <Main
@@ -30,8 +30,7 @@ const CatPage = ({
             .replace(/\n/gi, ' ')
             .substring(0, 100)}`}
         />
-      }
-    >
+      }>
       <Pagination pages={pages} pagenum={pagenum} cat={`/cat/all`} />
       <div className="flex flex-wrap">
         {jokes.map((item) => (
@@ -52,10 +51,10 @@ const CatPage = ({
         />
       </div>
     </Main>
-  )
-}
+  );
+};
 
-export default CatPage
+export default CatPage;
 
 const DATA_ALL = gql`
   query MyQuery($offset: Int!) {
@@ -69,20 +68,20 @@ const DATA_ALL = gql`
       joke
     }
   }
-`
+`;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await client.query({
     query: DATA_ALL,
-    variables: { pagenum: 1, offset: 0 },
-  })
+    variables: { pagenum: 1, offset: 0 }
+  });
 
   return {
     props: {
       jokes: data.jokes,
       pagenum: 1,
 
-      pages: data.jokes_aggregate.aggregate.count,
-    },
-  }
-}
+      pages: data.jokes_aggregate.aggregate.count
+    }
+  };
+};

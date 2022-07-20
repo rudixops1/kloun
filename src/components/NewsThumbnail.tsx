@@ -1,15 +1,15 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 const NewsThumbnail = ({
   title,
   image,
   slug,
-  uid,
+  uid
 }: {
-  title: string
-  image: string
-  slug: string
-  uid: string
+  title: string;
+  image: string;
+  slug: string;
+  uid: string;
 }) => (
   <div className="joke">
     <Link href={`/news/i/${slug}/${uid}`} passHref>
@@ -30,6 +30,6 @@ const NewsThumbnail = ({
       </a>
     </Link>
   </div>
-)
+);
 
-export default NewsThumbnail
+export default NewsThumbnail;

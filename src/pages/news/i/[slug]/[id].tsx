@@ -114,17 +114,9 @@ const DATA_QUERY = gql`
     }
   }
 `;
-export const getServerSideProps = async (
-  context: {
-    query: { id: string; slug: string };
-  },
-  res: { setHeader: (arg0: string, arg1: string) => void }
-) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  );
-
+export const getServerSideProps = async (context: {
+  query: { id: string; slug: string };
+}) => {
   const { id, slug } = context.query;
 
   const regex = shuffle(slug.split('-'))

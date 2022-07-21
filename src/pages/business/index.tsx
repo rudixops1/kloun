@@ -4,11 +4,20 @@
 import { gql } from '@apollo/client';
 import type { GetServerSideProps } from 'next';
 
-import type { Cat } from '@/components/Nav';
-import Nav from '@/components/Nav';
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
+import type { Cat } from '@/components/Nav';
+import Nav from '@/components/Nav';
 import client from '@/data/client';
+
+export type Company = {
+  _id: string;
+  name: string;
+  zip: number;
+  location: string;
+  uid?: string;
+  created_at: number;
+};
 
 const Index = ({ cats }: { cats: Cat[] }): JSX.Element => {
   return (
@@ -16,14 +25,14 @@ const Index = ({ cats }: { cats: Cat[] }): JSX.Element => {
       hideFooter
       meta={
         <Meta
-          title='Новини'
-          description='Новини'
-          cat='Новини'
-          url='https://www.kloun.lol/news/'
+          title='Бизнес фирми'
+          description='Бизнес фирми'
+          cat='Business'
+          url='https://www.kloun.lol/business/'
         />
       }
     >
-      <Nav cats={cats} prefix='business' />
+      <Nav cats={cats} prefix='business' limit={50} />
       <div className='my-10 flex w-full flex-col'>
         <div className='flex flex-wrap'></div>
       </div>
@@ -31,10 +40,37 @@ const Index = ({ cats }: { cats: Cat[] }): JSX.Element => {
   );
 };
 export const DATA_AGREGATE = gql`
-  query MyQuery {
-    companies_count(order_by: { count: desc }, limit: 100) {
+  query MyQuery @cached {
+    companies_count(order_by: { count: desc }) {
       count
       cat: location
+    }
+  }
+`;
+
+export const CITY_DATA = gql`
+  query MyQuery($location: String!) {
+    cats: companies(
+      limit: 30
+      offset: 1
+      where: { location: { _eq: $location } }
+      order_by: { uid: asc }
+    ) {
+      _id
+      cat: name
+      althref: _id
+      altcount: created_at
+    }
+  }
+`;
+
+export const COMPANY_INFO = gql`
+  query MyQuery($id: Int = 10) {
+    companies_by_pk(_id: $id) {
+      created_at
+      location
+      name
+      zip
     }
   }
 `;

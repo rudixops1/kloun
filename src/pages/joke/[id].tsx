@@ -5,12 +5,12 @@ import { gql } from '@apollo/client';
 import { chunk, uniqBy } from 'lodash';
 import dynamic from 'next/dynamic';
 
-import type { Cat } from '@/components/JokeCats';
-import Nav from '@/components/JokeCats';
 import { FormatJoke } from '@/components/JokeText';
 import { JokeThumbnail } from '@/components/JokeThumbnail';
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
+import type { Cat } from '@/components/Nav';
+import Nav from '@/components/Nav';
 import client from '@/data/client';
 import type { Doc } from '@/data/structure';
 
@@ -59,7 +59,7 @@ const Joke = (props: {
               );
             })}
           </div>
-          <Nav cats={props.cats[1]} />
+          <Nav cats={props.cats[1]} prefix='cat' />
           <div className='-m-2 flex flex-wrap'>
             {props.items[1].map((item): JSX.Element => {
               return (
@@ -72,7 +72,7 @@ const Joke = (props: {
               );
             })}
           </div>
-          <Nav cats={props.cats[0]} />
+          <Nav cats={props.cats[0]} prefix='cat' />
           <div className='-m-2 flex flex-wrap'>
             {props.items[2].map((item): JSX.Element => {
               return (

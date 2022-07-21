@@ -44,6 +44,9 @@
   .speech-bubble {
     @apply relative my-3 rounded-lg from-purple-900 to-pink-600 p-3;
   }
+  .btndisabled {
+    @apply btn btn-disabled;
+  }
 }
 
 .speech-bubble-odd {

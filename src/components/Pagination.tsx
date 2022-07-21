@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import Link from 'next/link';
 import type { FC, ReactElement } from 'react';
 
@@ -52,7 +53,7 @@ export const Pagination: FC<Props> = ({
               <a className='btn'>1</a>
             </Link>
 
-            <div className='btn btn-disabled'>...</div>
+            <div className='btndisabled'>...</div>
           </>
         )}
 
@@ -66,7 +67,7 @@ export const Pagination: FC<Props> = ({
 
         {max - pagemap[0].page > 10 && (
           <>
-            <div className='btn btn-disabled'>...</div>
+            <div className='btndisabled'>...</div>
 
             <Link href={`${cat}/${max}`} passHref>
               <a className='btn'>{max}</a>

@@ -7,6 +7,8 @@ module.exports = {
   reactStrictMode: true,
 
   images: {
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: [
       'img.pr0gramm.com',
       'thumb.pr0gramm.com',

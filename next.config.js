@@ -1,13 +1,28 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+});
+
+module.exports = withBundleAnalyzer({
   eslint: {
-    dirs: ['src']
+    dirs: ['.']
   },
-
-  reactStrictMode: true,
-
+  poweredByHeader: false,
+  trailingSlash: true,
+  generateEtags: false,
+  // basePath: '',
+  // The starter code load resources from `public` folder with `router.basePath` in React components.
+  // So, the source code is "basePath-ready".
+  // You can remove `basePath` if you don't need it.
+  reactStrictMode: true, // was true
+  experimental: {
+    images: {
+      unoptimized: true
+    }
+    // runtime: 'experimental-edge',
+  },
   images: {
-    dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: [
       'img.pr0gramm.com',
@@ -17,24 +32,7 @@ module.exports = {
       'static.dir.bg'
     ]
   },
-
-  // SVGR
-
-  webpack (config) {
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            typescript: true,
-            icon: true
-          }
-        }
-      ]
-    });
-
-    return config;
+  devIndicators: {
+    buildActivityPosition: 'bottom-right'
   }
-};
+});

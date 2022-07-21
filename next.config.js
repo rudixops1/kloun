@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   eslint: {
-    dirs: ['src'],
+    dirs: ['src']
   },
 
   reactStrictMode: true,
@@ -14,13 +14,8 @@ module.exports = {
   // },
 
   // SVGR
-  experimental: {
-    images: {
-      unoptimized: true,
-    },
-    // runtime: 'experimental-edge',
-  },
-  webpack(config) {
+
+  webpack (config) {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
@@ -29,12 +24,12 @@ module.exports = {
           loader: '@svgr/webpack',
           options: {
             typescript: true,
-            icon: true,
-          },
-        },
-      ],
+            icon: true
+          }
+        }
+      ]
     });
 
     return config;
-  },
+  }
 };

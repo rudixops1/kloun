@@ -6,12 +6,15 @@ module.exports = {
 
   reactStrictMode: true,
 
-  // Uncoment to add domain whitelist
-  // images: {
-  //   domains: [
-  //     'res.cloudinary.com',
-  //   ],
-  // },
+  images: {
+    domains: [
+      'img.pr0gramm.com',
+      'thumb.pr0gramm.com',
+      'nstatic.nova.bg',
+      'm.netinfo.bg',
+      'static.dir.bg'
+    ]
+  },
 
   // SVGR
 

@@ -18,7 +18,7 @@ const NewsThumbnail = ({
           {image && (
             <div className='absolute ml-2 h-20 w-20'>
               <Image
-                alt={image}
+                alt={title}
                 src={image}
                 width={200}
                 height={200}

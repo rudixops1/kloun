@@ -12,7 +12,7 @@ module.exports = {
   eslint: {
     dirs: ['src'],
   },
-
+  trailingSlash: true,
   images: {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: [

@@ -37,7 +37,7 @@ export const Pagination: FC<Props> = ({
   const next = curpage + 1 < max ? curpage + 1 : max;
 
   return (
-    <>
+    <div className='flex justify-center'>
       <nav className='btn-group block sm:hidden' aria-label='Pagination'>
         <Link href={`${cat}/${prev === 1 ? '' : prev}`} passHref>
           <a className='btn'>Назад</a>
@@ -49,7 +49,7 @@ export const Pagination: FC<Props> = ({
       <nav className='btn-group hidden sm:block' aria-label='Pagination'>
         {pagemap[0].page !== 1 && (
           <>
-            <Link href={`${cat}/`} passHref>
+            <Link href={`${cat}`} passHref>
               <a className='btn'>1</a>
             </Link>
 
@@ -75,6 +75,6 @@ export const Pagination: FC<Props> = ({
           </>
         )}
       </nav>
-    </>
+    </div>
   );
 };

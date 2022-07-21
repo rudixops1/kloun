@@ -14,7 +14,7 @@ import { DATA_AGREGATE, DATA_QUERY } from '@/pages/news/';
 const PagingNews = ({
   newsbg,
   newsbg_aggregate,
-  npagenum,
+  pagenum,
 }: RootNewsProps): JSX.Element => {
   return (
     <Main
@@ -24,7 +24,7 @@ const PagingNews = ({
           title='Новини'
           description='Новини'
           cat='Новини'
-          url={`https://www.kloun.lol/news/${npagenum}`}
+          url={`https://www.kloun.lol/news/${pagenum}`}
         />
       }
     >
@@ -40,8 +40,8 @@ const PagingNews = ({
         </div>
         <Pagination
           pages={newsbg_aggregate.aggregate.max.nid}
-          pagenum={Number(npagenum)}
-          cat='/news/'
+          pagenum={Number(pagenum)}
+          cat='/news'
           hideStats
         />
       </div>
@@ -51,23 +51,23 @@ const PagingNews = ({
 export default PagingNews;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { npagenum } = context.query;
+  const { pagenum } = context.query;
   const agregate = await client.query({ query: DATA_AGREGATE });
   const start =
     agregate.data.newsbg_aggregate.aggregate.max.nid -
-    (Number(npagenum) - 1) * 30;
+    (Number(pagenum) - 1) * 30;
   const end = start;
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { npagenum, start, end },
+    variables: { pagenum, start, end },
   });
 
   return {
     props: {
       newsbg: data.newsbg,
       newsbg_aggregate: agregate.data.newsbg_aggregate,
-      npagenum,
+      pagenum,
     },
   };
 };

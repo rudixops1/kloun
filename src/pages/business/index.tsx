@@ -41,7 +41,7 @@ const Index = ({ cats }: { cats: Cat[] }): JSX.Element => {
 };
 export const DATA_AGREGATE = gql`
   query MyQuery @cached {
-    companies_count(order_by: { count: desc }) {
+    companies_count(order_by: { count: desc }, limit: 50) {
       count
       cat: location
     }
@@ -49,10 +49,10 @@ export const DATA_AGREGATE = gql`
 `;
 
 export const CITY_DATA = gql`
-  query MyQuery($location: String!) {
+  query MyQuery($location: String!, $offset: Int!) {
     cats: companies(
       limit: 30
-      offset: 1
+      offset: $offset
       where: { location: { _eq: $location } }
       order_by: { uid: asc }
     ) {

@@ -16,7 +16,7 @@ const MenuNavBar = ({ className }: { className: string }) => {
         <ul className='rounded bg-base-100 p-2'>
           {catsdata.slice(0, 10).map((item) => (
             <li key={item.cat}>
-              <Link href={`/cat/${item.cat}/`} passHref>
+              <Link href={`/cat/${item.cat}`} passHref>
                 <a>{item.cat}</a>
               </Link>
             </li>
@@ -27,12 +27,12 @@ const MenuNavBar = ({ className }: { className: string }) => {
         </ul>
       </li>
       <li>
-        <Link href='/news/' passHref>
+        <Link href='/news' passHref>
           <a>Новини</a>
         </Link>
       </li>
       <li>
-        <Link href='/business/' passHref>
+        <Link href='/business' passHref>
           <a>Business</a>
         </Link>
       </li>

@@ -16,10 +16,12 @@ const Index = ({
   cats,
   cat,
   pages,
+  pagenum,
 }: {
   cats: Cat[];
   cat: string;
   pages: number;
+  pagenum: number;
 }): JSX.Element => {
   return (
     <Main
@@ -35,27 +37,28 @@ const Index = ({
       }
     >
       <Nav cats={cats} prefix='business/_company' formatlength={true} />
-      <Pagination pages={pages} pagenum={1} cat={`/business/${cat}`} />
+      <Pagination pages={pages} pagenum={pagenum} cat={`/business/${cat}`} />
     </Main>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { cat } = context.query;
-
+  const { cat, pagenum } = context.query;
   const agregate = await client.query({ query: DATA_AGREGATE });
-
+  const offset = (Number(pagenum) - 1) * 30;
+  // const agregate = await client.query({ query: DATA_AGREGATE });
   const { data } = await client.query({
     query: CITY_DATA,
-    variables: { location: cat, offset: 0 },
+    variables: { location: cat, offset },
   });
 
   return {
     props: {
-      cats: data.cats,
-      cat,
       pages: agregate.data.companies_count.find((c: Cat) => c.cat === cat)
         .count,
+      cats: data.cats,
+      cat,
+      pagenum: Number(pagenum),
     },
   };
 };

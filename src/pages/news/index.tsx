@@ -14,7 +14,7 @@ export interface RootNewsProps {
   newsbg: News[];
   newsbg_aggregate: NewsAggregate;
   newsbg_by_pk: NewsByPk;
-  npagenum?: number;
+  pagenum?: number;
   shuffled?: string[];
 }
 
@@ -68,15 +68,19 @@ const Index = ({ newsbg, newsbg_aggregate }: RootNewsProps): JSX.Element => {
       <div className='my-10 flex w-full flex-col'>
         <div className='flex flex-wrap'>
           {newsbg.map((item) => (
-            <NewsThumbnail key={item.uid} {...item} />
+            <div className='joke' key={item.slug}>
+              <div className='jokewrap'>
+                <NewsThumbnail key={item.uid} {...item} />
+              </div>
+            </div>
           ))}
-          <Pagination
-            pages={newsbg_aggregate.aggregate.max.nid}
-            pagenum={1}
-            cat='/news'
-            hideStats
-          />
         </div>
+        <Pagination
+          pages={newsbg_aggregate.aggregate.max.nid}
+          pagenum={1}
+          cat='/news'
+          hideStats
+        />
       </div>
     </Main>
   );
@@ -104,24 +108,24 @@ export const DATA_QUERY = gql`
   }
 `;
 export const getServerSideProps: GetServerSideProps = async () => {
-  const npagenum = 1;
+  const pagenum = 1;
   const agregate = await client.query({ query: DATA_AGREGATE });
 
   const start =
     agregate.data.newsbg_aggregate.aggregate.max.nid -
-    (Number(npagenum) - 1) * 30;
+    (Number(pagenum) - 1) * 30;
   const end = start;
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { npagenum, start, end },
+    variables: { pagenum, start, end },
   });
 
   return {
     props: {
       newsbg: data.newsbg,
       newsbg_aggregate: agregate.data.newsbg_aggregate,
-      npagenum,
+      pagenum,
     },
   };
 };

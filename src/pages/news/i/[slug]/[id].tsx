@@ -6,12 +6,10 @@ import { shuffle, uniqBy } from 'lodash';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
-import client from '@/data/client';
-
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
 import NewsThumbnail from '@/components/NewsThumbnail';
-
+import client from '@/data/client';
 import type { RootNewsProps } from '@/pages/news/';
 
 const NoSEO = dynamic(() => import('@/components/NoSEO'), {
@@ -23,7 +21,7 @@ const NewsItem = ({
   shuffled,
 }: RootNewsProps): JSX.Element => {
   const description = content.description ? content.description : title;
-  const html = content.html;
+  const { html } = content;
   return (
     <Main
       hideFooter
@@ -116,9 +114,17 @@ const DATA_QUERY = gql`
     }
   }
 `;
-export const getServerSideProps = async (context: {
-  query: { id: string; slug: string };
-}) => {
+export const getServerSideProps = async (
+  context: {
+    query: { id: string; slug: string };
+  },
+  res: { setHeader: (arg0: string, arg1: string) => void }
+) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+
   const { id, slug } = context.query;
 
   const regex = shuffle(slug.split('-'))
@@ -129,9 +135,9 @@ export const getServerSideProps = async (context: {
     query: DATA_QUERY,
     variables: {
       id,
-      _ilike1: '%' + regex[0] + '%',
-      _ilike2: '%' + regex[1] + '%',
-      _ilike3: '%' + regex[2] + '%',
+      _ilike1: `%${regex[0]}%`,
+      _ilike2: `%${regex[1]}%`,
+      _ilike3: `%${regex[2]}%`,
     },
   });
 

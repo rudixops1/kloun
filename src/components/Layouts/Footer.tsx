@@ -3,12 +3,10 @@ import Script from 'next/script';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 
-import catsdata from '@/data/cats';
-
+import { dialogAtom } from '@/atoms/dialog';
 import Dialog from '@/components/Dialog';
 import Nav from '@/components/JokeCats';
-
-import { dialogAtom } from '@/atoms/dialog';
+import catsdata from '@/data/cats';
 
 function Footer({ hide }: { hide?: boolean }) {
   const dialogdata = useRecoilValue(dialogAtom);

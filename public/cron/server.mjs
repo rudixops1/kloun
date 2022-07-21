@@ -12,7 +12,7 @@ fetch(`https://www.kloun.lol/api/joke/random/`)
       return {
         link: `https://www.kloun.lol/joke/${row._id}/`,
         name: row.cat,
-        picture: `https://www.kloun.lol/api/story/${row._id}/`
+        picture: `https://www.kloun.lol/api/story/${row._id}/`,
       };
     });
 
@@ -23,7 +23,7 @@ fetch(`https://www.kloun.lol/api/joke/random/`)
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         link: `https://www.kloun.lol/joke/${id}/`,
@@ -34,10 +34,10 @@ fetch(`https://www.kloun.lol/api/joke/random/`)
         actions: [
           {
             link: `https://www.kloun.lol/joke/${id}/`,
-            name: 'Прочети'
-          }
-        ]
-      })
+            name: 'Прочети',
+          },
+        ],
+      }),
     })
       .then((res) => res.json())
       .then((json) => {

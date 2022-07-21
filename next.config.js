@@ -1,6 +1,16 @@
+const headers = [
+  {
+    key: 'Cache-Control',
+    value: 'public, s-maxage=10, stale-while-revalidate=59',
+  },
+  {
+    key: 'x-powered-by',
+    value: 'RudixOps',
+  },
+];
 module.exports = {
   eslint: {
-    dirs: ['src']
+    dirs: ['src'],
   },
 
   images: {
@@ -10,8 +20,20 @@ module.exports = {
       'thumb.pr0gramm.com',
       'nstatic.nova.bg',
       'm.netinfo.bg',
-      'static.dir.bg'
-    ]
+      'static.dir.bg',
+    ],
+  },
+  async headers () {
+    return [
+      {
+        source: '/joke/:id',
+        headers,
+      },
+      {
+        source: '/news/:id',
+        headers,
+      },
+    ];
   },
   webpack (config) {
     config.module.rules.push({
@@ -22,12 +44,12 @@ module.exports = {
           loader: '@svgr/webpack',
           options: {
             typescript: true,
-            icon: true
-          }
-        }
-      ]
+            icon: true,
+          },
+        },
+      ],
     });
 
     return config;
-  }
+  },
 };

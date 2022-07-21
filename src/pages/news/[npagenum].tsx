@@ -3,13 +3,11 @@
 
 import type { GetServerSideProps } from 'next';
 
-import client from '@/data/client';
-
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
 import NewsThumbnail from '@/components/NewsThumbnail';
 import { Pagination } from '@/components/Pagination';
-
+import client from '@/data/client';
 import type { RootNewsProps } from '@/pages/news/';
 import { DATA_AGREGATE, DATA_QUERY } from '@/pages/news/';
 

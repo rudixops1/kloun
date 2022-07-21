@@ -4,9 +4,8 @@ import Image from 'next/image';
 import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
-import type { Doc } from '@/data/structure';
-
 import { dialogAtom } from '@/atoms/dialog';
+import type { Doc } from '@/data/structure';
 
 import FacebookShare from './FacebookShare';
 import { FormatJoke } from './JokeText';
@@ -76,7 +75,7 @@ const Dialog = ({ id, imgid }: { id?: string; imgid?: string }) => {
             <div className='container max-w-screen-md'>
               <FormatJoke joke={joke} />
             </div>
-            <FacebookShare id={id} />
+            <FacebookShare id={`https://www.kloun.lol/joke/${id}`} />
           </>
         )}
         {imgid && (

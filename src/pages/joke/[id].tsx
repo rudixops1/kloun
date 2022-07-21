@@ -3,11 +3,7 @@
 
 import { gql } from '@apollo/client';
 import { chunk, uniqBy } from 'lodash';
-import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
-
-import client from '@/data/client';
-import type { Doc } from '@/data/structure';
 
 import type { Cat } from '@/components/JokeCats';
 import Nav from '@/components/JokeCats';
@@ -15,6 +11,8 @@ import { FormatJoke } from '@/components/JokeText';
 import { JokeThumbnail } from '@/components/JokeThumbnail';
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
+import client from '@/data/client';
+import type { Doc } from '@/data/structure';
 
 const FacebookShare = dynamic(() => import('@/components/FacebookShare'), {
   ssr: false,
@@ -44,7 +42,7 @@ const Joke = (props: {
         <div className='xs:px-2 mx-auto mb-6 px-10 text-xl leading-relaxed sm:px-4 lg:w-2/3'>
           <FormatJoke joke={props.joke.joke} />
         </div>
-        <FacebookShare id={props.joke._id} />
+        <FacebookShare id={`https://www.kloun.lol/joke/${props.joke._id}`} />
       </div>
 
       {props.items && props.cats && (
@@ -107,7 +105,9 @@ const DATA_QUERY = gql`
     }
   }
 `;
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps = async (context: {
+  query: { id: string };
+}) => {
   const { id } = context.query;
 
   const { data } = await client.query({

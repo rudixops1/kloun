@@ -4,9 +4,8 @@ import type { FC, MouseEvent, ReactElement } from 'react';
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
 
-import { FormatJoke } from '@/components/JokeText';
-
 import { dialogAtom } from '@/atoms/dialog';
+import { FormatJoke } from '@/components/JokeText';
 
 import type { Doc } from '../data/structure';
 
@@ -73,7 +72,11 @@ export const JokeThumbnail: FC<Props> = ({
           </a>
         ) : (
           <div className=' absolute right-5 -mt-8'>
-            <FacebookShare id={item._id} noText noWrapper />
+            <FacebookShare
+              id={`https://www.kloun.lol/joke/${item._id}`}
+              noText
+              noWrapper
+            />
           </div>
         ))}
     </div>

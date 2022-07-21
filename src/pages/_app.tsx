@@ -1,9 +1,9 @@
+import '../styles/global.css';
+
 import type { AppProps } from 'next/app';
 import Script from 'next/script';
 import NextNProgress from 'nextjs-progressbar';
 import { RecoilRoot } from 'recoil';
-
-import '../styles/global.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

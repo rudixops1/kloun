@@ -31,7 +31,11 @@ const PagingNews = ({
       <div className='my-10 flex w-full flex-col'>
         <div className='flex flex-wrap'>
           {newsbg.map((item) => (
-            <NewsThumbnail key={item.slug} {...item} />
+            <div className='joke' key={item.slug}>
+              <div className='jokewrap'>
+                <NewsThumbnail {...item} />
+              </div>
+            </div>
           ))}
         </div>
         <Pagination

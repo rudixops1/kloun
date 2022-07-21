@@ -4,7 +4,7 @@
 import { gql } from '@apollo/client';
 import { shuffle, uniqBy } from 'lodash';
 import dynamic from 'next/dynamic';
-import Image from 'next/future/image';
+import Image from 'next/image';
 
 import client from '@/data/client';
 

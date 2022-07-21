@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import axios from 'axios';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 

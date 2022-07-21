@@ -62,7 +62,7 @@ const Index = ({ newsbg, newsbg_aggregate }: RootNewsProps): JSX.Element => {
           title='Новини'
           description='Новини'
           cat='Новини'
-          url='https://kloun.lol/news/'
+          url='https://www.kloun.lol/news/'
         />
       }
     >

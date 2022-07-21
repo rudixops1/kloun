@@ -26,7 +26,7 @@ const PagingNews = ({
           title='Новини'
           description='Новини'
           cat='Новини'
-          url={`https://kloun.lol/news/${npagenum}`}
+          url={`https://www.kloun.lol/news/${npagenum}`}
         />
       }
     >

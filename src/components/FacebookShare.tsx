@@ -11,10 +11,10 @@ const FacebookShare = ({
   noText?: boolean;
   noWrapper?: boolean;
 }) => {
-  // url={`https://kloun.lol/joke/${id}`}
+  // url={`https://www.kloun.lol/joke/${id}`}
   // quote={'next-share is a social share buttons for your next React apps.'}
   // hashtag={'#виц'}
-  /// <FacebookShareButton url={`https://kloun.lol/joke/${id}`}>
+  /// <FacebookShareButton url={`https://www.kloun.lol/joke/${id}`}>
   return (
     <div
       className={

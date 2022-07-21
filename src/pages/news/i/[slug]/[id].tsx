@@ -34,7 +34,7 @@ const NewsItem = ({
           cat='Новини'
           imgtype='image/jpeg'
           image={content.image ? content.image : image}
-          url={`https://kloun.lol/news/i/${slug}/${uid}`}
+          url={`https://www.kloun.lol/news/i/${slug}/${uid}`}
         />
       }
     >

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import Nav from '@/components/JokeCats';
+import Nav from '@/components/Nav';
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
 import { Program } from '@/components/Program';
@@ -40,13 +40,13 @@ const Index = () => {
         />
       }
     >
-      {type === 'Jokes' && <Nav cats={cats} />}
+      {type === 'Jokes' && <Nav cats={cats} prefix='cat' />}
       {type === 'Program' && (
         <Program className='container flex flex-wrap items-center justify-center sm:mx-auto' />
       )}
       {!type && (
         <>
-          <Nav cats={cats} limit={9} />
+          <Nav cats={cats} limit={9} prefix='cat' />
           <MoreButton text='Oще категории' type='Jokes' />
           <Program
             limit={12}

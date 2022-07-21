@@ -31,6 +31,11 @@ const MenuNavBar = ({ className }: { className: string }) => {
           <a>Новини</a>
         </Link>
       </li>
+      <li>
+        <Link href='/business/' passHref>
+          <a>Business</a>
+        </Link>
+      </li>
     </ul>
   );
 };

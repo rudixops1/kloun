@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil';
 
 import { dialogAtom } from '@/atoms/dialog';
 import Dialog from '@/components/Dialog';
-import Nav from '@/components/JokeCats';
+import Nav from '@/components/Nav';
 import catsdata from '@/data/cats';
 
 function Footer({ hide }: { hide?: boolean }) {
@@ -18,7 +18,7 @@ function Footer({ hide }: { hide?: boolean }) {
       }}
     >
       <div className=''>
-        {!hide && <Nav cats={shuffle(catsdata).slice(0, 3)} />}
+        {!hide && <Nav cats={shuffle(catsdata).slice(0, 3)} prefix='cat' />}
         <div className='text-center text-xs'>
           © {new Date().getFullYear()}, Built by RudixOps with ❤️
         </div>

@@ -1,4 +1,4 @@
-import type { Cat } from '../components/JokeCats';
+import type { Cat } from '../components/Nav';
 
 const catsdata: Cat[] = [
   {

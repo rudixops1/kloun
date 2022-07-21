@@ -1,21 +1,8 @@
 module.exports = {
   eslint: {
-    dirs: ['.']
+    dirs: ['src']
   },
-  poweredByHeader: false,
-  trailingSlash: true,
-  generateEtags: false,
-  // basePath: '',
-  // The starter code load resources from `public` folder with `router.basePath` in React components.
-  // So, the source code is "basePath-ready".
-  // You can remove `basePath` if you don't need it.
-  reactStrictMode: true, // was true
-  experimental: {
-    images: {
-      unoptimized: true
-    }
-    // runtime: 'experimental-edge',
-  },
+
   images: {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: [
@@ -26,7 +13,21 @@ module.exports = {
       'static.dir.bg'
     ]
   },
-  devIndicators: {
-    buildActivityPosition: 'bottom-right'
+  webpack (config) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            typescript: true,
+            icon: true
+          }
+        }
+      ]
+    });
+
+    return config;
   }
 };

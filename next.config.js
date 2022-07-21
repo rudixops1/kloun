@@ -30,7 +30,7 @@ module.exports = {
         headers,
       },
       {
-        source: '/news/:id',
+        source: '/news/:slug/:id',
         headers,
       },
     ];

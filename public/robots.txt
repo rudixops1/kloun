@@ -18,3 +18,6 @@ Sitemap: https://www.kloun.lol/sitemaps/out/9.xml
 Sitemap: https://www.kloun.lol/sitemaps/out/10.xml
 Sitemap: https://www.kloun.lol/sitemaps/out/11.xml
 Sitemap: https://www.kloun.lol/sitemaps/out/12.xml
+Sitemap: https://www.kloun.lol/sitemaps/out/13.xml
+Sitemap: https://www.kloun.lol/sitemaps/out/14.xml
+Sitemap: https://www.kloun.lol/sitemaps/out/15.xml

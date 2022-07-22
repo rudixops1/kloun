@@ -3,14 +3,33 @@ import fetch from 'cross-fetch';
 import fs from 'fs';
 import pkg from 'lodash';
 
-const { shuffle, chunk } = pkg;
+const query = `query MyQuery {
+  jokes: cats_count {
+      cat
+      count
+    }
+    news: newsbg_aggregate {
+      aggregate {
+        count
+      }
+    }
+    business: companies_count {
+      count
+      cat: location
+    }
+    jokeids: jokes(order_by: {nid: desc}, limit: 20000) {
+     _id
+  }
+}`;
+
+const { chunk } = pkg;
 
 const lastmod = '\t<lastmod>2022-07-22</lastmod>\n';
 
 fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
   .then((res) => res.json())
   .then((data) => {
-    const { jokes, news, business } = data;
+    const { jokes, news, business, jokeids } = data;
     const jokesmap = jokes
       .map((item) =>
         new Array(Math.round(item.count / 30))
@@ -23,16 +42,7 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           )
       )
       .flat();
-    const jokesmaptxt = jokes
-      .map((item) =>
-        new Array(Math.round(item.count / 30))
-          .fill(0)
-          .map(
-            (_, i) =>
-              `${new URL(`https://www.kloun.lol/cat/${item.cat}/${i + 1}/`)}`
-          )
-      )
-      .flat();
+
     //
     const newsmap = new Array(Math.round(Number(news.aggregate.count) / 30))
       .fill(0)
@@ -41,9 +51,7 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           `\t<url>\n\t\t<loc>https://www.kloun.lol/news/${i +
             1}/</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`
       );
-    const newsmaptxt = new Array(Math.round(Number(news.aggregate.count) / 30))
-      .fill(0)
-      .map((_, i) => `https://www.kloun.lol/news/${i + 1}/`);
+
     //
     const businessmap = business
       .map((item) =>
@@ -57,21 +65,18 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           )
       )
       .flat();
-    const businessmaptxt = business
-      .map((item) =>
-        new Array(Math.round(item.count / 30))
-          .fill(0)
-          .map(
-            (_, i) =>
-              `${new URL(
-                `https://www.kloun.lol/business/${item.cat}/${i + 1}/`
-              )}`
-          )
-      )
-      .flat();
+
+    const jokeidsmap = jokeids.map((item) => {
+      const url = `https://www.kloun.lol/joke/${item._id}/`;
+      return `\t<url>\n\t\t<loc>${url}</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`;
+    });
+
     //
 
-    const sitemap = chunk([...jokesmap, ...businessmap, ...newsmap], 5500);
+    const sitemap = chunk(
+      [...jokesmap, ...businessmap, ...newsmap, ...jokeidsmap],
+      5500
+    );
 
     // const sitemaptxt = chunk(
     //   shuffle([...newsmaptxt, ...jokesmaptxt, ...businessmaptxt]),

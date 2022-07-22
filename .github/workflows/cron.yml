@@ -1,7 +1,7 @@
 name: Trigger FB Post
 on:
   schedule:
-    - cron: '*/5 7-22 * * *' #*/5 7-22 trying new dasdsad
+    - cron: '*/5 7-20 * * *' #*/5 7-22 trying new dasdsad
 permissions: read-all
 jobs:
   job1:

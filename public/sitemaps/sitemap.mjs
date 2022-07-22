@@ -71,10 +71,7 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
       .flat();
     //
 
-    const sitemap = chunk(
-      shuffle([...newsmap, ...jokesmap, ...businessmap]),
-      1000
-    );
+    const sitemap = chunk([...jokesmap, ...businessmap, ...newsmap], 5500);
 
     // const sitemaptxt = chunk(
     //   shuffle([...newsmaptxt, ...jokesmaptxt, ...businessmaptxt]),

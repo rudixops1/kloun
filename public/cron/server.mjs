@@ -16,9 +16,6 @@ fetch(`https://www.kloun.lol/api/joke/random/`)
       };
     });
 
-    console.log(
-      `https://graph.facebook.com/v14.0/me/feed?access_token=${token}`
-    );
     fetch(`https://graph.facebook.com/v14.0/me/feed?access_token=${token}`, {
       method: 'POST',
       headers: {

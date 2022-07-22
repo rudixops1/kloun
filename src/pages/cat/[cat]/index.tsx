@@ -47,7 +47,14 @@ const CatPage = ({
           </li>
         </ul>
       </div>
-      <Pagination pages={pages} pagenum={pagenum} cat={`/cat/${cat}`} />
+      <div className='fixed bottom-0 left-0 z-10 flex w-full justify-center bg-black/30 p-4 backdrop-blur-sm'>
+        <Pagination
+          pages={pages}
+          pagenum={pagenum}
+          cat={`/cat/${cat}`}
+          hideStats
+        />
+      </div>
       <div className='flex flex-wrap'>
         {jokes.map((item) => (
           <JokeThumbnail
@@ -57,14 +64,6 @@ const CatPage = ({
             short={true}
           />
         ))}
-      </div>
-      <div className='fixed bottom-0 left-0 z-10 flex w-full justify-center bg-black/30 p-4 backdrop-blur-sm'>
-        <Pagination
-          pages={pages}
-          pagenum={pagenum}
-          cat={`/cat/${cat}`}
-          hideStats
-        />
       </div>
     </Main>
   );

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.kloun.lol
+
+# Sitemaps
+Sitemap: https://www.kloun.lol/sitemaps/out/1.xml

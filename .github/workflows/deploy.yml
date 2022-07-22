@@ -19,12 +19,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
       - name: Install Serverless Framework
         run: |
+          npm ci
           npm install -g serverless
           npm install -g @serverless/cli
-      - name: Serverless AWS authentication
-        run: components-v1
-      - name: Deploy to AWS
-        run: serverless
+          components-v1

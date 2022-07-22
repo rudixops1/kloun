@@ -1,5 +1,9 @@
-customHeaders:
-  - pattern: '*.xml'
+
+- pattern: '*.xml'
     headers:
-      - key: 'content-type'
-        value: 'text/xml; charset=utf-8'
+      - key: Content-Type
+        value: text/xml
+- pattern: '**/*'
+    headers:
+      - key: x-powered-by
+        value: RudixOps

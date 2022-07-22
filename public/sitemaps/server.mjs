@@ -5,7 +5,7 @@ import pkg from 'lodash';
 
 const { shuffle, chunk } = pkg;
 
-const date = '2022-07-20';
+const date = '2022-07-22T06:23:27.145Z';
 
 fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
   .then((res) => res.json())
@@ -56,7 +56,12 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
     sitemap.forEach(async (element, i) => {
       fs.writeFileSync(
         `/Users/rudix/Desktop/kloun/public/sitemaps/out/sitemap${i + 1}.xml`,
-        `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${element.join(
+        `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n${element.join(
           ''
         )}</urlset>`
       );

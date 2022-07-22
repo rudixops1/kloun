@@ -17,9 +17,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           .fill(0)
           .map(
             (_, i) =>
-              `\t<url>\n\t\t<loc>${new URL(
+              `\t<url><loc>${new URL(
                 `https://www.kloun.lol/cat/${item.cat}/${i + 1}/`
-              )}</loc>\n\t\t<lastmod>${date}</lastmod>\n\t\t<changefreq>monthly</changefreq>\n\t\t<priority>1.0</priority>\n\t</url>`
+              )}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>`
           )
       )
       .flat();
@@ -28,8 +28,8 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
       .fill(0)
       .map(
         (_, i) =>
-          `\t<url>\n\t\t<lastmod>${date}</lastmod>\n\t\t<changefreq>monthly</changefreq>\n\t\t<priority>1.0</priority>\n\t\t<loc>https://www.kloun.lol/news/${i +
-            1}/</loc>\n\t</url>`
+          `\t<url><loc>https://www.kloun.lol/news/${i +
+            1}/</loc><changefreq>daily</changefreq><priority>0.7</priority></url>`
       );
 
     const businessmap = business
@@ -38,9 +38,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           .fill(0)
           .map(
             (_, i) =>
-              `\t<url>\n\t\t<lastmod>${date}</lastmod>\n\t\t<changefreq>monthly</changefreq>\n\t\t<priority>0.7</priority>\n\t\t<loc>${`https://www.kloun.lol/business/${
-                item.cat
-              }/${i + 1}/`}</loc>\n\t</url>`
+              `\t<url><loc>${new URL(
+                `https://www.kloun.lol/business/${item.cat}/${i + 1}/`
+              )}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>`
           )
       )
       .flat();

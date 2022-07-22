@@ -21,7 +21,7 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
                 / /g,
                 '%20'
               )}/${i +
-                1}/</loc>< lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>1.0</priority> </url>`
+                1}/</loc> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>1.0</priority> </url>`
           )
       )
       .flat();

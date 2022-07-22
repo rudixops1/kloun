@@ -20,7 +20,7 @@ function Footer({ hide }: { hide?: boolean }) {
       <div className=''>
         {!hide && <Nav cats={shuffle(catsdata).slice(0, 3)} prefix='cat' />}
         <div className='text-center text-xs'>
-          kloun v.0.0.4c © {new Date().getFullYear()}, Built by RudixOps with ❤️
+          kloun v.0.1.5e © {new Date().getFullYear()}, Built by RudixOps with ❤️
         </div>
       </div>
       <Dialog {...dialogdata} />

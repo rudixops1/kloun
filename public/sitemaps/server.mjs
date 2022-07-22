@@ -17,11 +17,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           .fill(0)
           .map(
             (_, i) =>
-              `<url> <loc>https://www.kloun.lol/cat/${item.cat.replace(
-                / /g,
-                '%20'
-              )}/${i +
-                1}/</loc> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>1.0</priority> </url>`
+              `<url> <loc>${new URL(
+                `https://www.kloun.lol/cat/${item.cat}/${i + 1}/`
+              )}</loc> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>1.0</priority> </url>`
           )
       )
       .flat();
@@ -40,10 +38,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           .fill(0)
           .map(
             (_, i) =>
-              `<url> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>0.7</priority> <loc>https://www.kloun.lol/business/${item.cat.replace(
-                / /g,
-                '%20'
-              )}/${i + 1}/</loc> </url>`
+              `<url> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>0.7</priority> <loc>${`https://www.kloun.lol/business/${
+                item.cat
+              }/${i + 1}/`}</loc> </url>`
           )
       )
       .flat();

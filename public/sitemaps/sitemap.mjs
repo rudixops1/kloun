@@ -76,16 +76,33 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
       1000
     );
 
-    const sitemaptxt = chunk(
-      shuffle([...newsmaptxt, ...jokesmaptxt, ...businessmaptxt]),
-      1000
+    // const sitemaptxt = chunk(
+    //   shuffle([...newsmaptxt, ...jokesmaptxt, ...businessmaptxt]),
+    //   1000
+    // );
+
+    // sitemaptxt.forEach(async (element, i) => {
+    //   fs.writeFileSync(
+    //     `/Users/rudix/Desktop/kloun/public/sitemaps/out/${i + 1}.txt`,
+    //     element.join('\n')
+    //   );
+    // });
+
+    fs.writeFileSync(
+      `/Users/rudix/Desktop/kloun/public/robots.txt`,
+      `# *
+User-agent: *
+Allow: /
+    
+# Host
+Host: https://www.kloun.lol
+    
+# Sitemaps\n${sitemap
+        .map(
+          (_, i) => `Sitemap: https://www.kloun.lol/sitemaps/out/${i + 1}.xml`
+        )
+        .join('\n')}`
     );
-    sitemaptxt.forEach(async (element, i) => {
-      fs.writeFileSync(
-        `/Users/rudix/Desktop/kloun/public/sitemaps/out/${i + 1}.txt`,
-        element.join('\n')
-      );
-    });
 
     sitemap.forEach(async (element, i) => {
       fs.writeFileSync(

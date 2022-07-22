@@ -1,8 +1,6 @@
 klounApp:
   component: '@sls-next/serverless-component@3.7.0'
   inputs:
-    domain: 'kloun.lol'
-    domainMinimumProtocolVersion: 'TLSv1.2_2018'
     name:
       defaultLambda: klounda
       apiLambda: klounda-api

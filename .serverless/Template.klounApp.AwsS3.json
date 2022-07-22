@@ -1,0 +1,6 @@
+{
+  "name": "klounda-s3",
+  "region": "us-east-1",
+  "accelerated": true,
+  "url": "https://klounda-s3.s3.amazonaws.com"
+}

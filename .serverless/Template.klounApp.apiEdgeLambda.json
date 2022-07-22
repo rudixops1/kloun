@@ -1,0 +1,17 @@
+{
+  "name": "klounda-api",
+  "hash": "ZSpPI6/xwvbfj1qaUdyn/QrlNGcA1o6fA3McsDalNH0=",
+  "description": "API Lambda@Edge for Next CloudFront distribution",
+  "memory": 1024,
+  "timeout": 10,
+  "code": "/Users/rudix/Desktop/kloun/.serverless_nextjs/api-lambda",
+  "shims": [],
+  "handler": "index.handler",
+  "runtime": "nodejs14.x",
+  "env": {},
+  "role": {
+    "arn": "arn:aws:iam::445820032868:role/ndlcwah-smvuw7"
+  },
+  "arn": "arn:aws:lambda:us-east-1:445820032868:function:klounda-api",
+  "region": "us-east-1"
+}

@@ -67,7 +67,11 @@ const NewsItem = ({
         </div>
         <div className='flex flex-wrap'>
           {newsbg.map((item) => (
-            <NewsThumbnail key={item.uid} {...item} />
+            <div className='joke' key={item.slug}>
+              <div className='jokewrap'>
+                <NewsThumbnail {...item} />
+              </div>
+            </div>
           ))}
         </div>
       </div>

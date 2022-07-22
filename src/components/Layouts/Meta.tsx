@@ -25,11 +25,7 @@ const Meta = (props: IMetaProps) => {
           content='width=device-width,initial-scale=1'
           key='viewport'
         />
-        <link
-          rel='icon'
-          href={`${AppConfig.prefix}/favicon.ico`}
-          key='favicon'
-        />
+        <link rel='icon' href='/favicon.ico' key='favicon' />
       </Head>
       <NextSeo
         title={props.title}

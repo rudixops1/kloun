@@ -25,6 +25,6 @@ jobs:
           npm install -g serverless
           npm install -g @serverless/cli
       - name: Serverless AWS authentication
-        run: components-v1 config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: components-v1
       - name: Deploy to AWS
         run: serverless

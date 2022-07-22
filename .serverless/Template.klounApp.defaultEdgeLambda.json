@@ -1,0 +1,17 @@
+{
+  "name": "klounda",
+  "hash": "cS4lx7xgH7kZbgiNLkNSoV4zb5zQu4ygZk/jy1Sc8vY=",
+  "description": "Default Lambda@Edge for Next CloudFront distribution",
+  "memory": 1024,
+  "timeout": 10,
+  "code": "/Users/rudix/Desktop/kloun/.serverless_nextjs/default-lambda",
+  "shims": [],
+  "handler": "index.handler",
+  "runtime": "nodejs14.x",
+  "env": {},
+  "role": {
+    "arn": "arn:aws:iam::445820032868:role/oeqnkhpj-4mgxdr"
+  },
+  "arn": "arn:aws:lambda:us-east-1:445820032868:function:klounda",
+  "region": "us-east-1"
+}

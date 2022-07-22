@@ -1,0 +1,5 @@
+customHeaders:
+  - pattern: '*.xml'
+    headers:
+      - key: 'content-type'
+        value: 'text/xml; charset=utf-8'

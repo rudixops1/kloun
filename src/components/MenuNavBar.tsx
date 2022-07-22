@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import catsdata from '@/data/cats';
+import { AppConfig } from '@/utils/AppConfig';
 
 const MenuNavBar = ({ className }: { className: string }) => {
   return (
@@ -16,7 +17,7 @@ const MenuNavBar = ({ className }: { className: string }) => {
         <ul className='rounded bg-base-100 p-2'>
           {catsdata.slice(0, 10).map((item) => (
             <li key={item.cat}>
-              <Link href={`/cat/${item.cat}`} passHref>
+              <Link href={`${AppConfig.link}/cat/${item.cat}`} passHref>
                 <a>{item.cat}</a>
               </Link>
             </li>

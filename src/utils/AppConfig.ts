@@ -5,4 +5,7 @@ export const AppConfig = {
   locale: 'bg_BG',
   localehtml: 'bg',
   prefix: 'https://www.kloun.lol',
+  link: process.env.AWS_REGION
+    ? 'https://www.kloun.lol'
+    : 'http://localhost:3000',
 };

@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { AppConfig } from '@/utils/AppConfig';
+
 const NewsThumbnail = ({
   title,
   image,
@@ -12,7 +14,7 @@ const NewsThumbnail = ({
   slug: string;
   uid: string;
 }) => (
-  <Link href={`/news/i/${slug}/${uid}`} passHref>
+  <Link href={`${AppConfig.link}/news/i/${slug}/${uid}`} passHref>
     <a>
       <div className='-m-4 flex cursor-pointer flex-row '>
         {image && (

@@ -9,6 +9,7 @@ import { Meta } from '@/components/Layouts/Meta';
 import { Pagination } from '@/components/Pagination';
 import client from '@/data/client';
 import type { Doc } from '@/data/structure';
+import { AppConfig } from '@/utils/AppConfig';
 
 import { DATA_QUERY_CAT } from './index';
 
@@ -41,7 +42,7 @@ const CatPage = ({
             <Link href='/?type=Jokes'>Вицове</Link>
           </li>
           <li>
-            <Link href={`/cat/${cat}`}>{cat}</Link>
+            <Link href={`${AppConfig.link}/cat/${cat}`}>{cat}</Link>
           </li>
           <li>
             <a>{pagenum}</a>

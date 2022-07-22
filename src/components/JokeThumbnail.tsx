@@ -6,6 +6,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { dialogAtom } from '@/atoms/dialog';
 import { FormatJoke } from '@/components/JokeText';
+import { AppConfig } from '@/utils/AppConfig';
 
 import type { Doc } from '../data/structure';
 
@@ -34,7 +35,10 @@ export const JokeThumbnail: FC<Props> = ({
   return (
     <div className='joke'>
       {showcats && item.cat !== 'Разни' && (
-        <a className='joketop' href={`/cat/${cat.replace(/ /g, '%20')}/`}>
+        <a
+          className='joketop'
+          href={`${AppConfig.link}/cat/${cat.replace(/ /g, '%20')}/`}
+        >
           {cat}
         </a>
       )}
@@ -54,7 +58,7 @@ export const JokeThumbnail: FC<Props> = ({
               });
             }}
             className='jokebottom'
-            href={`/joke/${item._id}`}
+            href={`${AppConfig.link}/joke/${item._id}`}
           >
             Прочети
             <svg

@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import type { FC, ReactElement } from 'react';
 
+import { AppConfig } from '@/utils/AppConfig';
+
 interface Props {
   pagenum: number;
   pages: number;
@@ -39,17 +41,23 @@ export const Pagination: FC<Props> = ({
   return (
     <div className='flex justify-center'>
       <nav className='btn-group block sm:hidden' aria-label='Pagination'>
-        <Link href={`${cat}/${prev === 1 ? '' : prev}`} passHref>
+        <Link
+          href={`${AppConfig.link}${cat}/${prev === 1 ? '' : prev}`}
+          passHref
+        >
           <a className='btn'>Назад</a>
         </Link>
-        <Link href={`${cat}/${next === 1 ? '' : next}`} passHref>
+        <Link
+          href={`${AppConfig.link}${cat}/${next === 1 ? '' : next}`}
+          passHref
+        >
           <a className='btn'>Напред</a>
         </Link>
       </nav>
       <nav className='btn-group hidden sm:block' aria-label='Pagination'>
         {pagemap[0].page !== 1 && (
           <>
-            <Link href={`${cat}`} passHref>
+            <Link href={`${AppConfig.link}${cat}`} passHref>
               <a className='btn'>1</a>
             </Link>
 
@@ -59,7 +67,11 @@ export const Pagination: FC<Props> = ({
 
         {pagemap.map(({ page, active }) => {
           return (
-            <Link key={page} href={`${cat}/${page === 1 ? '' : page}`} passHref>
+            <Link
+              key={page}
+              href={`${AppConfig.link}${cat}/${page === 1 ? '' : page}`}
+              passHref
+            >
               <a className={`btn ${active ? 'btn-active' : ''}`}>{page}</a>
             </Link>
           );
@@ -69,7 +81,7 @@ export const Pagination: FC<Props> = ({
           <>
             <div className='btndisabled'>...</div>
 
-            <Link href={`${cat}/${max}`} passHref>
+            <Link href={`${AppConfig.link}${cat}/${max}`} passHref>
               <a className='btn'>{max}</a>
             </Link>
           </>

@@ -5,6 +5,8 @@ import pkg from 'lodash';
 
 const { shuffle, chunk } = pkg;
 
+const date = '2022-07-20';
+
 fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
   .then((res) => res.json())
   .then((data) => {
@@ -19,7 +21,7 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
                 / /g,
                 '%20'
               )}/${i +
-                1}/</loc><lastmod>2022-03-20</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>`
+                1}/</loc><lastmod>${date}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>`
           )
       )
       .flat();
@@ -28,7 +30,7 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
       .fill(0)
       .map(
         (_, i) =>
-          `<url><lastmod>2022-03-20</lastmod><changefreq>daily</changefreq><priority>1.0</priority><loc>https://www.kloun.lol/news/${i +
+          `<url><lastmod>${date}</lastmod><changefreq>daily</changefreq><priority>1.0</priority><loc>https://www.kloun.lol/news/${i +
             1}/</loc></url>`
       );
 
@@ -38,7 +40,7 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           .fill(0)
           .map(
             (_, i) =>
-              `<url><lastmod>2022-03-20</lastmod><changefreq>daily</changefreq><priority>1.0</priority><loc>https://www.kloun.lol/business/${item.cat.replace(
+              `<url><lastmod>${date}</lastmod><changefreq>daily</changefreq><priority>1.0</priority><loc>https://www.kloun.lol/business/${item.cat.replace(
                 / /g,
                 '%20'
               )}/${i + 1}/</loc></url>`
@@ -54,9 +56,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
     sitemap.forEach(async (element, i) => {
       fs.writeFileSync(
         `/Users/rudix/Desktop/kloun/public/sitemaps/out/sitemap${i + 1}.xml`,
-        `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${element.join(
+        `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${element.join(
           ''
-        )}</urlset></xml>`
+        )}</urlset>`
       );
     });
 

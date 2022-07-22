@@ -12,6 +12,9 @@ module.exports = {
   eslint: {
     dirs: ['src'],
   },
+  env: {
+    AWS_REGION: process.env.AWS_REGION,
+  },
   trailingSlash: true,
   images: {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

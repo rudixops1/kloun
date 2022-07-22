@@ -5,7 +5,7 @@ import pkg from 'lodash';
 
 const { shuffle, chunk } = pkg;
 
-const date = '2022-07-22T06:23:27.145Z';
+const date = '2022-07-21T06:23:27.145Z';
 
 fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
   .then((res) => res.json())
@@ -17,9 +17,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           .fill(0)
           .map(
             (_, i) =>
-              `<url> <loc>${new URL(
+              `\t<url>\n\t\t<loc>${new URL(
                 `https://www.kloun.lol/cat/${item.cat}/${i + 1}/`
-              )}</loc> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>1.0</priority> </url>`
+              )}</loc>\n\t\t<lastmod>${date}</lastmod>\n\t\t<changefreq>monthly</changefreq>\n\t\t<priority>1.0</priority>\n\t</url>`
           )
       )
       .flat();
@@ -28,8 +28,8 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
       .fill(0)
       .map(
         (_, i) =>
-          `<url> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>1.0</priority> <loc>https://www.kloun.lol/news/${i +
-            1}/</loc> </url>`
+          `\t<url>\n\t\t<lastmod>${date}</lastmod>\n\t\t<changefreq>monthly</changefreq>\n\t\t<priority>1.0</priority>\n\t\t<loc>https://www.kloun.lol/news/${i +
+            1}/</loc>\n\t</url>`
       );
 
     const businessmap = business
@@ -38,9 +38,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           .fill(0)
           .map(
             (_, i) =>
-              `<url> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>0.7</priority> <loc>${`https://www.kloun.lol/business/${
+              `\t<url>\n\t\t<lastmod>${date}</lastmod>\n\t\t<changefreq>monthly</changefreq>\n\t\t<priority>0.7</priority>\n\t\t<loc>${`https://www.kloun.lol/business/${
                 item.cat
-              }/${i + 1}/`}</loc> </url>`
+              }/${i + 1}/`}</loc>\n\t</url>`
           )
       )
       .flat();
@@ -53,11 +53,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
     sitemap.forEach(async (element, i) => {
       fs.writeFileSync(
         `/Users/rudix/Desktop/kloun/public/sitemaps/out/sitemap${i + 1}.xml`,
-        `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n${element.join(
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n${element.join(
           '\n'
         )}\n</urlset>`
       );
     });
-
-    console.log(sitemap[0]);
   });

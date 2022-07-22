@@ -5,7 +5,7 @@ import pkg from 'lodash';
 
 const { shuffle, chunk } = pkg;
 
-const date = '2022-07-21T06:23:27.145Z';
+const lastmod = '\t<lastmod>2022-07-22</lastmod>\n';
 
 fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
   .then((res) => res.json())
@@ -17,9 +17,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           .fill(0)
           .map(
             (_, i) =>
-              `<url><loc>${new URL(
+              `\t<url>\n\t\t<loc>${new URL(
                 `https://www.kloun.lol/cat/${item.cat}/${i + 1}/`
-              )}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>`
+              )}</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`
           )
       )
       .flat();
@@ -28,8 +28,8 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
       .fill(0)
       .map(
         (_, i) =>
-          `<url><loc>https://www.kloun.lol/news/${i +
-            1}/</loc><changefreq>daily</changefreq><priority>0.7</priority></url>`
+          `\t<url>\n\t\t<loc>https://www.kloun.lol/news/${i +
+            1}/</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`
       );
 
     const businessmap = business
@@ -38,9 +38,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           .fill(0)
           .map(
             (_, i) =>
-              `<url><loc>${new URL(
+              `\t<url>\n\t\t<loc>${new URL(
                 `https://www.kloun.lol/business/${item.cat}/${i + 1}/`
-              )}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>`
+              )}</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`
           )
       )
       .flat();
@@ -51,12 +51,11 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
     );
 
     sitemap.forEach(async (element, i) => {
-      console.log(element.join('\n'));
       fs.writeFileSync(
         `/Users/rudix/Desktop/kloun/public/sitemaps/out/sitemap${i + 1}.xml`,
-        `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">${element.join(
-          ''
-        )}</urlset>`
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${element.join(
+          '\n'
+        )}\n</urlset>`
       );
     });
   });

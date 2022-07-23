@@ -1,4 +1,5 @@
 import { shuffle } from 'lodash';
+import Image from 'next/image';
 import Script from 'next/script';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
@@ -7,6 +8,8 @@ import { dialogAtom } from '@/atoms/dialog';
 import Dialog from '@/components/Dialog';
 import Nav from '@/components/Nav';
 import catsdata from '@/data/cats';
+
+import powered from '../../../public/powered.png';
 
 function Footer({ hide }: { hide?: boolean }) {
   const dialogdata = useRecoilValue(dialogAtom);
@@ -17,10 +20,12 @@ function Footer({ hide }: { hide?: boolean }) {
         backgroundImage: `url('/images/botwave.svg')`,
       }}
     >
-      <div className=''>
+      <div>
         {!hide && <Nav cats={shuffle(catsdata).slice(0, 3)} prefix='cat' />}
-        <div className='text-center text-xs'>
-          kloun v.0.1.5e © {new Date().getFullYear()}, Built by RudixOps with ❤️
+        <div className='flex items-center justify-center'>
+          <div className='-ml-8'>
+            <Image src={powered} alt='powered' width={260} height={44} />
+          </div>
         </div>
       </div>
       <Dialog {...dialogdata} />

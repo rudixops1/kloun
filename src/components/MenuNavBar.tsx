@@ -43,7 +43,7 @@ const MenuNavBar = ({
       </li>
       <li>
         <Link href={`${AppConfig.link}/business/`} passHref={hrefPass}>
-          <a className='font-bold'>Business</a>
+          <a className='font-bold'>Бизнес</a>
         </Link>
       </li>
     </ul>

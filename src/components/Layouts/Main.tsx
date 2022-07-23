@@ -1,14 +1,9 @@
-import dynamic from 'next/dynamic';
 import type { ReactNode } from 'react';
 
+import Logo from '@/components/Layouts/Header';
 import MenuNavBar from '@/components/MenuNavBar';
 
-const Logo = dynamic(() => import('@/components/Layouts/Header'), {
-  ssr: false,
-});
-const Footer = dynamic(() => import('@/components/Layouts/Footer'), {
-  ssr: false,
-});
+import Footer from './Footer';
 
 type IMainProps = {
   meta: ReactNode;
@@ -59,7 +54,7 @@ const Main = (props: IMainProps) => {
         <div className='container mx-auto flex grow flex-col justify-center px-2 pb-20 sm:px-4 md:px-8'>
           {props.children}
         </div>
-        <Footer hide={props.hideFooter} />
+        <Footer />
       </div>
     </>
   );

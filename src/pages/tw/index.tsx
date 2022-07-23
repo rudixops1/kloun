@@ -2,7 +2,6 @@
 // import { useRouter } from 'next/router';
 
 import { gql } from '@apollo/client';
-import type { GetServerSideProps } from 'next';
 import Link from 'next/link';
 
 import { Main } from '@/components/Layouts/Main';
@@ -14,7 +13,13 @@ export type User = {
   id: string;
 };
 
-const Index = ({ twusers }: { twusers: User[] }): JSX.Element => {
+const Index = ({
+  twusers,
+  page,
+}: {
+  twusers: User[];
+  page: number;
+}): JSX.Element => {
   return (
     <Main
       hideFooter
@@ -42,31 +47,34 @@ const Index = ({ twusers }: { twusers: User[] }): JSX.Element => {
           </li>
         ))}
       </ul>
-      <Pagination pages={365195} pagenum={1} cat='/tw?page=' hideStats />
-      <div className='btn-group mt-10 justify-center'>
-        <button className='btn'>1</button>
-        <button className='btn btn-active'>2</button>
-        <button className='btn'>3</button>
-        <button className='btn'>4</button>
-      </div>
+      <Pagination pages={365195} pagenum={page} cat='/tw?page=' hideStats />
     </Main>
   );
 };
 
 export const USERS = gql`
-  query MyQuery {
-    twusers(order_by: { uid: asc }, limit: 300) {
+  query MyQuery($offset: Int!) {
+    twusers(order_by: { uid: asc }, limit: 300, offset: $offset) {
       id
     }
   }
 `;
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { data } = await client.query({ query: USERS });
+export const getServerSideProps = async ({
+  query,
+}: {
+  query: { page: string };
+}) => {
+  const { page } = query;
+  const rpage = Number(page.replace('/', ''));
+  const offset = (rpage - 1) * 300;
+
+  const { data } = await client.query({ query: USERS, variables: { offset } });
 
   return {
     props: {
       twusers: data.twusers,
+      page: rpage,
     },
   };
 };

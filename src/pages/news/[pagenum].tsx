@@ -53,14 +53,14 @@ export default PagingNews;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { pagenum } = context.query;
   const agregate = await client.query({ query: DATA_AGREGATE });
-  const start =
+
+  const end =
     agregate.data.newsbg_aggregate.aggregate.max.nid -
     (Number(pagenum) - 1) * 30;
-  const end = start;
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { pagenum, start, end },
+    variables: { pagenum, end },
   });
 
   return {

@@ -4,7 +4,7 @@
 
 // prettier-ignore
 declare module "nextjs-routes" {
-  export type Route =
+  export type Route = 
     | string
     | { pathname: "/.DS_Store"; query?: Query | undefined }
     | { pathname: "/api/.DS_Store"; query?: Query | undefined }

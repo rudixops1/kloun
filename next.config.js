@@ -1,5 +1,3 @@
-const { withRoutes } = require('nextjs-routes/next-config.cjs');
-
 const headers = [
   {
     key: 'Cache-Control',
@@ -59,4 +57,4 @@ const nextConfig = {
     return config;
   },
 };
-module.exports = withRoutes(nextConfig);
+module.exports = nextConfig;

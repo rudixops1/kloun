@@ -17,23 +17,23 @@ const MenuNavBar = ({ className }: { className: string }) => {
         <ul className='rounded bg-base-100 p-2'>
           {catsdata.slice(0, 10).map((item) => (
             <li key={item.cat}>
-              <Link href={`${AppConfig.link}/cat/${item.cat}`} passHref>
+              <Link href={`${AppConfig.link}/cat/${item.cat}/`} passHref>
                 <a>{item.cat}</a>
               </Link>
             </li>
           ))}
           <li>
-            <Link href='/?type=Jokes'>Всички </Link>
+            <Link href={`${AppConfig.link}/?type=Jokes`}>Всички </Link>
           </li>
         </ul>
       </li>
       <li>
-        <Link href='/news' passHref>
+        <Link href={`${AppConfig.link}/news`} passHref>
           <a>Новини</a>
         </Link>
       </li>
       <li>
-        <Link href='/business' passHref>
+        <Link href={`${AppConfig.link}/business`} passHref>
           <a>Business</a>
         </Link>
       </li>

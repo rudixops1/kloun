@@ -38,7 +38,7 @@ const CatPage = ({
       <div className='breadcrumbs text-sm'>
         <ul>
           <li>
-            <Link href='/?type=Jokes'>Вицове</Link>
+            <Link href={`${AppConfig.link}/?type=Jokes`}>Вицове</Link>
           </li>
           <li>
             <Link href={`${AppConfig.link}/cat/${cat}`}>{cat}</Link>

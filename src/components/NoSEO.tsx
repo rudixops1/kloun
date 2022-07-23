@@ -9,7 +9,7 @@ const NoSEO = ({ content, href }: { content: string[]; href: string }) => {
       ))}{' '}
       ...
       <Link href={href}>
-        <a className='btn' rel='noopener noreferrer nofollow'>
+        <a className='btn' target='_top'>
           Прочети нататък
         </a>
       </Link>

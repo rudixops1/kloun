@@ -40,12 +40,18 @@ const Main = (props: IMainProps) => {
                 />
               </svg>
             </label>
-            <MenuNavBar className='dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow' />
+            <MenuNavBar
+              className='dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow'
+              hrefPass={true}
+            />
           </div>
         </div>
         <div className='navbar-center'></div>
         <div className=' navbar-end '>
-          <MenuNavBar className='xs:block xs:invisible menu rounded-box menu-horizontal  invisible sm:visible md:visible' />
+          <MenuNavBar
+            className='xs:block xs:invisible menu rounded-box menu-horizontal  invisible sm:visible md:visible'
+            hrefPass={false}
+          />
         </div>
       </div>
       <div className='flex min-h-screen flex-col'>

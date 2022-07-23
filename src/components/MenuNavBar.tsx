@@ -3,11 +3,17 @@ import Link from 'next/link';
 import catsdata from '@/data/cats';
 import { AppConfig } from '@/utils/AppConfig';
 
-const MenuNavBar = ({ className }: { className: string }) => {
+const MenuNavBar = ({
+  className,
+  hrefPass,
+}: {
+  className: string;
+  hrefPass: boolean;
+}) => {
   return (
     <ul tabIndex={0} className={className}>
       <li>
-        <Link href='/'>
+        <Link href={AppConfig.link}>
           <a>Начало</a>
         </Link>
       </li>
@@ -17,7 +23,10 @@ const MenuNavBar = ({ className }: { className: string }) => {
         <ul className='rounded bg-base-100 p-2'>
           {catsdata.slice(0, 10).map((item) => (
             <li key={item.cat}>
-              <Link href={`${AppConfig.link}/cat/${item.cat}/`} passHref>
+              <Link
+                href={`${AppConfig.link}/cat/${item.cat}/`}
+                passHref={hrefPass}
+              >
                 <a>{item.cat}</a>
               </Link>
             </li>
@@ -28,12 +37,12 @@ const MenuNavBar = ({ className }: { className: string }) => {
         </ul>
       </li>
       <li>
-        <Link href={`${AppConfig.link}/news`} passHref>
+        <Link href={`${AppConfig.link}/news/`} passHref={hrefPass}>
           <a>Новини</a>
         </Link>
       </li>
       <li>
-        <Link href={`${AppConfig.link}/business`} passHref>
+        <Link href={`${AppConfig.link}/business/`} passHref={hrefPass}>
           <a>Business</a>
         </Link>
       </li>

@@ -1,11 +1,13 @@
 import Image from 'next/image';
 
+import logo from '../../../public/logobottom.png';
+
 function Logo({ title }: { title?: string }) {
   return (
     <header className="bg-[url('/images/upwave.svg')] bg-cover">
       <div className='z-10 flex w-full items-center justify-center pt-2 sm:pt-6'>
         <Image
-          src='/logobottom.png'
+          src={logo}
           alt='kloun'
           width={169}
           height={195}

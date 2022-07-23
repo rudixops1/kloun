@@ -39,9 +39,9 @@ const Index = ({
               <a
                 className='active flex gap-4 bg-slate-900'
                 rel='nofollow noreferrer'
-                target={'_blank'}
+                target='_blank'
               >
-                <span className='flex-1'>{user.id}</span>
+                {user.id}
               </a>
             </Link>
           </li>

@@ -6,8 +6,29 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('https://www.kloun.lol/font/Nunito-Regular.ttf') format('truetype');
+  src: url('/font/Nunito-Regular.ttf') format('truetype');
 }
+/*
+* font-bold
+*/
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/font/Nunito-Bold.ttf') format('truetype');
+}
+/*
+* font-thin
+*/
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('/font/Nunito-ExtraLight.ttf') format('truetype');
+}
+
 @layer components {
   ::-webkit-scrollbar {
     width: 10px;
@@ -34,7 +55,7 @@
     @apply w-full grow p-2 sm:w-1/3 md:h-1/4;
   }
   .btn1-count {
-    @apply flex-none  rounded bg-purple-900 px-2 text-2xl font-extralight;
+    @apply flex-none  rounded bg-purple-900 px-2 text-2xl font-thin;
   }
   .btn1-wrap {
     @apply flex h-full items-center rounded bg-gray-800 p-4;

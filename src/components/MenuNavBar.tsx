@@ -14,12 +14,12 @@ const MenuNavBar = ({
     <ul tabIndex={0} className={className}>
       <li>
         <Link href={AppConfig.link}>
-          <a>Начало</a>
+          <a className='font-bold'>Начало</a>
         </Link>
       </li>
 
       <li>
-        <a>Вицове</a>
+        <a className='font-bold'>Вицове</a>
         <ul className='rounded bg-base-100 p-2'>
           {catsdata.slice(0, 10).map((item) => (
             <li key={item.cat}>
@@ -27,7 +27,7 @@ const MenuNavBar = ({
                 href={`${AppConfig.link}/cat/${item.cat}/`}
                 passHref={hrefPass}
               >
-                <a>{item.cat}</a>
+                <a className='font-bold'>{item.cat}</a>
               </Link>
             </li>
           ))}
@@ -38,12 +38,12 @@ const MenuNavBar = ({
       </li>
       <li>
         <Link href={`${AppConfig.link}/news/`} passHref={hrefPass}>
-          <a>Новини</a>
+          <a className='font-bold'>Новини</a>
         </Link>
       </li>
       <li>
         <Link href={`${AppConfig.link}/business/`} passHref={hrefPass}>
-          <a>Business</a>
+          <a className='font-bold'>Business</a>
         </Link>
       </li>
     </ul>

@@ -66,7 +66,7 @@ export const getServerSideProps = async ({
   query: { page: string };
 }) => {
   const { page } = query;
-  const rpage = Number(page.replace('/', ''));
+  const rpage = Number(page ? page.replace('/', '') : 1);
   const offset = (rpage - 1) * 300;
 
   const { data } = await client.query({ query: USERS, variables: { offset } });

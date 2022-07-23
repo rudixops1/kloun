@@ -54,11 +54,7 @@ const Index = ({
 
 export const USERS = gql`
   query MyQuery($offset: Int!) {
-    twusers(
-      order_by: { uid: asc }
-      where: { nid: { _gte: $offset } }
-      limit: 300
-    ) {
+    twusers(where: { nid: { _gte: $offset } }, limit: 300) {
       id
     }
   }

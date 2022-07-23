@@ -40,5 +40,6 @@ jobs:
 
       - name: Deploy to the cloud
         run: |
+          npm install
           npm install -g @serverless/cli
           components-v1

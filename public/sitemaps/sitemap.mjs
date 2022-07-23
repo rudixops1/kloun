@@ -48,8 +48,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
       .fill(0)
       .map(
         (_, i) =>
-          `\t<url>\n\t\t<loc>https://www.kloun.lol/news/${i +
-            1}/</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`
+          `\t<url>\n\t\t<loc>https://www.kloun.lol/news/${
+            i + 1
+          }/</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`
       );
 
     //

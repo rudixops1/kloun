@@ -1,9 +1,0 @@
-
-- pattern: '*.xml'
-    headers:
-      - key: Content-Type
-        value: text/xml
-- pattern: '**/*'
-    headers:
-      - key: x-powered-by
-        value: RudixOps

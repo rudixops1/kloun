@@ -45,10 +45,7 @@
             "PATCH"
           ],
           "forward": {
-            "headers": [
-              "Authorization",
-              "Host"
-            ],
+            "headers": ["Authorization", "Host"],
             "cookies": "all",
             "queryString": true
           },
@@ -70,9 +67,7 @@
             "PATCH"
           ],
           "forward": {
-            "headers": [
-              "Accept"
-            ]
+            "headers": ["Accept"]
           },
           "lambda@edge": {
             "origin-request": "arn:aws:lambda:us-east-1:445820032868:function:klounda-image:11"
@@ -82,16 +77,10 @@
           "minTTL": 0,
           "defaultTTL": 0,
           "maxTTL": 31536000,
-          "allowedHttpMethods": [
-            "HEAD",
-            "GET"
-          ],
+          "allowedHttpMethods": ["HEAD", "GET"],
           "forward": {
             "cookies": "all",
-            "headers": [
-              "Authorization",
-              "Host"
-            ],
+            "headers": ["Authorization", "Host"],
             "queryString": true
           },
           "lambda@edge": {
@@ -108,10 +97,7 @@
     "defaultTTL": 0,
     "maxTTL": 31536000,
     "forward": {
-      "headers": [
-        "Authorization",
-        "Host"
-      ],
+      "headers": ["Authorization", "Host"],
       "cookies": "all",
       "queryString": true
     },

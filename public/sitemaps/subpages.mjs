@@ -20,8 +20,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
               `<url> <loc>https://www.kloun.lol/cat/${item.cat.replace(
                 / /g,
                 '%20'
-              )}/${i +
-                1}/</loc> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>1.0</priority> </url>`
+              )}/${
+                i + 1
+              }/</loc> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>1.0</priority> </url>`
           )
       )
       .flat();
@@ -30,8 +31,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
       .fill(0)
       .map(
         (_, i) =>
-          `<url> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>1.0</priority> <loc>https://www.kloun.lol/news/${i +
-            1}/</loc> </url>`
+          `<url> <lastmod>${date}</lastmod> <changefreq>daily</changefreq> <priority>1.0</priority> <loc>https://www.kloun.lol/news/${
+            i + 1
+          }/</loc> </url>`
       );
 
     const businessmap = business

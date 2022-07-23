@@ -1,3 +1,5 @@
+const { withRoutes } = require('nextjs-routes/next-config.cjs');
+
 const headers = [
   {
     key: 'Cache-Control',
@@ -8,7 +10,8 @@ const headers = [
     value: 'RudixOps',
   },
 ];
-module.exports = {
+
+const nextConfig = {
   eslint: {
     dirs: ['src'],
   },
@@ -56,3 +59,4 @@ module.exports = {
     return config;
   },
 };
+module.exports = withRoutes(nextConfig);

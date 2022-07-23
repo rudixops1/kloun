@@ -28,6 +28,7 @@
     "next-seo": "^5.4.0",
     "next-share": "^0.16.0",
     "nextjs-progressbar": "^0.0.14",
+    "nextjs-routes": "^0.0.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recoil": "^0.7.4",

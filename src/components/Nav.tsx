@@ -46,7 +46,7 @@ const Nav = ({ cats, limit, prefix, formatlength }: NavProps) => {
                   {formatlength ? (
                     <span className='text-xs'>{d.cat}</span>
                   ) : (
-                    d.cat
+                    <span>{d.cat}</span>
                   )}
                 </div>
                 {d.count !== 0 && (

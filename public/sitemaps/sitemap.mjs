@@ -1,32 +1,20 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
 import fetch from 'cross-fetch';
 import fs from 'fs';
 import pkg from 'lodash';
 
-const query = `query MyQuery {
-  jokes: cats_count {
-      cat
-      count
-    }
-    news: newsbg_aggregate {
-      aggregate {
-        count
-      }
-    }
-    business: companies_count {
-      count
-      cat: location
-    }
-    jokeids: jokes(order_by: {nid: desc}, limit: 20000) {
-     _id
-  }
-}`;
+const urlize = (string) => {
+  return `${string}`.replace(/&#\d+;/gm, (s) => {
+    return String.fromCharCode(s.match(/\d+/gm)[0]);
+  });
+};
 
 const { chunk } = pkg;
 
 const lastmod = '\t<lastmod>2022-07-22</lastmod>\n';
 
-fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
+fetch('http://54.247.0.27/api/rest/others/structure/sitemaps')
   .then((res) => res.json())
   .then((data) => {
     const { jokes, news, business, jokeids } = data;
@@ -36,7 +24,7 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           .fill(0)
           .map(
             (_, i) =>
-              `\t<url>\n\t\t<loc>${new URL(
+              `\t<url>\n\t\t<loc>${urlize(
                 `https://www.kloun.lol/cat/${item.cat}/${i + 1}/`
               )}</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`
           )
@@ -48,9 +36,9 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
       .fill(0)
       .map(
         (_, i) =>
-          `\t<url>\n\t\t<loc>https://www.kloun.lol/news/${
-            i + 1
-          }/</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`
+          `\t<url>\n\t\t<loc>${urlize(
+            `https://www.kloun.lol/news/${i + 1}/`
+          )}</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`
       );
 
     //
@@ -60,7 +48,7 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
           .fill(0)
           .map(
             (_, i) =>
-              `\t<url>\n\t\t<loc>${new URL(
+              `\t<url>\n\t\t<loc>${urlize(
                 `https://www.kloun.lol/business/${item.cat}/${i + 1}/`
               )}</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`
           )
@@ -68,7 +56,7 @@ fetch('http://db.kloun.lol/api/rest/others/structure/sitemaps')
       .flat();
 
     const jokeidsmap = jokeids.map((item) => {
-      const url = `https://www.kloun.lol/joke/${item._id}/`;
+      const url = urlize(`https://www.kloun.lol/joke/${item._id}/`);
       return `\t<url>\n\t\t<loc>${url}</loc>\n\t\t<priority>0.11</priority>\n\t${lastmod}\t</url>`;
     });
 
@@ -110,7 +98,7 @@ Host: https://www.kloun.lol
     sitemap.forEach(async (element, i) => {
       fs.writeFileSync(
         `/Users/rudix/Desktop/kloun/public/sitemaps/out/${i + 1}.xml`,
-        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${element.join(
+        `<?xml version="1.0" encoding="utf-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${element.join(
           '\n'
         )}\n</urlset>`
       );

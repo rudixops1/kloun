@@ -154,7 +154,7 @@ export const getServerSideProps = async (context: {
     query: DATA_QUERY,
     variables: {
       id,
-      _ilike1: `%${regex[0]}%`,
+      _ilike1: `%${regex[0]}-%`,
       // _ilike2: `%${regex[1]}%`,
       // _ilike3: `%${regex[2]}%`,
     },

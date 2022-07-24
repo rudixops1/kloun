@@ -28,6 +28,27 @@ const Meta = (props: IMetaProps) => {
           key='viewport'
         />
         <link rel='icon' href='/favicon.ico' key='favicon' />
+        <link
+          rel='preload'
+          href='/font/Nunito-Regular.woff2'
+          as='font'
+          type='font/woff2'
+          crossOrigin='anonymous'
+        ></link>
+        <link
+          rel='preload'
+          href='/font/Nunito-Bold.woff2'
+          as='font'
+          type='font/woff2'
+          crossOrigin='anonymous'
+        ></link>
+        <link
+          rel='preload'
+          href='/font/Nunito-ExtraLight.woff2'
+          as='font'
+          type='font/woff2'
+          crossOrigin='anonymous'
+        ></link>
       </Head>
       <NextSeo
         title={props.title}

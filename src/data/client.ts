@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-export const GRAPH_URL = 'http://34.245.180.183';
+export const GRAPH_URL = 'http://54.247.0.27';
 
 const client = new ApolloClient({
   ssrMode: true,

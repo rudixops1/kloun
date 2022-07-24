@@ -22,7 +22,6 @@ export type Company = {
 const Index = ({ cats }: { cats: Cat[] }): JSX.Element => {
   return (
     <Main
-      hideFooter
       meta={
         <Meta
           title='Бизнес фирми'

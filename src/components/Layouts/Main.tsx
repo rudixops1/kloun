@@ -54,7 +54,7 @@ const Main = (props: IMainProps) => {
         <div className='container mx-auto flex grow flex-col justify-center px-2 pb-20 sm:px-4 md:px-8'>
           {props.children}
         </div>
-        <Footer />
+        <Footer hideFooter={props.hideFooter} />
       </div>
     </>
   );

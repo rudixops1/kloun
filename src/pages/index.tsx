@@ -32,7 +32,6 @@ const Index = () => {
   const cats = catsdata.sort((a, b) => b.count - a.count);
   return (
     <Main
-      hideFooter
       meta={
         <Meta
           title='Вицове и забавни котки и мемета'

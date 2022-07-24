@@ -26,6 +26,7 @@ const CatPage = ({
 }): JSX.Element => {
   return (
     <Main
+      hideFooter
       meta={
         <Meta
           title={`Вицове от ${cat} на страница ${pagenum}`}

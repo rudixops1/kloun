@@ -55,7 +55,6 @@ export interface NewsByPk {
 const Index = ({ newsbg, newsbg_aggregate }: RootNewsProps): JSX.Element => {
   return (
     <Main
-      hideFooter
       meta={
         <Meta
           title='Новини'

@@ -4,6 +4,8 @@ import fetch from 'cross-fetch';
 import fs from 'fs';
 import pkg from 'lodash';
 
+const { shuffle } = pkg;
+
 const urlize = (string) => {
   return `${string}`.replace(/&#\d+;/gm, (s) => {
     return String.fromCharCode(s.match(/\d+/gm)[0]);
@@ -63,7 +65,7 @@ fetch('http://54.247.0.27/api/rest/others/structure/sitemaps')
     //
 
     const sitemap = chunk(
-      [...jokesmap, ...businessmap, ...newsmap, ...jokeidsmap],
+      shuffle([...jokesmap, ...businessmap, ...newsmap, ...jokeidsmap]),
       5500
     );
 

@@ -11,11 +11,10 @@ function Logo({ title }: { title?: string }) {
           alt='kloun'
           width={169}
           height={195}
-          priority={true}
           placeholder='empty'
         />
-        <div className='flex items-center justify-center  overflow-hidden truncate text-3xl font-extrabold md:text-6xl'>
-          <h1 className=' text-purple-200'>
+        <div className='flex items-center justify-center overflow-hidden truncate text-3xl font-extrabold md:text-6xl'>
+          <h1 className='text-purple-200'>
             {title && <span className='font-medium'>/{title}</span>}
           </h1>
         </div>

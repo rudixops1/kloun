@@ -73,7 +73,7 @@ const CatPage = ({
 export default CatPage;
 
 export const DATA_QUERY_CAT = gql`
-  query MyQuery($cat: String!, $offset: Int!) {
+  query MyQuery($cat: String!, $offset: Int!) @cached(ttl: 2630000) {
     jokes_aggregate(where: { cat: { _eq: $cat } }) {
       aggregate {
         count(columns: _id)

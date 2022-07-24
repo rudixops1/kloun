@@ -85,7 +85,7 @@ const Index = ({ newsbg, newsbg_aggregate }: RootNewsProps): JSX.Element => {
   );
 };
 export const DATA_AGREGATE = gql`
-  query MyQuery {
+  query MyQuery @cached(ttl: 2630000) {
     newsbg_aggregate {
       aggregate {
         max {

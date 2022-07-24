@@ -49,10 +49,7 @@
   }
   body {
     @apply m-0 bg-gray-900 p-0 text-base text-gray-400;
-    font-family: 'Nunito', ui-sans-serif, system-ui, -apple-system,
-      BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-      'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-      'Segoe UI Symbol', 'Noto Color Emoji';
+    font-family: 'Nunito';
   }
   .btn1 {
     @apply w-full grow p-2 sm:w-1/3 md:h-1/4;

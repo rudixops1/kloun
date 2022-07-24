@@ -127,9 +127,7 @@ const DATA_QUERY = gql`
       image
       slug
       uid
-      href
     }
-
     newsbg_by_pk(uid: $id) {
       date
       title

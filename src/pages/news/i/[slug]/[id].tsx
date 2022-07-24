@@ -40,15 +40,17 @@ const NewsItem = ({
         <div className='mx-auto leading-relaxed lg:w-2/3'>
           <div className='flex flex-row'>
             {image && (
-              <Image
-                alt={description}
-                className='mr-4 h-48 w-48 rounded-lg object-cover'
-                src={image}
-                width={480}
-                height={320}
-              />
+              <div className='mr-4 pt-2'>
+                <Image
+                  alt={description}
+                  className='h-48 w-48 rounded-lg object-cover'
+                  src={image}
+                  width={480}
+                  height={320}
+                />
+              </div>
             )}
-            <h1 className='text-2xl font-bold'>{title}</h1>
+            <h1 className='font-bold sm:text-2xl md:text-4xl'>{title}</h1>
           </div>
           {date && <div className='ml-4 text-sm text-gray-600'>{date}</div>}
 

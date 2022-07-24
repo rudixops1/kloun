@@ -39,9 +39,8 @@ const Index = ({ cats }: { cats: Cat[] }): JSX.Element => {
   );
 };
 export const DATA_AGREGATE = gql`
-  query MyQuery @cached {
-    companies_count(order_by: { count: desc }, limit: 50)
-      @cached(ttl: 2630000) {
+  query MyQuery @cached(ttl: 2630000) {
+    companies_count(order_by: { count: desc }, limit: 50) {
       count
       cat: location
     }

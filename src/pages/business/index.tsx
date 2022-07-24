@@ -53,7 +53,6 @@ export const CITY_DATA = gql`
       limit: 30
       offset: $offset
       where: { location: { _eq: $location } }
-      order_by: { uid: asc }
     ) {
       _id
       cat: name

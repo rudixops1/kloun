@@ -1,9 +1,7 @@
 import type { DefaultOptions } from '@apollo/client';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
-import fetch from 'cross-fetch';
 
-export const GRAPH_URL =
-  'http://ec2-54-247-0-27.eu-west-1.compute.amazonaws.com';
+export const GRAPH_URL = 'http://54.247.0.27';
 
 // const client = new ApolloClient({
 //   ssrMode: true,
@@ -23,10 +21,9 @@ const defaultOptions: DefaultOptions = {
 
 const httpLink = new HttpLink({
   uri: `${GRAPH_URL}/v1/graphql`,
-  fetch,
 });
 const client = new ApolloClient({
-  ssrMode: false,
+  ssrMode: true,
   link: httpLink,
   cache: new InMemoryCache(),
   defaultOptions,

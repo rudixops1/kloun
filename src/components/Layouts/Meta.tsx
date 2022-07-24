@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-script-component-in-head */
 /* eslint-disable @next/next/no-before-interactive-script-outside-document */
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
 import { AppConfig } from '@/utils/AppConfig';
@@ -16,6 +17,7 @@ type IMetaProps = {
 };
 
 const Meta = (props: IMetaProps) => {
+  const canonicalURL = AppConfig.prefix + useRouter().asPath;
   return (
     <>
       <Head>
@@ -30,7 +32,7 @@ const Meta = (props: IMetaProps) => {
       <NextSeo
         title={props.title}
         description={props.description}
-        canonical={props.canonical}
+        canonical={canonicalURL}
         facebook={{
           appId: '281985576166744',
         }}

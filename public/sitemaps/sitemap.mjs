@@ -92,14 +92,15 @@ Host: https://www.kloun.lol
     
 # Sitemaps\n${sitemap
         .map(
-          (_, i) => `Sitemap: https://www.kloun.lol/sitemaps/out/${i + 1}.xml`
+          (_, i) =>
+            `Sitemap: https://www.kloun.lol/sitemaps/out/${i + 1}_sitemap.xml`
         )
         .join('\n')}`
     );
 
     sitemap.forEach(async (element, i) => {
       fs.writeFileSync(
-        `/Users/rudix/Desktop/kloun/public/sitemaps/out/${i + 1}.xml`,
+        `/Users/rudix/Desktop/kloun/public/sitemaps/out/${i + 1}_sitemap.xml`,
         `<?xml version="1.0" encoding="utf-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${element.join(
           '\n'
         )}\n</urlset>`

@@ -14,9 +14,9 @@ const NewsThumbnail = ({
   slug: string;
   uid: string;
 }) => (
-  <Link href={`${AppConfig.link}/news/i/${slug}/${uid}`} passHref>
-    <a>
-      <div className='-m-4 flex cursor-pointer flex-row '>
+  <article className='-m-4 flex cursor-pointer flex-row'>
+    <Link href={`${AppConfig.link}/news/i/${slug}/${uid}`} passHref>
+      <a>
         {image && (
           <div className='absolute ml-2 h-20 w-20'>
             <Image
@@ -34,9 +34,9 @@ const NewsThumbnail = ({
             <h3 className='text-sm font-medium text-slate-300'>{title}</h3>
           </div>
         </div>
-      </div>
-    </a>
-  </Link>
+      </a>
+    </Link>
+  </article>
 );
 
 export default NewsThumbnail;

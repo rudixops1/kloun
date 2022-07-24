@@ -39,9 +39,9 @@ const Joke = (props: {
       }
     >
       <div className='my-10 flex w-full flex-col text-center'>
-        <div className='xs:px-2 mx-auto mb-6 px-10 text-xl leading-relaxed sm:px-4 lg:w-2/3'>
+        <article className='xs:px-2 mx-auto mb-6 px-10 text-xl leading-relaxed sm:px-4 lg:w-2/3'>
           <FormatJoke joke={props.joke.joke} />
-        </div>
+        </article>
         <FacebookShare id={`https://www.kloun.lol/joke/${props.joke._id}`} />
       </div>
 

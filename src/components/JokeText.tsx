@@ -46,7 +46,7 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
   });
 
   return (
-    <div>
+    <>
       {remapped.map(
         ({
           oddness,
@@ -89,6 +89,6 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
             </div>
           )
       )}
-    </div>
+    </>
   );
 };

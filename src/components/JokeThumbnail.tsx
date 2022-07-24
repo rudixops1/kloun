@@ -33,7 +33,7 @@ export const JokeThumbnail: FC<Props> = ({
   const jlen = joke.length <= 150;
   const setDialog = useSetRecoilState(dialogAtom);
   return (
-    <div className='joke'>
+    <article className='joke'>
       {showcats && item.cat !== 'Разни' && (
         <a
           className='joketop'
@@ -83,6 +83,6 @@ export const JokeThumbnail: FC<Props> = ({
             />
           </div>
         ))}
-    </div>
+    </article>
   );
 };

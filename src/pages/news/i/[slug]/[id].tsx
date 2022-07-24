@@ -54,14 +54,13 @@ const NewsItem = ({
 
           {shuffled && (
             <>
-              <div>
-                <NoSEO content={[description] || html} href={href} />
-              </div>
-              <div className='hidden'>
+              <NoSEO content={[description] || html} href={href} />
+
+              <article className='hidden'>
                 {shuffled.map((p: string, i: number) => (
                   <p key={i}>{p}</p>
                 ))}
-              </div>
+              </article>
             </>
           )}
         </div>

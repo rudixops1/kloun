@@ -78,34 +78,56 @@ const NewsItem = ({
   );
 };
 
+// const DATA_QUERY = gql`
+//   query MyQuery(
+//     $id: uuid!
+//     $_ilike1: String!
+//     $_ilike2: String!
+//     $_ilike3: String!
+//   ) {
+//     termone: newsbg(where: { slug: { _like: $_ilike1 } }, limit: 5) {
+//       title
+//       image
+//       slug
+//       uid
+//       href
+//     }
+//     termtwo: newsbg(where: { slug: { _like: $_ilike2 } }, limit: 5) {
+//       title
+//       image
+//       slug
+//       uid
+//       href
+//     }
+//     termthree: newsbg(where: { slug: { _like: $_ilike3 } }, limit: 5) {
+//       title
+//       image
+//       slug
+//       uid
+//       href
+//     }
+//     newsbg_by_pk(uid: $id) {
+//       date
+//       title
+//       image
+//       uid
+//       slug
+//       content
+//       href
+//     }
+//   }
+// `;
+
 const DATA_QUERY = gql`
-  query MyQuery(
-    $id: uuid!
-    $_ilike1: String!
-    $_ilike2: String!
-    $_ilike3: String!
-  ) {
-    termone: newsbg(where: { slug: { _like: $_ilike1 } }, limit: 5) {
+  query MyQuery($id: uuid!, $_ilike1: String!) {
+    termone: newsbg(where: { slug: { _like: $_ilike1 } }, limit: 15) {
       title
       image
       slug
       uid
       href
     }
-    termtwo: newsbg(where: { slug: { _like: $_ilike2 } }, limit: 5) {
-      title
-      image
-      slug
-      uid
-      href
-    }
-    termthree: newsbg(where: { slug: { _like: $_ilike3 } }, limit: 5) {
-      title
-      image
-      slug
-      uid
-      href
-    }
+
     newsbg_by_pk(uid: $id) {
       date
       title
@@ -131,15 +153,12 @@ export const getServerSideProps = async (context: {
     variables: {
       id,
       _ilike1: `%${regex[0]}%`,
-      _ilike2: `%${regex[1]}%`,
-      _ilike3: `%${regex[2]}%`,
+      // _ilike2: `%${regex[1]}%`,
+      // _ilike3: `%${regex[2]}%`,
     },
   });
 
-  const newsbg = uniqBy(
-    [...data.termone, ...data.termtwo, ...data.termthree],
-    'uid'
-  ).sort((a, b) => {
+  const newsbg = uniqBy([...data.termone], 'uid').sort((a, b) => {
     return a.uid - b.uid;
   });
   const shufflprep = data.newsbg_by_pk.content.html

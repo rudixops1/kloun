@@ -79,17 +79,13 @@ export const DATA_QUERY_CAT = gql`
         count(columns: _id)
       }
     }
-    jokes(
-      where: { cat: { _eq: $cat } }
-      order_by: { nid: desc }
-      limit: 30
-      offset: $offset
-    ) {
+    jokes(where: { cat: { _eq: $cat } }, limit: 30, offset: $offset) {
       _id
       joke
     }
   }
 `;
+// order_by: { nid: desc }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { cat } = context.query;

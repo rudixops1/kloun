@@ -35,6 +35,10 @@ const Index = ({ cats }: { cats: Cat[] }): JSX.Element => {
       <div className='my-10 flex w-full flex-col'>
         <div className='flex flex-wrap'></div>
       </div>
+      <p className='text-center text-xs font-thin'>
+        Източник на информацията: Официални регистри на Националната агенция по
+        приходите и Комисия за защита на личните данни.
+      </p>
     </Main>
   );
 };

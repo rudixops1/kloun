@@ -40,7 +40,8 @@ const Index = ({ cats }: { cats: Cat[] }): JSX.Element => {
 };
 export const DATA_AGREGATE = gql`
   query MyQuery @cached {
-    companies_count(order_by: { count: desc }, limit: 50) {
+    companies_count(order_by: { count: desc }, limit: 50)
+      @cached(ttl: 2630000) {
       count
       cat: location
     }
@@ -48,7 +49,7 @@ export const DATA_AGREGATE = gql`
 `;
 
 export const CITY_DATA = gql`
-  query MyQuery($location: String!, $offset: Int!) @cached(ttl: 2630000) {
+  query MyQuery($location: String!, $offset: Int!) {
     cats: companies(
       limit: 30
       offset: $offset

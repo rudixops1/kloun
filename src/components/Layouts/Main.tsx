@@ -42,7 +42,7 @@ const Main = (props: IMainProps) => {
           </div>
         </div>
         <div className='navbar-center'></div>
-        <div className=' navbar-end '>
+        <div className='navbar-end '>
           <MenuNavBar
             className='xs:block xs:invisible menu rounded-box menu-horizontal  invisible sm:visible md:visible'
             hrefPass={false}
@@ -51,9 +51,9 @@ const Main = (props: IMainProps) => {
       </div>
       <div className='flex min-h-screen flex-col'>
         <Logo title={props.title} />
-        <div className='container mx-auto flex grow flex-col justify-center px-2 pb-20 sm:px-4 md:px-8'>
+        <main className='container mx-auto flex grow flex-col justify-center px-2 pb-20 sm:px-4 md:px-8'>
           {props.children}
-        </div>
+        </main>
         <Footer hideFooter={props.hideFooter} />
       </div>
     </>

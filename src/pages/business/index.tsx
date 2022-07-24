@@ -48,7 +48,7 @@ export const DATA_AGREGATE = gql`
 `;
 
 export const CITY_DATA = gql`
-  query MyQuery($location: String!, $offset: Int!) {
+  query MyQuery($location: String!, $offset: Int!) @cached(ttl: 2630000) {
     cats: companies(
       limit: 30
       offset: $offset

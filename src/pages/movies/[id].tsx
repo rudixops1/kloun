@@ -13,10 +13,8 @@ const Item = ({ movie }: { movie: Movie }): JSX.Element => {
       hideFooter
       meta={
         <Meta
-          title='Twitter DB'
-          description='Twitter DB'
-          cat='Twitter'
-          url='https://www.kloun.lol/business/'
+          title={movie.title}
+          description={movie.description.slice(0, 100)}
         />
       }
     >

@@ -39,7 +39,13 @@ const Index = ({
             <div className='m-2 flex h-full rounded-lg bg-base-100'>
               <figure className='relative flex w-1/2  overflow-hidden rounded-l-lg'>
                 <div className='absolute inset-0  left-0 h-full'>
-                  <Image src={`/filmi/${slug}.jpg`} alt={title} layout='fill' />
+                  <Link href={`/movies/${slug}-${id}`}>
+                    <Image
+                      src={`/filmi/${slug}.jpg`}
+                      alt={title}
+                      layout='fill'
+                    />
+                  </Link>
                 </div>
               </figure>
 

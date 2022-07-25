@@ -79,7 +79,12 @@ export const DATA_QUERY_CAT = gql`
         count(columns: _id)
       }
     }
-    jokes(where: { cat: { _eq: $cat } }, limit: 30, offset: $offset) {
+    jokes(
+      where: { cat: { _eq: $cat } }
+      limit: 30
+      offset: $offset
+      order_by: { nid: desc }
+    ) {
       _id
       joke
     }

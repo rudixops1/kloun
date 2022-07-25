@@ -36,9 +36,12 @@ const Index = ({
         />
       }
     >
-      <div className='mb-10 flex flex-wrap'>
+      <div className='mb-10 flex flex-wrap justify-center'>
         {movies.map(({ slug, title, description }) => (
-          <article key={slug} className='mb-4 md:w-1/2 lg:w-1/3'>
+          <article
+            key={slug}
+            className='mb-4 w-fit sm:w-fit md:w-3/4 lg:w-2/3 xl:w-2/4 2xl:w-2/5'
+          >
             <div className='m-2 flex h-full rounded-lg bg-base-100'>
               <figure className='relative flex w-1/2  overflow-hidden rounded-l-lg'>
                 <div className='absolute inset-0  left-0 h-full'>
@@ -48,7 +51,8 @@ const Index = ({
 
               <div className='w-3/4 px-4'>
                 <h2 className='my-4 text-2xl font-bold'>{title}</h2>
-                <p className='mb-8 md:text-sm lg:text-xs'>
+
+                <p className='mb-8'>
                   {description.length > 200 ? (
                     <>{description.slice(0, 200)} ...</>
                   ) : (
@@ -64,6 +68,13 @@ const Index = ({
             </div>
           </article>
         ))}
+      </div>
+      <div className='fixed bottom-0 right-0 mr-4 mb-4 rounded-lg bg-orange-700 p-4 text-3xl'>
+        <div className='hidden sm:block'>SM</div>
+        <div className='hidden md:block'>MD</div>
+        <div className='hidden lg:block'>LG</div>
+        <div className='hidden xl:block'>XL</div>
+        <div className='hidden 2xl:block'>2XL</div>
       </div>
       <Pagination pages={pages} pagenum={page} cat='/movies/?page=' hideStats />
     </Main>

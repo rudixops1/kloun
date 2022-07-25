@@ -9,7 +9,7 @@ function Logo({ title }: { title?: string }) {
         <Image
           src={logo}
           alt='kloun'
-          width={169}
+          width={160}
           height={194}
           placeholder='empty'
         />

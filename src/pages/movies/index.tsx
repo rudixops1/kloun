@@ -38,7 +38,7 @@ const Index = ({
     >
       <div className='mb-10 flex flex-wrap'>
         {movies.map(({ slug, title, description }) => (
-          <article key={slug} className='mb-4 md:w-1/2'>
+          <article key={slug} className='mb-4 md:w-1/2 lg:w-1/3'>
             <div className='m-2 flex h-full rounded-lg bg-base-100'>
               <figure className='relative flex w-1/2  overflow-hidden rounded-l-lg'>
                 <div className='absolute inset-0  left-0 h-full'>
@@ -48,9 +48,9 @@ const Index = ({
 
               <div className='w-3/4 px-4'>
                 <h2 className='my-4 text-2xl font-bold'>{title}</h2>
-                <p className='mb-8'>
-                  {description.length > 150 ? (
-                    <>{description.slice(0, 150)} ...</>
+                <p className='mb-8 md:text-sm lg:text-xs'>
+                  {description.length > 200 ? (
+                    <>{description.slice(0, 200)} ...</>
                   ) : (
                     description
                   )}

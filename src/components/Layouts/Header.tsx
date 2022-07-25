@@ -10,7 +10,7 @@ function Logo({ title }: { title?: string }) {
           src={logo}
           alt='kloun'
           width={169}
-          height={195}
+          height={194}
           placeholder='empty'
         />
         {title && (

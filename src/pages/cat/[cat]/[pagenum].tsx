@@ -46,7 +46,9 @@ const CatPage = ({
             <Link href={`${AppConfig.link}/cat/${cat}`}>{cat}</Link>
           </li>
           <li>
-            <a>{pagenum}</a>
+            <Link href={`${AppConfig.link}/cat/${cat}/${pagenum}`}>
+              {pagenum}
+            </Link>
           </li>
         </ul>
       </div>

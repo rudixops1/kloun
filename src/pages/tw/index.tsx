@@ -23,14 +23,7 @@ const Index = ({
   return (
     <Main
       hideFooter
-      meta={
-        <Meta
-          title='Twitter DB'
-          description='Twitter DB'
-          cat='Twitter'
-          url='https://www.kloun.lol/business/'
-        />
-      }
+      meta={<Meta title='Twitter DB' description='Twitter DB' />}
     >
       <ul className='menu menu-compact flex-row flex-wrap justify-center p-0'>
         {twusers.map((user) => (

@@ -3,16 +3,19 @@
 
 import { gql } from '@apollo/client';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
 import { Pagination } from '@/components/Pagination';
 import client from '@/data/client';
+import { AppConfig } from '@/utils/AppConfig';
 
 export type Movie = {
   title: string;
   slug: string;
   description: string;
+  id: number;
 };
 
 const Index = ({
@@ -25,19 +28,9 @@ const Index = ({
   pages: number;
 }): JSX.Element => {
   return (
-    <Main
-      hideFooter
-      meta={
-        <Meta
-          title='Twitter DB'
-          description='Twitter DB'
-          cat='Twitter'
-          url='https://www.kloun.lol/business/'
-        />
-      }
-    >
+    <Main meta={<Meta title='Филми DB' description='Филми DB' cat='Filmi' />}>
       <div className='mb-10 flex flex-wrap justify-center'>
-        {movies.map(({ slug, title, description }) => (
+        {movies.map(({ slug, title, description, id }) => (
           <article
             key={slug}
             className='mb-4 w-fit sm:w-fit md:w-3/4 lg:w-2/3 xl:w-2/4 2xl:w-2/5'
@@ -62,27 +55,33 @@ const Index = ({
               </div>
             </div>
             <div className='card-actions -mt-14 mr-2 justify-end'>
-              <button className='btn btn-primary rounded-l-none rounded-t-none'>
-                още
-              </button>
+              <Link href={`${AppConfig.link}/movies/${slug}-${id}`} passHref>
+                <a className='btn btn-primary rounded-l-none rounded-t-none'>
+                  още
+                </a>
+              </Link>
             </div>
           </article>
         ))}
-      </div>
-      <div className='fixed bottom-0 right-0 mr-4 mb-4 rounded-lg bg-orange-700 p-4 text-3xl'>
-        <div className='hidden sm:block'>SM</div>
-        <div className='hidden md:block'>MD</div>
-        <div className='hidden lg:block'>LG</div>
-        <div className='hidden xl:block'>XL</div>
-        <div className='hidden 2xl:block'>2XL</div>
       </div>
       <Pagination pages={pages} pagenum={page} cat='/movies/?page=' hideStats />
     </Main>
   );
 };
 
-export const USERS = gql`
-  query MyQuery2($offset: Int!) {
+export const MOVIE = gql`
+  query MyQuery($id: Int!) {
+    movies_by_pk(id: $id) {
+      description
+      image
+      title
+      year
+    }
+  }
+`;
+
+const MOVIES = gql`
+  query MyQuery($offset: Int!) {
     movies_aggregate {
       aggregate {
         count
@@ -107,7 +106,7 @@ export const getServerSideProps = async ({
   const rpage = Number(page ? page.replace('/', '') : 1);
   const offset = (rpage - 1) * 30;
 
-  const { data } = await client.query({ query: USERS, variables: { offset } });
+  const { data } = await client.query({ query: MOVIES, variables: { offset } });
   const pages = data.movies_aggregate.aggregate.count;
   return {
     props: {

@@ -25,6 +25,7 @@ const nextConfig = {
       'nstatic.nova.bg',
       'm.netinfo.bg',
       'static.dir.bg',
+      'klounda-s3.s3.us-east-1.amazonaws.com',
     ],
   },
   async headers() {

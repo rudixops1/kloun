@@ -18,7 +18,7 @@ function Footer({ hideFooter }: { hideFooter?: boolean }) {
       }}
     >
       {!hideFooter && (
-        <footer className='footer  p-10 text-neutral-content'>
+        <footer className='footer p-10 text-neutral-content'>
           <div>
             <span className='footer-title'>Services</span>
             <Link href={`${AppConfig.link}/?type=Jokes`} passHref>
@@ -35,7 +35,13 @@ function Footer({ hideFooter }: { hideFooter?: boolean }) {
             </Link>
           </div>
           <div>
-            <span className='footer-title'>Компания</span>
+            <span className='footer-title'>&nbsp;</span>
+            <Link href={`${AppConfig.link}/movies/`} passHref>
+              <a>Филми</a>
+            </Link>
+          </div>
+          <div>
+            <span className='footer-title'>Company</span>
             <Link href={`${AppConfig.link}/other/about/`}>
               <a>За</a>
             </Link>

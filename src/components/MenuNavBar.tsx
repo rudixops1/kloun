@@ -41,11 +41,6 @@ const MenuNavBar = ({
           <a className='font-bold'>Новини</a>
         </Link>
       </li>
-      <li>
-        <Link href={`${AppConfig.link}/business/`} passHref={hrefPass}>
-          <a className='font-bold'>Бизнес</a>
-        </Link>
-      </li>
     </ul>
   );
 };

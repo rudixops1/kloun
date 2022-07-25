@@ -47,7 +47,7 @@ const Index = ({
           </li>
         ))}
       </ul>
-      <Pagination pages={365195} pagenum={page} cat='/tw?page=' hideStats />
+      <Pagination pages={365195} pagenum={page} cat='/tw/?page=' hideStats />
     </Main>
   );
 };

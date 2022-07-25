@@ -16,6 +16,7 @@ export type Movie = {
   slug: string;
   description: string;
   id: number;
+  year: number;
 };
 
 const Index = ({
@@ -76,6 +77,7 @@ export const MOVIE = gql`
       image
       title
       year
+      slug
     }
   }
 `;

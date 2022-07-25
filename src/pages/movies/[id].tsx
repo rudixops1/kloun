@@ -20,14 +20,25 @@ const Item = ({ movie }: { movie: Movie }): JSX.Element => {
         />
       }
     >
-      <div className=' flex flex-wrap justify-center'>
-        <Image
-          src={`/filmi/${movie.slug}.jpg`}
-          alt={movie.title}
-          layout='fill'
-        />
+      <div className='mt-6 flex flex-row flex-wrap justify-center'>
+        <div className='relative flex flex-wrap overflow-hidden rounded-lg bg-indigo-700 p-1'>
+          <span className='absolute top-0 left-0 z-20 rounded-md   bg-indigo-700 p-3  font-bold uppercase'>
+            {movie.title}
+          </span>
+          <span className='absolute bottom-0 right-0 z-20 rounded-md bg-indigo-700 p-3 font-light'>
+            {movie.year}
+          </span>
+          <Image
+            src={`/filmi/${movie.slug}.jpg`}
+            alt={movie.title}
+            width={342}
+            height={513}
+          />
+        </div>
+
         <div className='px-4'>
           <h2 className='my-4 text-2xl font-bold'>{movie.title}</h2>
+          <p className='mb-8'>{movie.description}</p>
         </div>
       </div>
     </Main>
@@ -57,7 +68,6 @@ export const getServerSideProps = async (context: {
   const { id } = context.query;
   const nid = Number(id.split('-').reverse()[0]);
   const { data } = await client.query({ query: MOVIE, variables: { id: nid } });
-  console.log(data.movies_by_pk);
 
   return {
     props: { movie: data.movies_by_pk },

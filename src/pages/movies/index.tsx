@@ -2,6 +2,7 @@
 // import { useRouter } from 'next/router';
 
 import { gql } from '@apollo/client';
+import Image from 'next/image';
 
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
@@ -35,29 +36,37 @@ const Index = ({
         />
       }
     >
-      <div className='flex flex-wrap gap-4'>
+      <div className='mb-10 flex flex-wrap'>
         {movies.map(({ slug, title, description }) => (
-          <div className='card bg-base-100 shadow-xl lg:card-side' key={slug}>
-            <figure>
-              <img
-                src={`https://klounda-s3.s3.us-east-1.amazonaws.com/public/filmi/${slug}.jpg`}
-                alt={title}
-              />
-            </figure>
-            <div className='card-body'>
-              <h2 className='card-title'>{title}</h2>
-              <p>
-                {description.length > 100 ? (
-                  <>{description.slice(0, 100)} ...</>
-                ) : (
-                  description
-                )}
-              </p>
-              <div className='card-actions justify-end'>
-                <button className='btn btn-primary'>Listen</button>
+          <article key={slug} className='mb-4 md:w-1/2'>
+            <div className='m-2 flex h-full rounded-lg bg-base-100'>
+              <figure className='relative flex w-1/2  rounded-l-lg'>
+                <Image
+                  src={`https://klounda-s3.s3.us-east-1.amazonaws.com/public/filmi/${slug}.jpg`}
+                  alt={title}
+                  objectFit='contain'
+                  className='rounded-l-lg'
+                  layout='fill'
+                />
+              </figure>
+
+              <div className='w-3/4 py-4 pr-2'>
+                <h2 className='mb-4 text-2xl font-bold'>{title}</h2>
+                <p className='mb-8'>
+                  {description.length > 150 ? (
+                    <>{description.slice(0, 150)} ...</>
+                  ) : (
+                    description
+                  )}
+                </p>
               </div>
             </div>
-          </div>
+            <div className='card-actions -mt-14 mr-2 justify-end'>
+              <button className='btn btn-primary rounded-l-none rounded-t-none'>
+                още
+              </button>
+            </div>
+          </article>
         ))}
       </div>
       <Pagination pages={pages} pagenum={page} cat='/movies/?page=' hideStats />

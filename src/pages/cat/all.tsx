@@ -73,10 +73,7 @@ const DATA_ALL = gql`
 `;
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  );
+  res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   const { data } = await client.query({
     query: DATA_ALL,
     variables: { pagenum: 1, offset: 0 },

@@ -65,10 +65,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
   res,
 }) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  );
+  res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   const { id }: { id?: string } = query;
   const nid = Number(id ? id.split('-').reverse()[0] : 1);
   const { data } = await client.query({ query: MOVIE, variables: { id: nid } });

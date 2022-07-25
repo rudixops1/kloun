@@ -110,10 +110,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
   res,
 }) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  );
+  res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   const { page }: { page?: string } = query;
   const rpage = Number(page ? page.replace('/', '') : 1);
   const offset = (rpage - 1) * 30;

@@ -107,10 +107,7 @@ export const DATA_QUERY = gql`
   }
 `;
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  );
+  res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   const pagenum = 1;
   const agregate = await client.query({ query: DATA_AGREGATE });
 

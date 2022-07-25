@@ -44,10 +44,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
   res,
 }) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  );
+  res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   const { cat } = query;
 
   const agregate = await client.query({ query: DATA_AGREGATE });

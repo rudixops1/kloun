@@ -36,7 +36,7 @@ const NewsItem = ({
         />
       }
     >
-      <div className='my-10 flex w-full flex-col'>
+      <article className='my-10 flex w-full flex-col'>
         <div className='mx-auto leading-relaxed lg:w-2/3'>
           <div className='flex flex-row'>
             {image && (
@@ -58,11 +58,11 @@ const NewsItem = ({
             <>
               <NoSEO content={[description] || html} href={href} />
 
-              <article className='hidden'>
+              <div className='hidden'>
                 {shuffled.map((p: string, i: number) => (
                   <p key={i}>{p}</p>
                 ))}
-              </article>
+              </div>
             </>
           )}
         </div>
@@ -75,7 +75,7 @@ const NewsItem = ({
             </div>
           ))}
         </div>
-      </div>
+      </article>
     </Main>
   );
 };

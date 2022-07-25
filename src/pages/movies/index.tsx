@@ -29,7 +29,7 @@ const Index = ({
   pages: number;
 }): JSX.Element => {
   return (
-    <Main meta={<Meta title='Филми DB' description='Филми DB' cat='Filmi' />}>
+    <Main meta={<Meta title='Филми DB' description='Филми DB' />}>
       <div className='mb-10 flex flex-wrap justify-center'>
         {movies.map(({ slug, title, description, id }) => (
           <article

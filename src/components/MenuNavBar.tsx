@@ -24,7 +24,7 @@ const MenuNavBar = ({
           {catsdata.slice(0, 10).map((item) => (
             <li key={item.cat}>
               <Link
-                href={`${AppConfig.link}/cat/${item.cat}/`}
+                href={`${AppConfig.link}/cat/${item.cat.replace(/ /g, '%20')}/`}
                 passHref={hrefPass}
               >
                 <a className='font-bold'>{item.cat}</a>

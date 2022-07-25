@@ -39,7 +39,7 @@ export const JokeThumbnail: FC<Props> = ({
           className='joketop'
           href={`${AppConfig.link}/cat/${cat.replace(/ /g, '%20')}/`}
         >
-          {cat}
+          <h2>{cat}</h2>
         </a>
       )}
       <div className='jokewrap'>

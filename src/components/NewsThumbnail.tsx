@@ -15,7 +15,10 @@ const NewsThumbnail = ({
   uid: string;
 }) => (
   <article className='-m-4 flex cursor-pointer flex-row'>
-    <Link href={`${AppConfig.link}/news/i/${slug}/${uid}`} passHref>
+    <Link
+      href={`${AppConfig.link}/news/i/${encodeURIComponent(slug)}/${uid}`}
+      passHref
+    >
       <a>
         {image && (
           <div className='absolute ml-2 h-20 w-20'>

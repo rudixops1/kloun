@@ -13,11 +13,13 @@ function Logo({ title }: { title?: string }) {
           height={195}
           placeholder='empty'
         />
-        <div className='flex items-center justify-center overflow-hidden truncate text-3xl font-extrabold md:text-6xl'>
-          <h1 className='text-purple-200'>
-            {title && <span className='font-medium'>/{title}</span>}
-          </h1>
-        </div>
+        {title && (
+          <div className='flex items-center justify-center overflow-hidden truncate text-3xl font-extrabold md:text-6xl'>
+            <h1 className='text-purple-200'>
+              <span className='font-medium'>/{title}</span>
+            </h1>
+          </div>
+        )}
       </div>
     </header>
   );

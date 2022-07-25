@@ -40,8 +40,15 @@ const Index = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { cat } = context.query;
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
+}) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+  const { cat } = query;
 
   const agregate = await client.query({ query: DATA_AGREGATE });
 

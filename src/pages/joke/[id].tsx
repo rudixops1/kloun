@@ -3,6 +3,7 @@
 
 import { gql } from '@apollo/client';
 import { chunk, uniqBy } from 'lodash';
+import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 
 import { FormatJoke } from '@/components/JokeText';
@@ -105,10 +106,15 @@ const DATA_QUERY = gql`
     }
   }
 `;
-export const getServerSideProps = async (context: {
-  query: { id: string };
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
 }) => {
-  const { id } = context.query;
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+  const { id } = query;
 
   const { data } = await client.query({
     query: DATA_QUERY,

@@ -94,8 +94,15 @@ export const DATA_QUERY_CAT = gql`
 `;
 // order_by: { nid: desc }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { cat } = context.query;
+export const getServerSideProps: GetServerSideProps = async ({
+  res,
+  query,
+}) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+  const { cat } = query;
 
   const { data } = await client.query({
     query: DATA_QUERY_CAT,

@@ -65,8 +65,15 @@ const Index = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.query;
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
+}) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+  const { id } = query;
 
   const { data } = await client.query({
     query: COMPANY_INFO,

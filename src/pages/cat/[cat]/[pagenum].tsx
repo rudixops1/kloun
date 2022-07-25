@@ -76,8 +76,15 @@ const CatPage = ({
 
 export default CatPage;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { pagenum, cat } = context.query;
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
+}) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+  const { pagenum, cat } = query;
 
   const offset = (Number(pagenum) - 1) * 30;
 

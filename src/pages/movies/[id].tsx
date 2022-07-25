@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import type { GetServerSideProps } from 'next';
 import Image from 'next/image';
 
 import { Main } from '@/components/Layouts/Main';
@@ -60,11 +61,16 @@ export const USERS = gql`
   }
 `;
 
-export const getServerSideProps = async (context: {
-  query: { id: string };
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
 }) => {
-  const { id } = context.query;
-  const nid = Number(id.split('-').reverse()[0]);
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+  const { id }: { id?: string } = query;
+  const nid = Number(id ? id.split('-').reverse()[0] : 1);
   const { data } = await client.query({ query: MOVIE, variables: { id: nid } });
 
   return {

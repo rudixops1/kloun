@@ -50,8 +50,15 @@ const PagingNews = ({
 };
 export default PagingNews;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { pagenum } = context.query;
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
+}) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+  const { pagenum } = query;
   const agregate = await client.query({ query: DATA_AGREGATE });
 
   const end =

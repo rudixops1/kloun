@@ -42,8 +42,15 @@ const Index = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { cat, pagenum } = context.query;
+export const getServerSideProps: GetServerSideProps = async ({
+  res,
+  query,
+}) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+  const { cat, pagenum } = query;
   const agregate = await client.query({ query: DATA_AGREGATE });
   const offset = (Number(pagenum) - 1) * 30;
   // const agregate = await client.query({ query: DATA_AGREGATE });

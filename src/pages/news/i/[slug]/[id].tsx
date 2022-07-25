@@ -3,6 +3,7 @@
 
 import { gql } from '@apollo/client';
 import { shuffle, uniqBy } from 'lodash';
+import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
@@ -139,12 +140,17 @@ const DATA_QUERY = gql`
     }
   }
 `;
-export const getServerSideProps = async (context: {
-  query: { id: string; slug: string };
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
 }) => {
-  const { id, slug } = context.query;
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+  const { id, slug }: { id?: string; slug?: string } = query;
 
-  const regex = shuffle(slug.split('-'))
+  const regex = shuffle(slug ? slug.split('-') : '')
     .filter((strx) => strx.length >= 5)
     .slice(0, 3);
 

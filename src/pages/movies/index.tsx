@@ -2,6 +2,7 @@
 // import { useRouter } from 'next/router';
 
 import { gql } from '@apollo/client';
+import type { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -105,12 +106,15 @@ const MOVIES = gql`
   }
 `;
 
-export const getServerSideProps = async ({
+export const getServerSideProps: GetServerSideProps = async ({
   query,
-}: {
-  query: { page: string };
+  res,
 }) => {
-  const { page } = query;
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+  const { page }: { page?: string } = query;
   const rpage = Number(page ? page.replace('/', '') : 1);
   const offset = (rpage - 1) * 30;
 

@@ -40,18 +40,14 @@ const Index = ({
         {movies.map(({ slug, title, description }) => (
           <article key={slug} className='mb-4 md:w-1/2'>
             <div className='m-2 flex h-full rounded-lg bg-base-100'>
-              <figure className='relative flex w-1/2  rounded-l-lg'>
-                <Image
-                  src={`https://klounda-s3.s3.us-east-1.amazonaws.com/public/filmi/${slug}.jpg`}
-                  alt={title}
-                  objectFit='contain'
-                  className='rounded-l-lg'
-                  layout='fill'
-                />
+              <figure className='relative flex w-1/2  overflow-hidden rounded-l-lg'>
+                <div className='absolute inset-0  left-0 h-full'>
+                  <Image src={`/filmi/${slug}.jpg`} alt={title} layout='fill' />
+                </div>
               </figure>
 
-              <div className='w-3/4 py-4 pr-2'>
-                <h2 className='mb-4 text-2xl font-bold'>{title}</h2>
+              <div className='w-3/4 px-4'>
+                <h2 className='my-4 text-2xl font-bold'>{title}</h2>
                 <p className='mb-8'>
                   {description.length > 150 ? (
                     <>{description.slice(0, 150)} ...</>

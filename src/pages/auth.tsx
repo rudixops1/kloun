@@ -60,8 +60,12 @@ const SignIn = ({ err }: { err?: { message: string } }): JSX.Element => {
   const [close, setClose] = useState(false);
   return (
     <Main hideFooter meta={<Meta title={`Login`} description={`Login`} />}>
-      <form action='/auth/' method='POST'>
-        <div className='flex flex-col items-center justify-center'>
+      <form
+        action='/auth/'
+        method='POST'
+        className='flex flex-col items-center justify-center'
+      >
+        <div className='form-control w-full max-w-xs  rounded-md bg-slate-900 p-4'>
           {err && !close && (
             <div className='alert alert-error my-4 max-w-xs rounded-md shadow-lg'>
               <div>
@@ -83,17 +87,24 @@ const SignIn = ({ err }: { err?: { message: string } }): JSX.Element => {
               </div>
             </div>
           )}
-          <div className='form-control w-full max-w-xs  rounded-md bg-slate-900 p-4'>
-            <Input name='username' placeholder='Потребителско име' />
 
-            <Input name='password' placeholder='Парола' type='password' />
-            <Input name='action' value='login' type='hidden' />
-            <button
-              type='submit'
-              className='btn btn-primary btn-md mt-4 self-end'
-            >
-              Вход
-            </button>
+          <Input name='username' placeholder='Потребителско име' />
+
+          <Input name='password' placeholder='Парола' type='password' />
+          <Input name='action' value='login' type='hidden' />
+          <div className='mt-6 flex w-full'>
+            <div className='flex  flex-1 justify-center bg-white'>
+              <div className='  bg-black  align-middle'>content</div>
+            </div>
+
+            <div className='bg-slate-300 '>
+              <button
+                type='submit'
+                className='btn btn-primary btn-md  self-end'
+              >
+                Вход
+              </button>
+            </div>
           </div>
         </div>
       </form>

@@ -128,7 +128,6 @@ export const getServerSideProps = async ({
       await Auth.signIn(username, password);
       const user = await Auth.currentAuthenticatedUser();
       const session = await Auth.currentSession();
-      console.log(session.getAccessToken().getJwtToken());
 
       const userInfo = {
         ...user.attributes,
@@ -145,12 +144,12 @@ export const getServerSideProps = async ({
   };
   const signUp = async (username: string, password: string, email: string) => {
     try {
-      await Auth.signUp({
+      const data = await Auth.signUp({
         username,
         password,
         attributes: { email },
       });
-      return { props: { stage: 1, error: { name: 'Empty' } } };
+      return data;
     } catch (err: any) {
       return { err: { message: err.message, code: err.code } };
     }
@@ -158,9 +157,8 @@ export const getServerSideProps = async ({
 
   const confirmSignUp = async (username: string, authCode: string) => {
     try {
-      await Auth.confirmSignUp(username, authCode);
-
-      // return({props:{  stage: 2, error: { name: 'Empty' } });
+      const data = await Auth.confirmSignUp(username, authCode);
+      return { stage: 2, username, ...data };
     } catch (err: any) {
       return { err: { message: err.message, code: err.code } };
     }
@@ -168,15 +166,14 @@ export const getServerSideProps = async ({
 
   const forgot = async (username: string) => {
     try {
-      await Auth.forgotPassword(username);
-
-      return { props: { stage: 1 } };
+      const data = await Auth.forgotPassword(username);
+      return { stage: 1, username, ...data };
     } catch (err: any) {
       return { err: { message: err.message, code: err.code } };
     }
   };
   const submitCode = () => {
-    return { props: { stage: 2 } };
+    return { stage: 2 };
   };
   const changePassword = async (
     username: string,

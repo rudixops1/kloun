@@ -1,75 +1,16 @@
 /* eslint-disable no-cond-assign */
 /* eslint-disable no-nested-ternary */
-import type { FC, ReactElement } from 'react';
 import React from 'react';
 
-export const formattedjoke = (joke: string): string => {
-  return joke
-    .replaceAll('- А', '\n- А')
-    .replaceAll('- Б', '\n- Б')
-    .replaceAll('- В', '\n- В')
-    .replaceAll('- Г', '\n- Г')
-    .replaceAll('- Д', '\n- Д')
-    .replaceAll('- Е', '\n- Е')
-    .replaceAll('- Ж', '\n- Ж')
-    .replaceAll('- З', '\n- З')
-    .replaceAll('- И', '\n- И')
-    .replaceAll('- Й', '\n- Й')
-    .replaceAll('- К', '\n- К')
-    .replaceAll('- Л', '\n- Л')
-    .replaceAll('- М', '\n- М')
-    .replaceAll('- Н', '\n- Н')
-    .replaceAll('- О', '\n- О')
-    .replaceAll('- П', '\n- П')
-    .replaceAll('- Р', '\n- Р')
-    .replaceAll('- С', '\n- С')
-    .replaceAll('- Т', '\n- Т')
-    .replaceAll('- У', '\n- У')
-    .replaceAll('- Ф', '\n- Ф')
-    .replaceAll('- Х', '\n- Х')
-    .replaceAll('- Ц', '\n- Ц')
-    .replaceAll('- Ч', '\n- Ч')
-    .replaceAll('- Ш', '\n- Ш')
-    .replaceAll('- Щ', '\n- Щ')
-    .replaceAll('- Ю', '\n- Ю')
-    .replaceAll('- Я', '\n- Я')
-    .replaceAll('-А', '\n-А')
-    .replaceAll('-Б', '\n-Б')
-    .replaceAll('-В', '\n-В')
-    .replaceAll('-Г', '\n-Г')
-    .replaceAll('-Д', '\n-Д')
-    .replaceAll('-Е', '\n-Е')
-    .replaceAll('-Ж', '\n-Ж')
-    .replaceAll('-З', '\n-З')
-    .replaceAll('-И', '\n-И')
-    .replaceAll('-Й', '\n-Й')
-    .replaceAll('-К', '\n-К')
-    .replaceAll('-Л', '\n-Л')
-    .replaceAll('-М', '\n-М')
-    .replaceAll('-Н', '\n-Н')
-    .replaceAll('-О', '\n-О')
-    .replaceAll('-П', '\n-П')
-    .replaceAll('-Р', '\n-Р')
-    .replaceAll('-С', '\n-С')
-    .replaceAll('-Т', '\n-Т')
-    .replaceAll('-У', '\n-У')
-    .replaceAll('-Ф', '\n-Ф')
-    .replaceAll('-Х', '\n-Х')
-    .replaceAll('-Ц', '\n-Ц')
-    .replaceAll('-Ч', '\n-Ч')
-    .replaceAll('-Ш', '\n-Ш')
-    .replaceAll('-Щ', '\n-Щ')
-    .replaceAll('-Ю', '\n-Ю')
-    .replaceAll('-Я', '\n-Я')
-    .replaceAll('—', '\n-');
-};
+import { formattedjoke } from '@/utils/formatter';
 
-interface Props {
+export const FormatJoke = ({
+  joke,
+  short,
+}: {
   joke: string;
   short?: boolean;
-}
-
-export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
+}): JSX.Element => {
   if (short) {
     const substr = joke.slice(0, 150);
     const jlen = joke.length <= 150;

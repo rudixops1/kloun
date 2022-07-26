@@ -2,8 +2,8 @@ import { gql } from '@apollo/client';
 import Jimp from 'jimp/es';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { formattedjoke } from '@/components/JokeText';
 import client from '@/data/client';
+import { formattedjoke } from '@/utils/formatter';
 
 const DATA_QUERY = gql`
   query MyQuery($id: String!) {

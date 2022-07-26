@@ -57,31 +57,33 @@ const Input = ({
 };
 
 const SignIn = ({ err }: { err?: { message: string } }): JSX.Element => {
+  const [close, setClose] = useState(false);
   return (
     <Main hideFooter meta={<Meta title={`Login`} description={`Login`} />}>
-      {err && (
-        <div className='alert alert-error shadow-lg'>
-          <div>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-6 w-6 shrink-0 stroke-current'
-              fill='none'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
-              />
-            </svg>
-            <span>{err.message}</span>
-          </div>
-        </div>
-      )}
       <form action='/auth/' method='POST'>
         <div className='flex flex-col items-center justify-center'>
-          <div className='form-control w-full max-w-xs border-spacing-x-0.5 rounded-md bg-slate-900 p-4'>
+          {err && !close && (
+            <div className='alert alert-error my-4 max-w-xs rounded-md shadow-lg'>
+              <div>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-6 w-6 shrink-0 cursor-pointer stroke-current'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  onClick={(): void => setClose(true)}
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
+                  />
+                </svg>
+                <span>{err.message}</span>
+              </div>
+            </div>
+          )}
+          <div className='form-control w-full max-w-xs  rounded-md bg-slate-900 p-4'>
             <Input name='username' placeholder='Потребителско име' />
 
             <Input name='password' placeholder='Парола' type='password' />

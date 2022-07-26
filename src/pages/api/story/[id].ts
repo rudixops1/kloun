@@ -2,6 +2,7 @@ import { gql } from '@apollo/client';
 import Jimp from 'jimp/es';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { formattedjoke } from '@/components/JokeText';
 import client from '@/data/client';
 
 const DATA_QUERY = gql`
@@ -34,11 +35,10 @@ export default async function handler(
         // return background
         Jimp.loadFont(`https://www.kloun.lol/font.fnt`)
           .then((font) => {
-            const splitted = data.jokes_by_pk.joke.split('\n');
+            const splitted = formattedjoke(data.jokes_by_pk.joke).split('\n');
             let h = 50;
             splitted.forEach((line: string) => {
               image.print(font, 10, h, line, 180);
-
               h += Jimp.measureTextHeight(font, line, 180);
             });
             // image.blit(background, 10, 320)

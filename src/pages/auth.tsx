@@ -3,9 +3,11 @@
 import { Amplify, withSSRContext } from 'aws-amplify';
 import bodyParser from 'body-parser';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { useState } from 'react';
+import Link from 'next/link';
 import { promisify } from 'util';
 
+import Err from '@/components/forms/Err';
+import Input from '@/components/forms/Input';
 import { Main } from '@/components/Layouts/Main';
 import { Meta } from '@/components/Layouts/Meta';
 
@@ -21,106 +23,106 @@ Amplify.configure({
   oauth: {},
 });
 
-const Input = ({
-  name,
-  placeholder,
-  type,
-  value,
+const SubForm = ({
+  left,
+  button,
 }: {
-  name: string;
-  placeholder?: string;
-  type?: string;
-  value?: string;
-}): JSX.Element => {
-  const [val, setVal] = useState(value);
-
-  return (
-    <div className={type === 'hidden' ? 'hidden' : 'block'}>
-      <label className='label'>
-        <span className='label-text'>{placeholder}</span>
-        <span className='label-text-alt'> </span>
-      </label>
-      <input
-        type={type || 'text'}
-        placeholder={placeholder}
-        className='inputx w-full max-w-xs'
-        name={name}
-        value={val}
-        onChange={(e): void => setVal(e.target.value)}
-      />
-      <label className='label'>
-        <span className='label-text-alt'></span>
-        <span className='label-text-alt'></span>
-      </label>
+  left?: { text: string; href: string };
+  button: string;
+}): JSX.Element => (
+  <div className='mt-6 flex w-full'>
+    <div className='flex grow items-center justify-end pr-1 text-sm'>
+      {left && (
+        <Link href={left.href}>
+          <a className='font-bold underline'>{left.text}</a>
+        </Link>
+      )}
     </div>
-  );
-};
+    <div>
+      <button type='submit' className='btn btn-primary btn-md  self-end'>
+        {button}
+      </button>
+    </div>
+  </div>
+);
 
-const SignIn = ({ err }: { err?: { message: string } }): JSX.Element => {
-  const [close, setClose] = useState(false);
+const SignIn = ({
+  err,
+  section,
+}: {
+  err?: { message: string };
+  section: string;
+}): JSX.Element => {
+  const titles = {
+    signin: 'Вход',
+    signup: 'Регистрация',
+    forgot: 'Забравена парола',
+    submitCode: 'Потвърждение',
+    changePassword: 'Смяна на парола',
+  } as { [key: string]: string };
+  const title = titles[section];
   return (
     <Main hideFooter meta={<Meta title={`Login`} description={`Login`} />}>
       <form
-        action='/auth/'
+        action={`/auth/?section=${section}`}
         method='POST'
         className='flex flex-col items-center justify-center'
       >
-        <div className='form-control w-full max-w-xs  rounded-md bg-slate-900 p-4'>
-          {err && !close && (
-            <div className='alert alert-error my-4 max-w-xs rounded-md shadow-lg'>
+        <h1 className='text-3xl font-bold'>{title}</h1>
+        <div className='form-control w-full max-w-md  rounded-lg bg-slate-900 p-4'>
+          {JSON.stringify(err)}
+          {err && <Err err={err} />}
+          {section === 'signin' && (
+            <>
+              <Input name='username' placeholder='Потребителско име' />
+              <Input name='email' placeholder='E-mail' />
+              <Input name='password' placeholder='Парола' type='password' />
+
               <div>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-6 w-6 shrink-0 cursor-pointer stroke-current'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  onClick={(): void => setClose(true)}
+                <button
+                  type='submit'
+                  className='btn btn-primary btn-md  self-end'
                 >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
-                  />
-                </svg>
-                <span>{err.message}</span>
+                  Whod 2
+                </button>
               </div>
-            </div>
+            </>
           )}
-
-          <Input name='username' placeholder='Потребителско име' />
-
-          <Input name='password' placeholder='Парола' type='password' />
-          <Input name='action' value='login' type='hidden' />
-          <div className='mt-6 flex w-full'>
-            <div className='flex  flex-1 justify-center bg-white'>
-              <div className='  bg-black  align-middle'>content</div>
-            </div>
-
-            <div className='bg-slate-300 '>
-              <button
-                type='submit'
-                className='btn btn-primary btn-md  self-end'
-              >
-                Вход
-              </button>
-            </div>
-          </div>
+          {section === 'signup' && (
+            <>
+              <Input name='username' placeholder='Потребителско име' />
+              <Input name='email' placeholder='E-mail' />
+              <Input name='password' placeholder='Парола' type='password' />
+              <Input
+                name='passwordagain'
+                placeholder='Парола пак'
+                type='password'
+              />
+              <SubForm
+                left={{
+                  text: 'Вече си регистриран? Вход',
+                  href: '/auth/?section=signin',
+                }}
+                button='Регистрация'
+              />
+            </>
+          )}
         </div>
       </form>
     </Main>
   );
 };
 
-export default SignIn;
-
 export const getServerSideProps = async ({
+  query,
   req,
   res,
 }: {
+  query: { section: string };
   req: NextApiRequest;
   res: NextApiResponse;
 }) => {
+  const { section } = query;
   const { Auth } = withSSRContext({ req });
 
   const login = async (username: string, password: string) => {
@@ -135,9 +137,8 @@ export const getServerSideProps = async ({
         token: session.getAccessToken().getJwtToken(),
         refreshtoken: session.getRefreshToken().getToken(),
       };
-      // setUser(userInfo);
+
       return userInfo;
-      // localStorage.setItem('user', JSON.stringify(userInfo));
     } catch (err: any) {
       return { err: { message: err.message, code: err.code } };
     }
@@ -208,21 +209,48 @@ export const getServerSideProps = async ({
     } = req.body;
     if (action === 'login') {
       const data = await login(username, password);
-
       return {
         props: data,
       };
     }
     if (action === 'signup') {
-      signUp(username, password, email);
-    } else if (action === 'confirm') {
-      confirmSignUp(username, authCode);
-    } else if (action === 'forgot') {
-      forgot(username);
-    } else if (action === 'submitCode') {
-      submitCode();
-    } else if (action === 'changePassword') {
-      changePassword(username, validation, password, confirmPassword);
+      console.log('signup called');
+
+      const data = await signUp(username, password, email);
+      console.log(data);
+
+      return {
+        props: { ...data, section: 'signup' },
+      };
+    }
+    if (action === 'confirm') {
+      const data = await confirmSignUp(username, authCode);
+      return {
+        props: { ...data, section: 'confirm' },
+      };
+    }
+    if (action === 'forgot') {
+      const data = await forgot(username);
+      return {
+        props: { ...data, section: 'forgot' },
+      };
+    }
+    if (action === 'submitCode') {
+      const data = await submitCode();
+      return {
+        props: { ...data, section: 'submitCode' },
+      };
+    }
+    if (action === 'changePassword') {
+      const data = await changePassword(
+        username,
+        validation,
+        password,
+        confirmPassword
+      );
+      return {
+        props: { ...data, section: 'changePassword' },
+      };
     }
 
     return {
@@ -231,11 +259,14 @@ export const getServerSideProps = async ({
       },
     };
   }
+
   return {
     props: {
-      username: 'GET',
+      section: section || 'signin',
     },
   };
   // const user = await Auth.currentAuthenticatedUser();
   // console.log('user: ', user);
 };
+
+export default SignIn;

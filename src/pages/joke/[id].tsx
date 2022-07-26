@@ -93,8 +93,8 @@ const Joke = (props: {
 };
 
 const DATA_QUERY = gql`
-  query MyQuery($id: String!) {
-    jokes(where: { _id: { _lt: $id } }, limit: 30, order_by: { _id: desc }) {
+  query MyQuery($id: String!, $offset: Int!) {
+    jokes(limit: 30, offset: $offset, order_by: { _id: desc }) {
       _id
       joke
       cat
@@ -115,7 +115,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const { data } = await client.query({
     query: DATA_QUERY,
-    variables: { id },
+    variables: { id, offset: Math.floor(Math.random() * 139700) },
   });
 
   const cats = uniqBy(

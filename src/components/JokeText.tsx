@@ -3,6 +3,67 @@
 import type { FC, ReactElement } from 'react';
 import React from 'react';
 
+export const formattedjoke = (joke: string): string => {
+  return joke
+    .replaceAll('- А', '\n- А')
+    .replaceAll('- Б', '\n- Б')
+    .replaceAll('- В', '\n- В')
+    .replaceAll('- Г', '\n- Г')
+    .replaceAll('- Д', '\n- Д')
+    .replaceAll('- Е', '\n- Е')
+    .replaceAll('- Ж', '\n- Ж')
+    .replaceAll('- З', '\n- З')
+    .replaceAll('- И', '\n- И')
+    .replaceAll('- Й', '\n- Й')
+    .replaceAll('- К', '\n- К')
+    .replaceAll('- Л', '\n- Л')
+    .replaceAll('- М', '\n- М')
+    .replaceAll('- Н', '\n- Н')
+    .replaceAll('- О', '\n- О')
+    .replaceAll('- П', '\n- П')
+    .replaceAll('- Р', '\n- Р')
+    .replaceAll('- С', '\n- С')
+    .replaceAll('- Т', '\n- Т')
+    .replaceAll('- У', '\n- У')
+    .replaceAll('- Ф', '\n- Ф')
+    .replaceAll('- Х', '\n- Х')
+    .replaceAll('- Ц', '\n- Ц')
+    .replaceAll('- Ч', '\n- Ч')
+    .replaceAll('- Ш', '\n- Ш')
+    .replaceAll('- Щ', '\n- Щ')
+    .replaceAll('- Ю', '\n- Ю')
+    .replaceAll('- Я', '\n- Я')
+    .replaceAll('-А', '\n-А')
+    .replaceAll('-Б', '\n-Б')
+    .replaceAll('-В', '\n-В')
+    .replaceAll('-Г', '\n-Г')
+    .replaceAll('-Д', '\n-Д')
+    .replaceAll('-Е', '\n-Е')
+    .replaceAll('-Ж', '\n-Ж')
+    .replaceAll('-З', '\n-З')
+    .replaceAll('-И', '\n-И')
+    .replaceAll('-Й', '\n-Й')
+    .replaceAll('-К', '\n-К')
+    .replaceAll('-Л', '\n-Л')
+    .replaceAll('-М', '\n-М')
+    .replaceAll('-Н', '\n-Н')
+    .replaceAll('-О', '\n-О')
+    .replaceAll('-П', '\n-П')
+    .replaceAll('-Р', '\n-Р')
+    .replaceAll('-С', '\n-С')
+    .replaceAll('-Т', '\n-Т')
+    .replaceAll('-У', '\n-У')
+    .replaceAll('-Ф', '\n-Ф')
+    .replaceAll('-Х', '\n-Х')
+    .replaceAll('-Ц', '\n-Ц')
+    .replaceAll('-Ч', '\n-Ч')
+    .replaceAll('-Ш', '\n-Ш')
+    .replaceAll('-Щ', '\n-Щ')
+    .replaceAll('-Ю', '\n-Ю')
+    .replaceAll('-Я', '\n-Я')
+    .replaceAll('—', '\n-');
+};
+
 interface Props {
   joke: string;
   short?: boolean;
@@ -10,9 +71,9 @@ interface Props {
 
 export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
   if (short) {
-    const substr = joke.substring(0, 150);
+    const substr = joke.slice(0, 150);
     const jlen = joke.length <= 150;
-    const lines = substr.split('\n').slice(0, 3);
+    const lines = formattedjoke(substr).split('\n').slice(0, 3);
     return (
       <>
         {lines.map((line: string, i: number) => (
@@ -24,26 +85,28 @@ export const FormatJoke: FC<Props> = ({ joke, short }): ReactElement => {
   }
   let i1 = 0;
 
-  const remapped = joke.split('\n').map((line, i) => {
-    const num =
-      line.startsWith('-') ||
-      line.startsWith(' -') ||
-      line.startsWith('–') ||
-      line.startsWith('  -')
-        ? (i1 += 1) % 2 === 0
-          ? 'even'
-          : 'odd'
-        : false;
+  const remapped = formattedjoke(joke)
+    .split('\n')
+    .map((line, i) => {
+      const num =
+        line.startsWith('-') ||
+        line.startsWith(' -') ||
+        line.startsWith('–') ||
+        line.startsWith('  -')
+          ? (i1 += 1) % 2 === 0
+            ? 'even'
+            : 'odd'
+          : false;
 
-    return {
-      key: i,
-      line:
-        num === 'odd' || num === 'even'
-          ? line.replace('-', '').replace('–', '')
-          : line,
-      ...(num && { oddness: num }),
-    };
-  });
+      return {
+        key: i,
+        line:
+          num === 'odd' || num === 'even'
+            ? line.replace('-', '').replace('–', '')
+            : line,
+        ...(num && { oddness: num }),
+      };
+    });
 
   return (
     <>

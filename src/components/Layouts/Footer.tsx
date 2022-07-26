@@ -19,27 +19,31 @@ function Footer({ hideFooter }: { hideFooter?: boolean }) {
     >
       {!hideFooter && (
         <footer className='footer p-10 text-neutral-content'>
-          <div>
+          <div className='w-full'>
             <span className='footer-title'>Services</span>
-            <Link href={`${AppConfig.link}/?type=Jokes`} passHref>
-              <a>Вицове</a>
-            </Link>
-            <Link href={`${AppConfig.link}/news`} passHref>
-              <a>Новини</a>
-            </Link>
-            <Link href={`${AppConfig.link}/business`} passHref>
-              <a>Бизнес</a>
-            </Link>
-            <Link href={`${AppConfig.link}/tw`} passHref>
-              <a>Туитър ДБ (бета)</a>
-            </Link>
+            <div className='flex w-full'>
+              <div className='flex flex-1 flex-col gap-3'>
+                <Link href={`${AppConfig.link}/?type=Jokes`} passHref>
+                  <a className='block'>Вицове</a>
+                </Link>
+                <Link href={`${AppConfig.link}/news`} passHref>
+                  <a className='block'>Новини</a>
+                </Link>
+                <Link href={`${AppConfig.link}/business`} passHref>
+                  <a className='block'>Бизнес</a>
+                </Link>
+              </div>
+              <div className='flex flex-1 flex-col gap-3'>
+                <Link href={`${AppConfig.link}/movies/`} passHref>
+                  <a className='block'>Филми</a>
+                </Link>
+                <Link href={`${AppConfig.link}/tw`} passHref>
+                  <a className='block'>Туитър ДБ (бета)</a>
+                </Link>
+              </div>
+            </div>
           </div>
-          <div>
-            <span className='footer-title'>&nbsp;</span>
-            <Link href={`${AppConfig.link}/movies/`} passHref>
-              <a>Филми</a>
-            </Link>
-          </div>
+
           <div>
             <span className='footer-title'>Company</span>
             <Link href={`${AppConfig.link}/other/about/`}>

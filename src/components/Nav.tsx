@@ -23,9 +23,8 @@ const Nav = ({ cats, limit, prefix, formatlength }: NavProps) => {
     }
     return count;
   };
-
   return (
-    <div className='flex flex-wrap sm:mx-auto sm:mb-2 '>
+    <div className='my-3 flex w-full flex-wrap gap-3'>
       {newcats.map(
         (d: {
           cat: string;
@@ -40,13 +39,13 @@ const Nav = ({ cats, limit, prefix, formatlength }: NavProps) => {
             }/`}
             passHref
           >
-            <a className='w-full grow p-2 sm:w-1/2 md:w-1/3   lg:w-1/4 xl:w-1/5 '>
+            <a className='w-full grow sm:w-1/2 md:w-1/3   lg:w-1/4 xl:w-1/5 '>
               <div className='flex h-full items-center rounded bg-gray-800 p-4'>
                 <div className='flex-1  justify-center align-middle font-medium text-white'>
                   {formatlength ? (
-                    <span className='text-xs'>{d.cat}</span>
+                    <span className='text-shadow text-xs'>{d.cat}</span>
                   ) : (
-                    <span>{d.cat}</span>
+                    <span className='text-shadow'>{d.cat}</span>
                   )}
                 </div>
                 {d.count !== 0 && (

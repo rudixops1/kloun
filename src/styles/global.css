@@ -75,6 +75,9 @@
   .inputx {
     @apply input input-bordered;
   }
+  .text-shadow {
+    text-shadow: 1px 1px 3px black;
+  }
 }
 
 .speech-bubble-odd {
@@ -111,4 +114,5 @@
   margin-top: -10px;
   margin-right: -20px;
 }
+
 /* cyrillic-ext */

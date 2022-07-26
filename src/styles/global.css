@@ -75,6 +75,9 @@
   .btndisabled {
     @apply btn btn-disabled;
   }
+  .inputx {
+    @apply input input-bordered;
+  }
 }
 
 .speech-bubble-odd {

@@ -2,7 +2,7 @@
 // import { useRouter } from 'next/router';
 
 import { gql } from '@apollo/client';
-import { chunk, uniqBy } from 'lodash';
+import { chunk, shuffle } from 'lodash';
 import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 
@@ -14,6 +14,8 @@ import type { Cat } from '@/components/Nav';
 import Nav from '@/components/Nav';
 import client from '@/data/client';
 import type { Doc } from '@/data/structure';
+
+import catsdata from '../../data/cats';
 
 const FacebookShare = dynamic(() => import('@/components/FacebookShare'), {
   ssr: false,
@@ -116,21 +118,12 @@ export const getServerSideProps: GetServerSideProps = async ({
     query: DATA_QUERY,
     variables: { id, offset: Math.floor(Math.random() * 139700) },
   });
-
-  const cats = uniqBy(
-    data.jokes.map((joke: Doc) => {
-      return { cat: joke.cat };
-    }),
-    'cat'
-  );
-
+  const cats = chunk(shuffle(catsdata), 7);
   return {
     props: {
       joke: data.jokes_by_pk,
       items: chunk(data.jokes, Math.round(data.jokes.length / 3)),
-      cats:
-        cats &&
-        chunk(Object.values(cats), Math.round(Object.values(cats).length / 2)),
+      cats,
     },
   };
 };

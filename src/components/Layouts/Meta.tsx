@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
 import { AppConfig } from '@/utils/AppConfig';
-import { keywordsMap, stopwords } from '@/utils/formatter';
+import { stopwords } from '@/utils/formatter';
 
 type IMetaProps = {
   title: string;
@@ -26,9 +26,6 @@ const Meta = (props: IMetaProps) => {
     .slice(0, 60);
 
   const description = stopwords(props.description).slice(0, 120);
-  const keywords = props.keywords
-    ? props.keywords
-    : keywordsMap(props.description);
 
   return (
     <>
@@ -66,12 +63,6 @@ const Meta = (props: IMetaProps) => {
         title={title}
         description={description}
         canonical={canonicalURL}
-        additionalMetaTags={[
-          {
-            name: 'keywords',
-            content: keywords,
-          },
-        ]}
         facebook={{
           appId: '281985576166744',
         }}

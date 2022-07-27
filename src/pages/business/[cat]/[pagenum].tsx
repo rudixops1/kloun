@@ -5,12 +5,13 @@ import type { GetServerSideProps } from 'next';
 
 import Main from '@/components/Layouts/Main';
 import Meta from '@/components/Layouts/Meta';
-import type { Cat } from '@/components/Nav';
 import Nav from '@/components/Nav';
 import { Pagination } from '@/components/Pagination';
 import client from '@/data/client';
+import type { Cat } from '@/utils/formatter';
+import { businessdata, deslugify } from '@/utils/formatter';
 
-import { CITY_DATA, DATA_AGREGATE } from '..';
+import { CITY_DATA } from '..';
 
 const Index = ({
   cats,
@@ -47,19 +48,18 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }) => {
   res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-  const { cat, pagenum } = query;
-  const agregate = await client.query({ query: DATA_AGREGATE });
+  const { cat, pagenum } = query as { cat: string; pagenum: string };
+
   const offset = (Number(pagenum) - 1) * 30;
   // const agregate = await client.query({ query: DATA_AGREGATE });
   const { data } = await client.query({
     query: CITY_DATA,
-    variables: { location: cat, offset },
+    variables: { location: deslugify(cat), offset },
   });
-
+  const pages = businessdata.find((c) => c.slug === cat)!.count;
   return {
     props: {
-      pages: agregate.data.companies_count.find((c: Cat) => c.cat === cat)
-        .count,
+      pages,
       cats: data.cats,
       cat,
       pagenum: Number(pagenum),

@@ -5,12 +5,12 @@ import type { GetServerSideProps } from 'next';
 
 import Main from '@/components/Layouts/Main';
 import Meta from '@/components/Layouts/Meta';
-import type { Cat } from '@/components/Nav';
 import Nav from '@/components/Nav';
 import { Pagination } from '@/components/Pagination';
 import client from '@/data/client';
-
-import { CITY_DATA, DATA_AGREGATE } from '..';
+import { CITY_DATA } from '@/pages/business';
+import type { Cat } from '@/utils/formatter';
+import { businessdata, deslugify } from '@/utils/formatter';
 
 const Index = ({
   cats,
@@ -34,6 +34,7 @@ const Index = ({
         />
       }
     >
+      {JSON.stringify(cats)}
       <Nav cats={cats} prefix='business/_company' formatlength={true} />
       <Pagination pages={pages} pagenum={1} cat={`/business/${cat}`} />
     </Main>
@@ -45,21 +46,18 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
 }) => {
   res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-  const { cat } = query;
-
-  const agregate = await client.query({ query: DATA_AGREGATE });
+  const { cat } = query as { cat: string };
 
   const { data } = await client.query({
     query: CITY_DATA,
-    variables: { location: cat, offset: 0 },
+    variables: { location: deslugify(cat), offset: 0 },
   });
-
+  const pages = businessdata.find((c) => c.slug === cat)!.count;
   return {
     props: {
       cats: data.cats,
       cat,
-      pages: agregate.data.companies_count.find((c: Cat) => c.cat === cat)
-        .count,
+      pages,
     },
   };
 };

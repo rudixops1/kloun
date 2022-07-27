@@ -29,8 +29,12 @@ const Nav = ({ cats, limit, prefix, formatlength }: NavProps) => {
           althref?: string;
         }) => (
           <Link
-            key={d.slug}
-            href={`${AppConfig.link}/${prefix}/${d.slug}/`}
+            key={d.cat}
+            href={
+              d.althref
+                ? `${AppConfig.link}/${prefix}/${d.althref}`
+                : `${AppConfig.link}/${prefix}/${d.slug}/`
+            }
             passHref
           >
             <a className='w-full grow sm:w-1/2 md:w-1/3   lg:w-1/4 xl:w-1/5 '>

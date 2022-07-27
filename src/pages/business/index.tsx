@@ -8,7 +8,8 @@ import Main from '@/components/Layouts/Main';
 import Meta from '@/components/Layouts/Meta';
 import type { Cat } from '@/components/Nav';
 import Nav from '@/components/Nav';
-import client from '@/data/client';
+
+import { businessdata } from '../../utils/formatter';
 
 export type Company = {
   _id: string;
@@ -42,14 +43,6 @@ const Index = ({ cats }: { cats: Cat[] }): JSX.Element => {
     </Main>
   );
 };
-export const DATA_AGREGATE = gql`
-  query MyQuery @cached(ttl: 2630000) {
-    companies_count(order_by: { count: desc }, limit: 50) {
-      count
-      cat: location
-    }
-  }
-`;
 
 export const CITY_DATA = gql`
   query MyQuery($location: String!, $offset: Int!) {
@@ -80,11 +73,9 @@ export const COMPANY_INFO = gql`
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
 
-  const { data } = await client.query({ query: DATA_AGREGATE });
-
   return {
     props: {
-      cats: data.companies_count,
+      cats: businessdata,
     },
   };
 };

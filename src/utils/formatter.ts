@@ -61,7 +61,7 @@ export const formattedjoke = (joke: string): string => {
     .replace(/-Ю/g, '\n-Ю')
     .replace(/-Я/g, '\n-Я')
     .replace(/—/g, '\n-')
-    .replace(/\?/g, '\n');
+    .replace(/\?/g, '?\n');
 };
 
 export const stopwords = (string: string): string => {

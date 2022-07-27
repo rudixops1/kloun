@@ -7,8 +7,8 @@ import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
-import { Main } from '@/components/Layouts/Main';
-import { Meta } from '@/components/Layouts/Meta';
+import Main from '@/components/Layouts/Main';
+import Meta from '@/components/Layouts/Meta';
 import NewsThumbnail from '@/components/NewsThumbnail';
 import client from '@/data/client';
 import type { RootNewsProps } from '@/pages/news/';

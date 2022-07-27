@@ -3,13 +3,13 @@
 import { Amplify, withSSRContext } from 'aws-amplify';
 import bodyParser from 'body-parser';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Link from 'next/link';
 import { promisify } from 'util';
 
 import Err from '@/components/forms/Err';
 import Input from '@/components/forms/Input';
-import { Main } from '@/components/Layouts/Main';
-import { Meta } from '@/components/Layouts/Meta';
+import SubForm from '@/components/forms/SubForm';
+import Main from '@/components/Layouts/Main';
+import Meta from '@/components/Layouts/Meta';
 
 const getBody = promisify(bodyParser.urlencoded());
 
@@ -23,30 +23,7 @@ Amplify.configure({
   oauth: {},
 });
 
-const SubForm = ({
-  left,
-  button,
-}: {
-  left?: { text: string; href: string };
-  button: string;
-}): JSX.Element => (
-  <div className='mt-6 flex w-full'>
-    <div className='flex grow items-center justify-end pr-1 text-sm'>
-      {left && (
-        <Link href={left.href}>
-          <a className='font-bold underline'>{left.text}</a>
-        </Link>
-      )}
-    </div>
-    <div>
-      <button type='submit' className='btn btn-primary btn-md  self-end'>
-        {button}
-      </button>
-    </div>
-  </div>
-);
-
-const SignIn = ({
+const AuthPage = ({
   err,
   section,
 }: {
@@ -64,32 +41,31 @@ const SignIn = ({
   return (
     <Main hideFooter meta={<Meta title={`Login`} description={`Login`} />}>
       <form
-        action={`/auth/?section=${section}`}
+        action={`/auth/`}
         method='POST'
         className='flex flex-col items-center justify-center'
       >
         <h1 className='text-3xl font-bold'>{title}</h1>
-        <div className='form-control w-full max-w-md  rounded-lg bg-slate-900 p-4'>
-          {JSON.stringify(err)}
+        <div className='form-control w-full max-w-md  rounded-lg bg-gray-800 p-4'>
           {err && <Err err={err} />}
           {section === 'signin' && (
             <>
               <Input name='username' placeholder='Потребителско име' />
               <Input name='email' placeholder='E-mail' />
               <Input name='password' placeholder='Парола' type='password' />
-
-              <div>
-                <button
-                  type='submit'
-                  className='btn btn-primary btn-md  self-end'
-                >
-                  Whod 2
-                </button>
-              </div>
+              <Input name='action' type='hidden' value='signin' />
+              <SubForm
+                left={{
+                  text: 'Регистрирай се',
+                  href: '/auth/?section=signup',
+                }}
+                button='Вход'
+              />
             </>
           )}
           {section === 'signup' && (
             <>
+              <Input name='action' type='hidden' value='signup' />
               <Input name='username' placeholder='Потребителско име' />
               <Input name='email' placeholder='E-mail' />
               <Input name='password' placeholder='Парола' type='password' />
@@ -100,7 +76,7 @@ const SignIn = ({
               />
               <SubForm
                 left={{
-                  text: 'Вече си регистриран? Вход',
+                  text: 'Вход',
                   href: '/auth/?section=signin',
                 }}
                 button='Регистрация'
@@ -143,7 +119,7 @@ export const getServerSideProps = async ({
       return { err: { message: err.message, code: err.code } };
     }
   };
-  const signUp = async (username: string, password: string, email: string) => {
+  const signup = async (username: string, password: string, email: string) => {
     try {
       const data = await Auth.signUp({
         username,
@@ -152,11 +128,13 @@ export const getServerSideProps = async ({
       });
       return data;
     } catch (err: any) {
-      return { err: { message: err.message, code: err.code } };
+      console.log(err.log, err.AuthError);
+
+      return { err: { message: err.message || err.log } };
     }
   };
 
-  const confirmSignUp = async (username: string, authCode: string) => {
+  const confirmsignup = async (username: string, authCode: string) => {
     try {
       const data = await Auth.confirmSignUp(username, authCode);
       return { stage: 2, username, ...data };
@@ -173,10 +151,10 @@ export const getServerSideProps = async ({
       return { err: { message: err.message, code: err.code } };
     }
   };
-  const submitCode = () => {
+  const submitcode = () => {
     return { stage: 2 };
   };
-  const changePassword = async (
+  const changepassword = async (
     username: string,
     validation: string,
     password: string,
@@ -207,16 +185,14 @@ export const getServerSideProps = async ({
       validation,
       confirmPassword,
     } = req.body;
-    if (action === 'login') {
+    if (action === 'signin') {
       const data = await login(username, password);
       return {
-        props: data,
+        props: { ...data, section: 'signin' },
       };
     }
     if (action === 'signup') {
-      console.log('signup called');
-
-      const data = await signUp(username, password, email);
+      const data = await signup(username, password, email);
       console.log(data);
 
       return {
@@ -224,7 +200,7 @@ export const getServerSideProps = async ({
       };
     }
     if (action === 'confirm') {
-      const data = await confirmSignUp(username, authCode);
+      const data = await confirmsignup(username, authCode);
       return {
         props: { ...data, section: 'confirm' },
       };
@@ -236,13 +212,13 @@ export const getServerSideProps = async ({
       };
     }
     if (action === 'submitCode') {
-      const data = await submitCode();
+      const data = await submitcode();
       return {
         props: { ...data, section: 'submitCode' },
       };
     }
     if (action === 'changePassword') {
-      const data = await changePassword(
+      const data = await changepassword(
         username,
         validation,
         password,
@@ -269,4 +245,4 @@ export const getServerSideProps = async ({
   // console.log('user: ', user);
 };
 
-export default SignIn;
+export default AuthPage;

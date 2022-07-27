@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Main } from '@/components/Layouts/Main';
-import { Meta } from '@/components/Layouts/Meta';
+import Main from '@/components/Layouts/Main';
+import Meta from '@/components/Layouts/Meta';
 import Nav from '@/components/Nav';
 import { Program } from '@/components/Program';
 

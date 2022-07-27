@@ -4,7 +4,7 @@ const Err = ({ err }: { err: { message: string } }): JSX.Element => {
   const [close, setClose] = useState(false);
 
   return !close ? (
-    <div className='alert alert-error my-4 max-w-xs rounded-md shadow-lg'>
+    <div className='alert alert-error  rounded-md shadow-lg'>
       <div>
         <svg
           xmlns='http://www.w3.org/2000/svg'

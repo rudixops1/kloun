@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
-import { Main } from '@/components/Layouts/Main';
-import { Meta } from '@/components/Layouts/Meta';
+import Main from '@/components/Layouts/Main';
+import Meta from '@/components/Layouts/Meta';
 
 const Index = (): JSX.Element => {
   return (

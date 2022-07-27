@@ -4,8 +4,8 @@ import { gql } from '@apollo/client';
 import type { GetServerSideProps } from 'next';
 
 import { JokeThumbnail } from '@/components/JokeThumbnail';
-import { Main } from '@/components/Layouts/Main';
-import { Meta } from '@/components/Layouts/Meta';
+import Main from '@/components/Layouts/Main';
+import Meta from '@/components/Layouts/Meta';
 import { Pagination } from '@/components/Pagination';
 import client from '@/data/client';
 import type { Doc } from '@/data/structure';

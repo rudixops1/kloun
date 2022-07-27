@@ -3,8 +3,8 @@
 
 import type { GetServerSideProps } from 'next';
 
-import { Main } from '@/components/Layouts/Main';
-import { Meta } from '@/components/Layouts/Meta';
+import Main from '@/components/Layouts/Main';
+import Meta from '@/components/Layouts/Meta';
 import client from '@/data/client';
 
 import type { Company } from '../index';

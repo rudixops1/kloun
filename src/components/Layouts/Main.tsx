@@ -60,4 +60,4 @@ const Main = (props: IMainProps) => {
   );
 };
 
-export { Main };
+export default Main;

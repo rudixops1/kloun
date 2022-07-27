@@ -4,8 +4,8 @@
 import { gql } from '@apollo/client';
 import type { GetServerSideProps } from 'next';
 
-import { Main } from '@/components/Layouts/Main';
-import { Meta } from '@/components/Layouts/Meta';
+import Main from '@/components/Layouts/Main';
+import Meta from '@/components/Layouts/Meta';
 import type { Cat } from '@/components/Nav';
 import Nav from '@/components/Nav';
 import client from '@/data/client';

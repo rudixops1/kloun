@@ -6,8 +6,8 @@ import type { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Main } from '@/components/Layouts/Main';
-import { Meta } from '@/components/Layouts/Meta';
+import Main from '@/components/Layouts/Main';
+import Meta from '@/components/Layouts/Meta';
 import { Pagination } from '@/components/Pagination';
 import client from '@/data/client';
 import { AppConfig } from '@/utils/AppConfig';

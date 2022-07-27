@@ -3,8 +3,8 @@
 
 import type { GetServerSideProps } from 'next';
 
-import { Main } from '@/components/Layouts/Main';
-import { Meta } from '@/components/Layouts/Meta';
+import Main from '@/components/Layouts/Main';
+import Meta from '@/components/Layouts/Meta';
 import NewsThumbnail from '@/components/NewsThumbnail';
 import { Pagination } from '@/components/Pagination';
 import client from '@/data/client';

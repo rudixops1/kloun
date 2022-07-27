@@ -2,8 +2,8 @@ import { gql } from '@apollo/client';
 import type { GetServerSideProps } from 'next';
 import Image from 'next/image';
 
-import { Main } from '@/components/Layouts/Main';
-import { Meta } from '@/components/Layouts/Meta';
+import Main from '@/components/Layouts/Main';
+import Meta from '@/components/Layouts/Meta';
 import client from '@/data/client';
 import type { Movie } from '@/pages/movies/';
 import { MOVIE } from '@/pages/movies/';

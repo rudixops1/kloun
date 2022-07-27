@@ -66,6 +66,7 @@ export const formattedjoke = (joke: string): string => {
 
 export const stopwords = (string: string): string => {
   return string
+    .replace(/[\W_]+/g, ' ')
     .replace(/\n/g, ' ')
     .replace(/ а /gi, ' ')
     .replace(/ автентичен /gi, ' ')
@@ -330,6 +331,7 @@ export const stopwords = (string: string): string => {
 
 export const keywordsMap = (string: string): string => {
   const stwords = stopwords(string.toLowerCase())
+    .replace(/[\W_]+/g, ' ')
     .split(' ')
     .filter((i) => i.length > 5);
   return chunk(shuffle(stwords).slice(0, 10), 3)

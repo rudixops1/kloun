@@ -29,7 +29,7 @@ const NewsItem = ({
       meta={
         <Meta
           title={title}
-          description={description}
+          description={shuffled[0]}
           cat='Новини'
           imgtype='image/jpeg'
           image={content.image ? content.image : image}

@@ -15,7 +15,7 @@ export interface RootNewsProps {
   newsbg_aggregate: NewsAggregate;
   newsbg_by_pk: NewsByPk;
   pagenum?: number;
-  shuffled?: string[];
+  shuffled: string[];
 }
 
 export interface News {

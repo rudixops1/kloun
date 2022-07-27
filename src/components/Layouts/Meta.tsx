@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
 import { AppConfig } from '@/utils/AppConfig';
+import { keywordsMap, stopwords } from '@/utils/formatter';
 
 type IMetaProps = {
   title: string;
@@ -14,10 +15,21 @@ type IMetaProps = {
   url?: string;
   cat?: string;
   imgtype?: string;
+  keywords?: string;
 };
 
 const Meta = (props: IMetaProps) => {
   const canonicalURL = AppConfig.prefix + useRouter().asPath;
+  const title = props.title
+    .replace(/\s+/g, ' ')
+    .replace(/\n/g, ' ')
+    .slice(0, 60);
+
+  const description = stopwords(props.description).slice(0, 120);
+  const keywords = props.keywords
+    ? props.keywords
+    : keywordsMap(props.description);
+
   return (
     <>
       <Head>
@@ -51,17 +63,23 @@ const Meta = (props: IMetaProps) => {
         ></link>
       </Head>
       <NextSeo
-        title={props.title}
-        description={props.description}
+        title={title}
+        description={description}
         canonical={canonicalURL}
+        additionalMetaTags={[
+          {
+            name: 'keywords',
+            content: keywords,
+          },
+        ]}
         facebook={{
           appId: '281985576166744',
         }}
         openGraph={
           props.image
             ? {
-                title: props.title,
-                description: props.description,
+                title,
+                description,
                 url: props.url ? props.url : AppConfig.prefix,
                 locale: AppConfig.locale,
                 site_name: AppConfig.site_name,

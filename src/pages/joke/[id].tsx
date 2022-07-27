@@ -24,15 +24,14 @@ const Joke = (props: {
   items?: [Doc[], Doc[], Doc[]];
   cats?: [Cat[], Cat[]];
 }): JSX.Element => {
-  const jokemeta: string = props.joke.joke.replace(/\n/gi, ' ');
   return (
     <Main
       hideFooter
       title={props.joke.cat}
       meta={
         <Meta
-          title={`${jokemeta.substring(0, 30)} ...`}
-          description={`${jokemeta.substring(0, 150)} ...`}
+          title={props.joke.joke}
+          description={props.joke.joke}
           cat={props.joke.cat}
           image={`http://cdn.kloun.lol/api/img/${props.joke._id}.png`}
           url={`https://www.kloun.lol/joke/${props.joke._id}/`}

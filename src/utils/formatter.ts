@@ -341,3 +341,5 @@ export const keywordsMap = (string: string): string => {
     .map((i) => i.join(' '))
     .join(',');
 };
+
+// SEO keywords

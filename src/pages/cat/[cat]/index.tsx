@@ -11,6 +11,7 @@ import { Pagination } from '@/components/Pagination';
 import client from '@/data/client';
 import type { Doc } from '@/data/structure';
 import { AppConfig } from '@/utils/AppConfig';
+import { deslugify } from '@/utils/formatter';
 
 const CatPage = ({
   jokes,
@@ -27,11 +28,8 @@ const CatPage = ({
     <Main
       meta={
         <Meta
-          title={`Вицове от ${cat} на страница ${pagenum}`}
-          description={`Вицове от ${cat}${jokes[0].joke
-            .split('\n')
-            .join(' ')
-            .substring(0, 100)}`}
+          title={`Вицове от ${deslugify(cat)} на страница ${pagenum}`}
+          description={`Вицове от ${deslugify(cat)} ${jokes[0].joke}`}
         />
       }
     >
@@ -41,7 +39,7 @@ const CatPage = ({
             <Link href={`${AppConfig.link}/?type=Jokes`}>Вицове</Link>
           </li>
           <li>
-            <Link href={`${AppConfig.link}/cat/${cat}`}>{cat}</Link>
+            <Link href={`${AppConfig.link}/cat/${cat}`}>{deslugify(cat)}</Link>
           </li>
           <li>
             <Link href={`${AppConfig.link}/cat/${cat}/${pagenum}`}>
@@ -99,11 +97,11 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }) => {
   res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-  const { cat } = query;
+  const { cat } = query as { cat: string };
 
   const { data } = await client.query({
     query: DATA_QUERY_CAT,
-    variables: { pagenum: 1, offset: 0, cat },
+    variables: { pagenum: 1, offset: 0, cat: deslugify(cat) },
   });
 
   return {

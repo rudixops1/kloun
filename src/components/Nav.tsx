@@ -1,13 +1,8 @@
 import Link from 'next/link';
 
 import { AppConfig } from '@/utils/AppConfig';
+import type { Cat } from '@/utils/formatter';
 
-export interface Cat {
-  cat: string;
-  count: number;
-  altcount?: number;
-  althref?: string;
-}
 export interface NavProps {
   cats: Cat[];
   limit?: number;
@@ -29,14 +24,13 @@ const Nav = ({ cats, limit, prefix, formatlength }: NavProps) => {
         (d: {
           cat: string;
           count: number;
+          slug: string;
           altcount?: number;
           althref?: string;
         }) => (
           <Link
-            key={d.cat}
-            href={`${AppConfig.link}/${prefix}/${
-              d.althref || d.cat.replace(/ /g, '%20')
-            }/`}
+            key={d.slug}
+            href={`${AppConfig.link}/${prefix}/${d.slug}/`}
             passHref
           >
             <a className='w-full grow sm:w-1/2 md:w-1/3   lg:w-1/4 xl:w-1/5 '>

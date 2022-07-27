@@ -10,6 +10,7 @@ import { Pagination } from '@/components/Pagination';
 import client from '@/data/client';
 import type { Doc } from '@/data/structure';
 import { AppConfig } from '@/utils/AppConfig';
+import { deslugify } from '@/utils/formatter';
 
 import { DATA_QUERY_CAT } from './index';
 
@@ -29,11 +30,8 @@ const CatPage = ({
       hideFooter
       meta={
         <Meta
-          title={`Вицове от ${cat} на страница ${pagenum}`}
-          description={`Вицове от ${cat}${jokes[0].joke
-            .split('\n')
-            .join(' ')
-            .substring(0, 100)}`}
+          title={`Вицове от ${deslugify(cat)} на страница ${pagenum}`}
+          description={`Вицове от ${deslugify(cat)} ${jokes[0].joke}`}
         />
       }
     >
@@ -43,7 +41,7 @@ const CatPage = ({
             <Link href={`${AppConfig.link}/?type=Jokes`}>Вицове</Link>
           </li>
           <li>
-            <Link href={`${AppConfig.link}/cat/${cat}`}>{cat}</Link>
+            <Link href={`${AppConfig.link}/cat/${cat}`}>{deslugify(cat)}</Link>
           </li>
           <li>
             <Link href={`${AppConfig.link}/cat/${cat}/${pagenum}`}>
@@ -81,13 +79,12 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
 }) => {
   res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-  const { pagenum, cat } = query;
-
+  const { cat, pagenum } = query as { cat: string; pagenum: string };
   const offset = (Number(pagenum) - 1) * 30;
 
   const { data } = await client.query({
     query: DATA_QUERY_CAT,
-    variables: { pagenum, offset, cat },
+    variables: { pagenum, offset, cat: deslugify(cat) },
   });
 
   return {

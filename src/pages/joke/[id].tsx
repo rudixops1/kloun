@@ -10,12 +10,11 @@ import { FormatJoke } from '@/components/JokeText';
 import { JokeThumbnail } from '@/components/JokeThumbnail';
 import Main from '@/components/Layouts/Main';
 import Meta from '@/components/Layouts/Meta';
-import type { Cat } from '@/components/Nav';
 import Nav from '@/components/Nav';
 import client from '@/data/client';
 import type { Doc } from '@/data/structure';
-
-import catsdata from '../../data/cats';
+import type { Cat } from '@/utils/formatter';
+import { catsdata, slugify } from '@/utils/formatter';
 
 const FacebookShare = dynamic(() => import('@/components/FacebookShare'), {
   ssr: false,
@@ -44,6 +43,7 @@ const Joke = (props: {
         <article className='xs:px-2 mx-auto mb-6 px-10 text-xl leading-relaxed sm:px-4 lg:w-2/3'>
           <FormatJoke joke={props.joke.joke} />
         </article>
+        {slugify('Разни')}
         <FacebookShare id={`https://www.kloun.lol/joke/${props.joke._id}`} />
       </div>
 

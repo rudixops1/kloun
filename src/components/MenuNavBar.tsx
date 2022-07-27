@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import catsdata from '@/data/cats';
 import { AppConfig } from '@/utils/AppConfig';
+import { catsdata } from '@/utils/formatter';
 
 const MenuNavBar = ({
   className,
@@ -24,7 +24,7 @@ const MenuNavBar = ({
           {catsdata.slice(0, 10).map((item) => (
             <li key={item.cat}>
               <Link
-                href={`${AppConfig.link}/cat/${item.cat.replace(/ /g, '%20')}/`}
+                href={`${AppConfig.link}/cat/${item.slug}/`}
                 passHref={hrefPass}
               >
                 <a className='font-bold'>{item.cat}</a>

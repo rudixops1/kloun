@@ -5,8 +5,7 @@ import Main from '@/components/Layouts/Main';
 import Meta from '@/components/Layouts/Meta';
 import Nav from '@/components/Nav';
 import { Program } from '@/components/Program';
-
-import catsdata from '../data/cats';
+import { catsdata } from '@/utils/formatter';
 
 const MoreButton = ({
   text,

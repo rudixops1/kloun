@@ -12,12 +12,7 @@ const Item = ({ movie }: { movie: Movie }): JSX.Element => {
   return (
     <Main
       hideFooter
-      meta={
-        <Meta
-          title={movie.title}
-          description={movie.description.slice(0, 100)}
-        />
-      }
+      meta={<Meta title={movie.title} description={movie.description} />}
     >
       <div className='mt-6 flex flex-row flex-wrap justify-center'>
         <div className='relative flex flex-wrap overflow-hidden rounded-lg bg-indigo-700 p-1'>

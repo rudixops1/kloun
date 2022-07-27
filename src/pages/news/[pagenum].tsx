@@ -21,10 +21,9 @@ const PagingNews = ({
       hideFooter
       meta={
         <Meta
-          title='Новини'
-          description='Новини'
+          title={newsbg[0].title}
+          description={newsbg[0].title}
           cat='Новини'
-          url={`https://www.kloun.lol/news/${pagenum}`}
         />
       }
     >

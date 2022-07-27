@@ -14,13 +14,29 @@ export const FormatJoke = ({
   if (short) {
     const substr = joke.slice(0, 150);
     const jlen = joke.length <= 150;
-    const lines = formattedjoke(substr).split('\n').slice(0, 3);
+    const lines = formattedjoke(
+      jlen ? joke.replace(/\.../g, '') : `${substr} ...`
+    )
+      .split('\n')
+      .slice(0, 3);
     return (
       <>
         {lines.map((line: string, i: number) => (
-          <p key={i}>{i === 2 && !jlen ? <>{`${line}...`}</> : line}</p>
+          <p key={i}>
+            {line.endsWith('...') ? (
+              <>
+                {line.replace(/\.../g, '')}{' '}
+                <span className='absolute h-6   w-8 text-4xl'>
+                  <span className='absolute ml-1 leading-4 text-purple-600'>
+                    ...
+                  </span>
+                </span>
+              </>
+            ) : (
+              <>{line}</>
+            )}
+          </p>
         ))}
-        {substr.length >= 149 && lines.length <= 2 && <>...</>}
       </>
     );
   }

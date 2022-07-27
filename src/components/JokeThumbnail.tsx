@@ -58,15 +58,14 @@ export const JokeThumbnail: FC<Props> = ({
                 return { id: item._id };
               });
             }}
-            className='jokebottom text-shadow'
+            className='jokebottom'
             href={`${AppConfig.link}/joke/${item._id}`}
           >
-            Прочети
-            <span className='ml-1'>
+            <span>
               <Image
                 src='/images/readmore.svg'
-                width={33}
-                height={14}
+                width={38}
+                height={16}
                 alt='прочети'
               />
             </span>
